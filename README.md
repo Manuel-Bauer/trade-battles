@@ -20,7 +20,7 @@ current_gain_loss: jsonb
 watchlist: text[]
 
 
-battle columns:
+battles:
 
 battle_id: text PRIMARY KEY
 battle_members: text[]
