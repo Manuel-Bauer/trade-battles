@@ -1,0 +1,99 @@
+Trade Battles API Documentation
+
+baseurl: http://localhost:3000
+
+
+------------ Transactions ------------
+------------------------------------------------------------------
+Get all transactions
+------------------------------------------------------------------
+
+Endpoint: /transactions
+Method: GET
+
+------------------------------------------------------------------
+Get transactions by id
+------------------------------------------------------------------
+
+Endpoint: /transactions/:id
+Method: GET
+
+------------------------------------------------------------------
+Get transactions by battle id
+------------------------------------------------------------------
+
+Endpoint: /transactions/battle/:battle_id
+Method: GET
+
+------------------------------------------------------------------
+Create a transaction
+------------------------------------------------------------------
+
+Endpoint: /transactions
+Method: POST
+Body example:
+{
+		"battle_id":"70dd5705-1ba4-47fc-afef-867886e82cd4",
+		"user_id":"ee42d2f1-aa3c-416d-a032-882bd386279d",
+        "action":"SELL",
+		"symbol":"AAPL",
+		"price":"148.34",
+		"quantity":"15",
+}
+
+Parameters: {
+	battle_id : uuid (mandatory)
+	user_id : uuid (mandatory)
+	action: 'BUY' || 'SELL' (mandatory)
+	symbol: stock ticker string (mandatory)
+	price: number (mandatory)
+	quantity: number (mandatory)
+}
+
+------------------------------------------------------------------
+Delete transaction
+------------------------------------------------------------------
+
+Endpoint: /transactions/:id
+Method: DELETE
+
+
+
+------------ Battles ------------
+
+
+------------------------------------------------------------------
+Get battles by user id
+------------------------------------------------------------------
+
+Endpoint: /battles/mybattles/:user_id
+Method: GET
+
+
+------------------------------------------------------------------
+Create a battle
+------------------------------------------------------------------
+
+Endpoint: /battles
+Method: POST
+Body example:
+{
+    "battle_members":["123abc","456def","246abc","246def","987abc"],
+	"start_date":"1654167395",
+	"end_date":"1656759395",
+	"battle_name":"My First Battle"
+}
+
+Parameters: {
+    "battle_members": user_id[] (mandatory)
+	"start_date": unix time timestamp (mandatory)
+	"end_date": unix time timestamp (mandatory)
+	"battle_name": string (mandatory)
+}
+
+
+
+
+
+
+
