@@ -5,7 +5,7 @@ const user_model = require("./users.model");
 const transaction_model = require("./transactions.model");
 
 exports.getMyBattles = async (user_id) => {
-	console.log(user_id);
+	console.log("getMyBattles", user_id);
 	const allBattles = await pool.query(`SELECT * FROM ${table_name}`);
 	const myBattles = allBattles.rows.filter((battle) =>
 		battle.battle_members.includes(user_id)
