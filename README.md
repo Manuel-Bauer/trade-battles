@@ -2,6 +2,8 @@
 
 ## Backend
 
+Requires PostgreSQL >14.0 for procedures in sql script
+
 For the app to work it needs two api keys that are inside /server/models/config
 
 The first one you can get from https://iexcloud.io
