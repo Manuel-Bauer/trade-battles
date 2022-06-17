@@ -38,6 +38,7 @@ export const BattlePortfolio: React.FC = () => {
       user_id,
       battle.battle_id,
     );
+    console.log('getUserPortfolio: portfolioArray.data', portfolioArray.data);
 
     // console.warn(portfolioArray);
     profit = 0;
@@ -45,6 +46,7 @@ export const BattlePortfolio: React.FC = () => {
       portfolioArray.data.map(async el => {
         // console.warn(el.symbol);
         const quote = await ApiClient.getQuote(el.symbol);
+        console.log('getQuote', quote);
         el.price = quote.data.close ? quote.data.close : quote.data.latestPrice;
         el.change = ((el.price - el.averageCost) / el.averageCost) * 100;
         el.quote = quote.data;
@@ -53,6 +55,7 @@ export const BattlePortfolio: React.FC = () => {
       }),
     );
     portfolio.sort((a, b) => a.symbol.charCodeAt(0) - b.symbol.charCodeAt(0));
+    console.log('portfolio', portfolio);
     // console.warn(portfolio.map(el => el.symbol));
     setCurrentUserPortfolio(portfolio);
     setNonLockedGainLoss(prevstate => (prevstate += profit));
@@ -104,7 +107,7 @@ export const BattlePortfolio: React.FC = () => {
       <View
         style={{flex: 1, backgroundColor: theme.light_mode_white, padding: 10}}>
         {refreshing ? (
-          <View style={styles.portfolio_header_container}></View>
+          <View style={styles.portfolio_header_container} />
         ) : (
           <BattlePortfolioHeader
             battle={battle}
@@ -119,7 +122,7 @@ export const BattlePortfolio: React.FC = () => {
           setCurrentUserPortfolio={setCurrentUserPortfolio}
         />
 
-        {currentUserPortfolio[0].price === 0 ? (
+        {currentUserPortfolio?.[0]?.price === 0 ? (
           <View
             style={{
               width: 140,
