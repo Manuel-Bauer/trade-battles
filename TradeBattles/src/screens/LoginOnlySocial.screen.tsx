@@ -13,6 +13,7 @@ import {useUserContext} from '../App.provider';
 import {ApiClient} from '../services/ApiClient.service';
 import LottieView from 'lottie-react-native';
 
+
 const googleImageSource = require('../../assets/images/Google_logo.png');
 const facebookImageSource = require('../../assets/images/Facebook_logo.png');
 const appleImageSource = require('../../assets/images/Apple_logo.png');
@@ -20,7 +21,7 @@ const appleImageSource = require('../../assets/images/Apple_logo.png');
 GoogleSignin.configure({
   scopes: ['https://www.googleapis.com/auth/drive.readonly'], // [Android] what API you want to access on behalf of the user, default is email and profile
   webClientId:
-    '590254695836-9ai733i10c8phjeh71t0e5vp0hctm905.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+    '191720145630-k4pircur8hjk7712vbg8s85j18fo961f.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
 });
 
 const fallingMoneySrc = require('../../assets/lotties/falling_money.json');

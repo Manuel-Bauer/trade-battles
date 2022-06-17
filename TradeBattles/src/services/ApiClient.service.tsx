@@ -10,7 +10,7 @@ import type {User} from '../shared/Types';
 import type {Transaction, GraphPoint} from '../shared/Types';
 
 const port = 3000;
-const baseUrl = `http://192.168.1.142:${port}`;
+const baseUrl = `http://localhost:${port}`;
 // const baseUrl = `http://localhost:${port}`;
 export const ApiClient = {
   getMyBattles: async (user_id: string) => {
@@ -39,7 +39,6 @@ export const ApiClient = {
 
   handleSignIn: async (user: User) => {
     const dbUser = await ApiClient.getUserById(user.id);
-
     console.warn(dbUser.data, 'HANDLE SIGN IN');
     if (dbUser.data.length === 0) {
       ApiClient.createUser(user);
