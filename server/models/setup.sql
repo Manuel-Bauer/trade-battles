@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS users (
     transactions text[],
     photo text,
     email text,
-    current_gain_loss jsonb,
+    current_gains_losses jsonb,
     watchlist text[]
 );
 CREATE TABLE IF NOT EXISTS battles (
