@@ -6,7 +6,7 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-async function getAllUsers() {
+async function getAllUsers () {
   try {
     const allUsers = await prisma.user.findMany({});
     return allUsers;
@@ -17,9 +17,17 @@ async function getAllUsers() {
   }
 }
 
-async function createUser(data) {
+async function createUser (data) {
   try {
-    const user = await prisma.user.create({ data });
+    const user = await prisma.user.create({
+      data: {
+        google_id: data.id,
+        givenName: data.givenName,
+        familyName: data.familyName,
+        photo: data.photo,
+        email: data.email
+      }
+    });
     return user;
   } catch (err) {
     throw err;
@@ -28,7 +36,7 @@ async function createUser(data) {
   }
 }
 
-async function getUser(id) {
+async function getUser (id) {
   try {
     const user = await prisma.user.findFirst({
       where: {
@@ -43,7 +51,7 @@ async function getUser(id) {
   }
 }
 
-async function updateWatchlist(id, updatedWatchlist) {
+async function updateWatchlist (id, updatedWatchlist) {
   try {
     const user = await prisma.user.update({
       where: { id },

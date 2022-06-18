@@ -2,7 +2,7 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-async function createBattle(data) {
+async function createBattle (data) {
   try {
     const battle = await prisma.battle.create({ data });
     return battle;
@@ -13,11 +13,11 @@ async function createBattle(data) {
   }
 }
 
-async function getMyBattles(userId) {
+async function getMyBattles (userId) {
   try {
     const myBattles = await prisma.battle.findMany({
       where: {
-        userId,
+        user: { google_id: userId }
       },
       include: {
         transaction: true,

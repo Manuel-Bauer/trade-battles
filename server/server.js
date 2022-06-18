@@ -34,8 +34,6 @@ app.use(router);
 //   quantity: 1,
 // }).then((res) => console.log(res));
 
-getMyBattles(1).then((res) => console.log(res));
-
 app.listen(PORT, () => {
   console.log(`We are in boys... http://localhost:${PORT}`);
 });
