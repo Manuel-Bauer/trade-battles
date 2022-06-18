@@ -31,7 +31,6 @@ export const Battles: React.FC = () => {
     React.useCallback(() => {
       ApiClient.getMyBattles(currentUser.id)
         .then(res => setMyBattles(res.data))
-        .then(res => setNoBattles(false))
         .catch(error => setNoBattles(true));
     }, [currentUser]),
   );
@@ -52,7 +51,7 @@ export const Battles: React.FC = () => {
           +
         </Text>
       </Pressable>
-      {noBattles && (
+      {myBattles.length === 0 && (
         <View style={styles.arrows}>
           <LottieView source={pointingArrowSrc} autoPlay />
         </View>
@@ -66,7 +65,7 @@ export const Battles: React.FC = () => {
         My Battles
       </Text>
 
-      {noBattles ? (
+      {myBattles.length === 0 ? (
         <View style={styles.noBattlesContainer}>
           <Text
             style={{
@@ -77,11 +76,7 @@ export const Battles: React.FC = () => {
           </Text>
         </View>
       ) : (
-        <BattleCardList
-          myBattles={myBattles}
-          setMyBattles={setMyBattles}
-          setNoBattles={setNoBattles}
-        />
+        <BattleCardList myBattles={myBattles} />
       )}
     </SafeAreaView>
   );

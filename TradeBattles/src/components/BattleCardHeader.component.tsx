@@ -1,16 +1,18 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {useUserContext} from '../App.provider';
-
-import {theme} from '../shared/themes';
+import {useAuth} from '../Contexts/Auth';
+import {useTheme} from '../Contexts/Theme';
 import {Battle} from '../shared/Types';
 
 export const BattleCardHeader: React.FC<{
   battle: Battle;
 }> = ({battle}) => {
+  const {theme} = useTheme();
+  const {currentUser} = useAuth();
+
   let position = 0;
   battle.battle_members.filter((el, index) => {
-    if (el.user_id === useUserContext().user.id) position = index;
+    if (el.user_id === currentUser.id) position = index;
   });
 
   const determinePositionEnding = (position: number) => {
@@ -29,22 +31,28 @@ export const BattleCardHeader: React.FC<{
     }
   };
   return (
-    <View style={styles.container}>
-      <Text style={styles.header_small}>{battle.battle_name}</Text>
+    <View style={{...styles.container, backgroundColor: theme.colors.primary}}>
+      <Text
+        style={{
+          ...styles.header_small,
+          color: theme.colors.lightest,
+          fontFamily: theme.fonts.bold,
+        }}>
+        {battle.battle_name}
+      </Text>
       <View
         style={{
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'center',
-          // marginTop: 5,
         }}>
         <Text
           style={{
             alignSelf: 'center',
             fontSize: 25,
             fontWeight: '300',
-            color: theme.colorPrimary,
-            fontFamily: theme.fontFamilyRegular,
+            color: theme.colors.lightest,
+            fontFamily: theme.fonts.regular,
           }}>
           #{position + 1}
           {determinePositionEnding(position + 1)}
@@ -56,18 +64,15 @@ export const BattleCardHeader: React.FC<{
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: theme.primary_yellow,
     height: 90,
     borderTopStartRadius: 45,
     borderTopEndRadius: 45,
-    marginBottom: 20,
+    marginBottom: 5,
   },
   header_small: {
     fontSize: 25,
     fontWeight: '600',
     marginTop: 15,
     alignSelf: 'center',
-    color: theme.colorPrimary,
-    fontFamily: theme.fontFamilyBold,
   },
 });

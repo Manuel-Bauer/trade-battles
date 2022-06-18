@@ -1,18 +1,24 @@
 import React from 'react';
 import {Text, View, Image, StyleSheet, Pressable} from 'react-native';
-import {theme} from '../shared/themes';
+
 import {useUserContext} from '../App.provider';
 import {BattleCardHeader} from './BattleCardHeader.component';
 import {Battle} from '../shared/Types';
 import {useNavigation} from '@react-navigation/native';
 import {ProfileScreenNavigationProp} from '../shared/Types';
 import {formatter} from '../shared/Methods';
+import {useAuth} from '../Contexts/Auth';
+import {useTheme} from '../Contexts/Theme';
 
 export const BattleCard: React.FC<{
   battle: Battle;
 }> = ({battle}) => {
+  const {currentUser} = useAuth();
+  const {theme, darkMode} = useTheme();
   const userContext = useUserContext();
   const navigation = useNavigation<ProfileScreenNavigationProp>();
+
+  /* RANKING */
   battle.battle_members = battle.battle_members.sort(
     (a, b) =>
       b.current_gains_losses[battle.battle_id] -
@@ -24,10 +30,13 @@ export const BattleCard: React.FC<{
       onPress={() => {
         navigation.navigate('BattlePortfolio', {
           battle: battle,
-          user_id: userContext.user.id,
+          user_id: currentUser.id,
         });
       }}
-      style={styles.container}>
+      style={{
+        ...styles.container,
+        backgroundColor: darkMode ? theme.colors.dark : theme.colors.lightest,
+      }}>
       <BattleCardHeader battle={battle} />
 
       {battle.battle_members.map((member, index) => {
@@ -38,8 +47,15 @@ export const BattleCard: React.FC<{
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'space-between',
-              marginBottom: 20,
-              paddingHorizontal: 20,
+              paddingTop: 10,
+              paddingBottom: 10,
+              paddingLeft: 20,
+              paddingRight: 20,
+              borderRadius: 50,
+              borderBottomColor: darkMode
+                ? theme.colors.darkest
+                : theme.colors.lighter,
+              borderBottomWidth: 1,
             }}>
             <View style={{flexDirection: 'row'}}>
               <Image
@@ -55,14 +71,19 @@ export const BattleCard: React.FC<{
               <View>
                 <Text
                   style={{
-                    color: theme.colorPrimary,
-                    fontFamily: theme.fontFamilyRegular,
+                    color: theme.colors.textPrimary,
+                    fontFamily: theme.fonts.regular,
                     fontSize: 12,
                     fontWeight: '700',
                   }}>
                   {member.first_name} {member.last_name}
                 </Text>
-                <Text style={styles.text}>
+                <Text
+                  style={{
+                    ...styles.text,
+                    color: theme.colors.textPrimary,
+                    fontFamily: theme.fonts.regular,
+                  }}>
                   {formatter.format(
                     member.current_gains_losses[String(battle.battle_id)]
                       ? member.current_gains_losses[String(battle.battle_id)]
@@ -73,8 +94,8 @@ export const BattleCard: React.FC<{
             </View>
             <Text
               style={{
-                color: theme.colorPrimary,
-                fontFamily: theme.fontFamilyBold,
+                color: theme.colors.textPrimary,
+                fontFamily: theme.fonts.bold,
               }}>
               #{index + 1}
             </Text>
@@ -87,7 +108,6 @@ export const BattleCard: React.FC<{
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: theme.greyPrimary,
     width: '80%',
     height: '100%',
     borderRadius: 45,
@@ -100,9 +120,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
   },
   text: {
-    color: theme.colorPrimary,
     fontSize: 12,
-    fontFamily: theme.fontFamilyRegular,
     fontWeight: '400',
   },
 });

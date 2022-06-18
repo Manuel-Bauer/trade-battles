@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {Battle} from '../shared/Types';
 import {BattleCard} from './BattleCard.component';
-import {theme} from '../shared/themes';
+import {useTheme} from '../Contexts/Theme';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -16,6 +16,7 @@ const BATTLE_CONTAINER = width;
 export const BattleCardList: React.FC<{
   myBattles: Battle[];
 }> = ({myBattles}) => {
+  const {theme} = useTheme();
   const [currentBattleIndex, setCurrentBattleIndex] = useState(0);
 
   const scrollX = React.useRef(new Animated.Value(0)).current;
@@ -86,8 +87,7 @@ export const BattleCardList: React.FC<{
           flexDirection: 'row',
         }}>
         {myBattles.map((dot, index) => {
-          const backgroundColor =
-            index === currentBattleIndex ? theme.colorPrimary : 'grey';
+          const backgroundColor = theme.colors.light;
           const size = index === currentBattleIndex ? 8 : 7;
           return (
             <View
