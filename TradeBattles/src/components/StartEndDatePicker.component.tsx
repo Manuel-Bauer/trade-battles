@@ -9,32 +9,38 @@ export const StartEndDatePicker: React.FC<{
   startDate: Date;
   endDate: Date;
 }> = ({setStartDate, setEndDate, startDate, endDate}) => {
-  const {theme} = useTheme();
+  const {theme, darkMode} = useTheme();
   const [openStartDatePicker, setOpenStartDatePicker] = useState(false);
   const [openEndDatePicker, setOpenEndDatePicker] = useState(false);
   return (
     <View style={styles.container}>
       <Pressable
-        style={{...styles.dateButton, backgroundColor: theme.colors.primary}}
+        style={{
+          ...styles.dateButton,
+          backgroundColor: darkMode ? theme.colors.dark : theme.colors.lighter,
+        }}
         onPress={() => setOpenStartDatePicker(true)}>
         <Text
           style={{
             ...styles.buttonText,
             fontFamily: theme.fonts.bold,
-            color: theme.colors.lightest,
+            color: theme.colors.textPrimary,
           }}>
           Pick Start Date
         </Text>
       </Pressable>
 
       <Pressable
-        style={{...styles.dateButton, backgroundColor: theme.colors.primary}}
+        style={{
+          ...styles.dateButton,
+          backgroundColor: darkMode ? theme.colors.dark : theme.colors.lighter,
+        }}
         onPress={() => setOpenEndDatePicker(true)}>
         <Text
           style={{
             ...styles.buttonText,
             fontFamily: theme.fonts.bold,
-            color: theme.colors.lightest,
+            color: theme.colors.textPrimary,
           }}>
           Pick End Date
         </Text>

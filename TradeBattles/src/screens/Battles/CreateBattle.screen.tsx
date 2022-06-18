@@ -168,12 +168,12 @@ export const CreateBattle = () => {
         onPress={() => handleCreate()}
         style={{
           ...styles.createButton,
-          backgroundColor: darkMode ? theme.colors.dark : theme.colors.light,
+          backgroundColor: theme.colors.primary,
         }}>
         <Text
           style={{
             ...styles.createText,
-            color: theme.colors.textPrimary,
+            color: theme.colors.lightest,
             fontFamily: theme.fonts.bold,
           }}>
           CREATE
