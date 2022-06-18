@@ -23,7 +23,6 @@ export const Battles: React.FC = () => {
   const {theme} = useTheme();
   const {currentUser} = useAuth();
   const [myBattles, setMyBattles] = useState<Battle[]>([]);
-  const [noBattles, setNoBattles] = useState(false);
 
   const navigation = useNavigation<ProfileScreenNavigationProp>();
 
@@ -31,7 +30,7 @@ export const Battles: React.FC = () => {
     React.useCallback(() => {
       ApiClient.getMyBattles(currentUser.id)
         .then(res => setMyBattles(res.data))
-        .catch(error => setNoBattles(true));
+        .catch(() => setMyBattles([]));
     }, [currentUser]),
   );
 

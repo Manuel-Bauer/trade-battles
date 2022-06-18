@@ -7,8 +7,8 @@ import {
   View,
 } from 'react-native';
 import {Battle} from '../shared/Types';
-import {BattleCard} from './BattleCard.component';
 import {useTheme} from '../Contexts/Theme';
+import {BattleCard} from './Battles/BattleCard.component';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;

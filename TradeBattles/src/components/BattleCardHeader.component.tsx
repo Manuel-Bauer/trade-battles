@@ -15,8 +15,8 @@ export const BattleCardHeader: React.FC<{
     if (el.user_id === currentUser.id) position = index;
   });
 
-  const determinePositionEnding = (position: number) => {
-    const lastNumber = Number(String(position)[String(position).length - 1]);
+  const determinePositionEnding = (pos: number) => {
+    const lastNumber = Number(String(pos)[String(pos).length - 1]);
     switch (lastNumber) {
       case 1:
         return 'st';
