@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, Pressable, Text, StyleSheet} from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import {theme} from '../shared/themes';
+import {useTheme} from '../Contexts/Theme';
 
 export const StartEndDatePicker: React.FC<{
   setStartDate: React.Dispatch<React.SetStateAction<Date>>;
@@ -9,20 +9,35 @@ export const StartEndDatePicker: React.FC<{
   startDate: Date;
   endDate: Date;
 }> = ({setStartDate, setEndDate, startDate, endDate}) => {
+  const {theme} = useTheme();
   const [openStartDatePicker, setOpenStartDatePicker] = useState(false);
   const [openEndDatePicker, setOpenEndDatePicker] = useState(false);
   return (
     <View style={styles.container}>
       <Pressable
-        style={styles.date_button}
+        style={{...styles.dateButton, backgroundColor: theme.colors.primary}}
         onPress={() => setOpenStartDatePicker(true)}>
-        <Text style={styles.button_text}>Pick Start Date</Text>
+        <Text
+          style={{
+            ...styles.buttonText,
+            fontFamily: theme.fonts.bold,
+            color: theme.colors.lightest,
+          }}>
+          Pick Start Date
+        </Text>
       </Pressable>
 
       <Pressable
-        style={styles.date_button}
+        style={{...styles.dateButton, backgroundColor: theme.colors.primary}}
         onPress={() => setOpenEndDatePicker(true)}>
-        <Text style={styles.button_text}>Pick End Date</Text>
+        <Text
+          style={{
+            ...styles.buttonText,
+            fontFamily: theme.fonts.bold,
+            color: theme.colors.lightest,
+          }}>
+          Pick End Date
+        </Text>
       </Pressable>
 
       <DatePicker
@@ -61,8 +76,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
   },
-  date_button: {
-    backgroundColor: theme.primary_yellow,
+  dateButton: {
     width: '40%',
     height: 40,
     borderRadius: 10,
@@ -70,9 +84,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  button_text: {
+  buttonText: {
     fontSize: 15,
     fontWeight: '700',
-    fontFamily: theme.fontFamilyRegular,
   },
 });

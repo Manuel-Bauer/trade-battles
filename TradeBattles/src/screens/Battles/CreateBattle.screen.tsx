@@ -3,13 +3,14 @@ import {View, Text, StyleSheet, Image, Pressable} from 'react-native';
 import {CustomInput} from '../../components/CustomInput.component';
 import {StartEndDatePicker} from '../../components/StartEndDatePicker.component';
 import {ApiClient} from '../../services/ApiClient.service';
-import {theme} from '../../shared/themes';
 import {BattleMember} from '../../shared/Types';
 import {CustomModal} from '../../components/CustomModal';
 import {BattleMemberIcon} from '../../components/BattleMemberIcon.component';
 import {GoBack} from '../../components/GoBack.component';
+import {useTheme} from '../../Contexts/Theme';
 
 export const CreateBattle = () => {
+  const {theme, darkMode} = useTheme();
   const [addedMembers, setAddedMembers] = useState<BattleMember[]>([]);
   const [battleName, setBattleName] = useState('');
   const [search, setSearch] = useState('');
@@ -61,18 +62,36 @@ export const CreateBattle = () => {
       : false;
   };
   return (
-    <View style={styles.container}>
+    <View
+      style={{
+        ...styles.container,
+        backgroundColor: theme.colors.backgroundColor,
+      }}>
       <View style={{marginRight: 'auto'}}>
         <GoBack />
       </View>
-      <Text style={styles.title}>Battle Name</Text>
+      <Text
+        style={{
+          ...styles.title,
+          fontFamily: theme.fonts.bold,
+          color: theme.colors.textPrimary,
+        }}>
+        Battle Name
+      </Text>
       <CustomInput
         value={battleName}
         setValue={setBattleName}
         placeholder={'Choose a name for your battle...'}
         secureTextEntry={false}
       />
-      <Text style={styles.title}>Members</Text>
+      <Text
+        style={{
+          ...styles.title,
+          fontFamily: theme.fonts.bold,
+          color: theme.colors.textPrimary,
+        }}>
+        Members
+      </Text>
       <CustomInput
         value={search}
         setValue={setSearch}
@@ -87,7 +106,12 @@ export const CreateBattle = () => {
           <View key={el.email} style={styles.search_item_with_button_container}>
             <View style={styles.search_item_container}>
               <Image style={styles.search_photo} source={{uri: el.photo}} />
-              <Text style={styles.search_user_name}>
+              <Text
+                style={{
+                  ...styles.searchUserName,
+                  color: theme.colors.textPrimary,
+                  fontFamily: theme.fonts.bold,
+                }}>
                 {el.first_name} {el.last_name}
               </Text>
             </View>
@@ -96,8 +120,18 @@ export const CreateBattle = () => {
                 setAddedMembers(prevState => [...prevState, el]);
                 setSearch('');
               }}
-              style={styles.add_button}>
-              <Text style={styles.add_text}>ADD</Text>
+              style={{
+                ...styles.addButton,
+                backgroundColor: theme.colors.primary,
+              }}>
+              <Text
+                style={{
+                  ...styles.addText,
+                  color: theme.colors.textPrimary,
+                  fontFamily: theme.fonts.bold,
+                }}>
+                ADD
+              </Text>
             </Pressable>
           </View>
         ) : undefined,
@@ -108,7 +142,14 @@ export const CreateBattle = () => {
           <BattleMemberIcon key={el.email} photo={el.photo} />
         ))}
       </View>
-      <Text style={styles.title}>Select start and end dates</Text>
+      <Text
+        style={{
+          ...styles.title,
+          fontFamily: theme.fonts.bold,
+          color: theme.colors.textPrimary,
+        }}>
+        Select start and end dates
+      </Text>
       <StartEndDatePicker
         setStartDate={setStartDate}
         setEndDate={setEndDate}
@@ -123,8 +164,20 @@ export const CreateBattle = () => {
         <Text>Battle will end on: {endDate.toDateString()}</Text>
       )}
 
-      <Pressable onPress={() => handleCreate()} style={styles.create_button}>
-        <Text style={styles.create_text}>CREATE</Text>
+      <Pressable
+        onPress={() => handleCreate()}
+        style={{
+          ...styles.createButton,
+          backgroundColor: darkMode ? theme.colors.dark : theme.colors.light,
+        }}>
+        <Text
+          style={{
+            ...styles.createText,
+            color: theme.colors.textPrimary,
+            fontFamily: theme.fonts.bold,
+          }}>
+          CREATE
+        </Text>
       </Pressable>
       <CustomModal
         viewable={errorMessage}
@@ -145,32 +198,25 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    backgroundColor: theme.light_mode_white,
   },
   title: {
     fontSize: 20,
     fontWeight: '600',
-    marginBottom: 15,
-    marginTop: 15,
-    fontFamily: theme.fontFamilyBold,
-    color: theme.colorPrimary,
+    marginBottom: 10,
+    marginTop: 30,
   },
-  add_button: {
-    backgroundColor: theme.colorPrimary,
+  addButton: {
     width: 45,
     height: 25,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  add_text: {
-    color: theme.light_mode_white,
+  addText: {
     fontSize: 11,
     fontWeight: '700',
-    fontFamily: theme.fontFamilyBold,
   },
-  create_button: {
-    backgroundColor: theme.colorPrimary,
+  createButton: {
     width: '80%',
     height: 50,
     marginTop: 50,
@@ -178,10 +224,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 12,
   },
-  create_text: {
-    color: theme.light_mode_white,
+  createText: {
     fontWeight: '900',
-    fontFamily: theme.fontFamilyBold,
   },
   search_photo: {
     width: 30,
@@ -194,10 +238,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
-  search_user_name: {
-    color: theme.colorPrimary,
+  searchUserName: {
     fontSize: 12,
-    fontFamily: theme.fontFamilyRegular,
   },
   search_item_with_button_container: {
     flexDirection: 'row',
