@@ -41,7 +41,9 @@ export const StockDetails: React.FC = () => {
       });
     };
     fetchPrice();
-    setInterval(() => fetchPrice(), 1000);
+    setInterval(() => fetchPrice(), 300000);
+    //set to 5 minute interval
+    //used 1% of my api credits in 5 minutes at 1 second interval
   }, []);
 
   return (
