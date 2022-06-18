@@ -1,9 +1,12 @@
 const fetch = require('node-fetch');
 require('dotenv').config();
 
+const IEXapibaseurl = 'https://cloud.iexapis.com/stable';
+const PoligonApiBaseUrl = 'https://api.polygon.io/v2/aggs/ticker';
+
 exports.getQuote = async (symbol) => {
   const quote = await fetch(
-    `https://cloud.iexapis.com/stable/stock/${symbol.toLowerCase()}/quote?token=${
+    `${IEXapibaseurl}/stock/${symbol.toLowerCase()}/quote?token=${
       process.env.IEX_API_KEY
     }`
   ).then((res) => res.json());
@@ -27,7 +30,7 @@ exports.getHistoricalData = async (
   };
   const startDate = convertDate(start_date);
   const endDate = convertDate(end_date);
-  const url = `https://polygon.io/${ticker.toUpperCase()}/range/${periodicity_unit}/${periodicity}/${start_date}/${end_date}?adjusted=true&sort=asc`;
+  const url = `${PoligonApiBaseUrl}/${ticker.toUpperCase()}/range/${periodicity_unit}/${periodicity}/${start_date}/${end_date}?adjusted=true&sort=asc`;
   console.log(url);
   const data = await fetch(url, {
     method: 'GET',
