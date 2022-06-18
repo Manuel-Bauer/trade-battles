@@ -32,7 +32,7 @@ async function getUser(id) {
   try {
     const user = await prisma.user.findUnique({
       where: {
-        id,
+        google_id: id,
       },
     });
     return user;

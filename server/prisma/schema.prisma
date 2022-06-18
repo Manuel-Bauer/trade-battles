@@ -11,8 +11,8 @@ datasource db {
 }
 
 model User {
-  // id Int @id @default(autoincrement())
-  id Int @id
+  id Int @id @default(autoincrement())
+  google_id String
   givenName String
   familyName String
   photo String
