@@ -12,7 +12,7 @@ datasource db {
 
 model User {
   id Int @id @default(autoincrement())
-  google_id String
+  google_id String @unique
   givenName String
   familyName String
   photo String
