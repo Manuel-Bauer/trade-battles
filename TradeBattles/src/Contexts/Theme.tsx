@@ -25,11 +25,13 @@ export interface IThemeProvider {
       secondary: string;
       darkSecondary: string;
       backgroundColor: string;
+      textPrimary: string;
+      textSecondary: string;
     };
     fonts: {
-      fontFamilyBold: string;
-      fontFamilyRegular: string;
-      fontFamilyLight: string;
+      bold: string;
+      regular: string;
+      light: string;
     };
   };
 }
@@ -69,12 +71,14 @@ export const ThemeProvider: FC<any> = ({children}) => {
         lightSecondary: darkMode ? '#ffddfe' : '#e7d8fd',
         secondary: darkMode ? '#f4b8ff' : '#c4a0f9',
         darkSecondary: darkMode ? '#d794e2' : '#a084e1',
-        backgroundColor: darkMode ? '#00243B' : '#FAFAFA',
+        backgroundColor: darkMode ? '#00111c' : '#FAFAFA',
+        textPrimary: darkMode ? '#FAFAFA' : '#171717',
+        textSecondary: darkMode ? '#d5d5d5' : '#383838',
       },
       fonts: {
-        fontFamilyBold: 'PlusJakartaSans-Bold',
-        fontFamilyRegular: 'PlusJakartaSans-Regular',
-        fontFamilyLight: 'PlusJakartaSans-Light',
+        bold: 'PlusJakartaSans-Bold',
+        regular: 'PlusJakartaSans-Regular',
+        light: 'PlusJakartaSans-Light',
       },
     },
   };

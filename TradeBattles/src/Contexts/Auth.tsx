@@ -13,9 +13,9 @@ GoogleSignin.configure({
 export interface IUserProvider {
   currentUser: User;
   setUser: (user: User) => void;
-  // signup: (email: string, password: string, firstName: string) => Promise<User>;
   login: () => Promise<User>;
-  // logout: () => Promise<void>;
+  logout: () => Promise<void>;
+  // signup: (email: string, password: string, firstName: string) => Promise<User>;
   // resetPassword: (email: string) => Promise<void>;
   // resendEmailVerififaction: () => Promise<void>;
   // idToken: string;
@@ -33,16 +33,17 @@ export const UserProvider: FC<any> = ({children}) => {
   const [currentUser, setCurrentUser] = useState<User>(UserInitializer);
 
   function login(): Promise<User> {
-    return GoogleSignin.signIn()
-      .then(user => {
-        const userObject: User = {...user, watchlist: []} as unknown as User;
-        setCurrentUser(userObject);
-        return userObject;
-      })
-      .then(userObject => {
-        ApiClient.handleSignIn(userObject);
-        return userObject;
-      });
+    return GoogleSignin.signIn().then(async ({user}) => {
+      console.log('login() => GoogleSignin => .then(user ...', user);
+      const userObject: User = {...user, watchlist: []} as unknown as User;
+      setCurrentUser(userObject);
+      await ApiClient.handleSignIn(userObject);
+      return userObject;
+    });
+  }
+
+  async function logout(): Promise<void> {
+    setCurrentUser(UserInitializer);
   }
   /* 
     const [idToken, setIdToken] = useState<string>('');
@@ -57,9 +58,6 @@ export const UserProvider: FC<any> = ({children}) => {
     }
 
 
-    function logout(): Promise<void> {
-      // ...
-    }
 
     function resetPassword(email: string): Promise<void> {
       // ...
@@ -70,10 +68,10 @@ export const UserProvider: FC<any> = ({children}) => {
     currentUser,
     setUser: (user: User) => setCurrentUser(user),
     login,
+    logout,
     // idToken,
     // signup,
     // login,
-    // logout,
     // resetPassword,
     // resendEmailVerififaction,
   };
