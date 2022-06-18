@@ -26,7 +26,11 @@ export const StartEndDatePicker: React.FC<{
             fontFamily: theme.fonts.bold,
             color: theme.colors.textPrimary,
           }}>
-          Pick Start Date
+          {startDate ? (
+            <Text>{startDate.toDateString()}</Text>
+          ) : (
+            'Pick Start Date'
+          )}
         </Text>
       </Pressable>
 
@@ -42,14 +46,14 @@ export const StartEndDatePicker: React.FC<{
             fontFamily: theme.fonts.bold,
             color: theme.colors.textPrimary,
           }}>
-          Pick End Date
+          {endDate ? <Text>{endDate.toDateString()}</Text> : 'Pick End Date'}
         </Text>
       </Pressable>
 
       <DatePicker
         modal
         open={openStartDatePicker}
-        date={startDate}
+        date={startDate || new Date()}
         onConfirm={date => {
           setOpenStartDatePicker(false);
           setStartDate(date);
@@ -62,7 +66,7 @@ export const StartEndDatePicker: React.FC<{
       <DatePicker
         modal
         open={openEndDatePicker}
-        date={endDate}
+        date={endDate || new Date()}
         onConfirm={date => {
           setOpenEndDatePicker(false);
           setEndDate(date);

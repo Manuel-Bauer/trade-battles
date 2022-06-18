@@ -21,8 +21,8 @@ export const CreateBattle = () => {
   const [battleName, setBattleName] = useState('');
   const [search, setSearch] = useState('');
 
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState<Date | null>();
+  const [endDate, setEndDate] = useState<Date | null>();
   const [members, setMembers] = useState<BattleMember[]>();
   const [errorMessage, setErrorMessage] = useState(false);
   const [successfulCreate, setSuccessfulCreate] = useState(false);
@@ -34,8 +34,6 @@ export const CreateBattle = () => {
   };
 
   useEffect(() => {
-    setStartDate(new Date(Date.now()));
-    setEndDate(new Date(Date.now()));
     getMembers();
   }, []);
 
@@ -50,8 +48,8 @@ export const CreateBattle = () => {
         setSuccessfulCreate(true),
         setAddedMembers([]),
         setBattleName(''),
-        setEndDate(new Date()),
-        setStartDate(new Date()))
+        setEndDate(null),
+        setStartDate(null))
       : setErrorMessage(true);
   };
 
@@ -87,6 +85,8 @@ export const CreateBattle = () => {
         placeholder={'Choose a name for your battle...'}
         secureTextEntry={false}
       />
+
+      {/* ----- SEARCHING FOR MEMBERS ----- */}
       <Text
         style={{
           ...styles.title,
@@ -114,11 +114,14 @@ export const CreateBattle = () => {
         ) : undefined,
       )}
 
-      <View style={{flexDirection: 'row'}}>
+      {/* ----- ADDED MEMBERS AVATARS ----- */}
+      <View style={{flexDirection: 'row', flexWrap: 'wrap', marginTop: 10}}>
         {addedMembers.map(el => (
           <BattleMemberIcon key={el.email} photo={el.photo} />
         ))}
       </View>
+
+      {/* ----- SETTING DATES ----- */}
       <Text
         style={{
           ...styles.title,
@@ -130,17 +133,9 @@ export const CreateBattle = () => {
       <StartEndDatePicker
         setStartDate={setStartDate}
         setEndDate={setEndDate}
-        endDate={endDate}
         startDate={startDate}
+        endDate={endDate}
       />
-
-      {startDate.getTime() > Date.now() && (
-        <Text>Battle will start on: {startDate.toDateString()}</Text>
-      )}
-      {endDate.getTime() > Date.now() && (
-        <Text>Battle will end on: {endDate.toDateString()}</Text>
-      )}
-
       <Pressable
         onPress={() => handleCreate()}
         style={{

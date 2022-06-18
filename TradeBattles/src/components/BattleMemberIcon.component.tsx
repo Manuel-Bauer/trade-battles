@@ -1,24 +1,25 @@
 import React from 'react';
 import {View, Image} from 'react-native';
-import {theme} from '../shared/themes';
+import {useTheme} from '../Contexts/Theme';
 
 export const BattleMemberIcon: React.FC<{photo: string}> = ({photo}) => {
+  const {theme, darkMode} = useTheme();
   return (
     <View style={{margin: 5}}>
       <View
         style={{
-          width: 46,
-          height: 46,
+          padding: 1,
           borderRadius: 50,
-          backgroundColor: theme.colorPrimary,
+          backgroundColor: darkMode ? theme.colors.light : theme.colors.dark,
           justifyContent: 'center',
         }}>
         <View
           style={{
-            width: 44,
-            height: 44,
+            padding: 2,
             borderRadius: 50,
-            backgroundColor: theme.light_mode_white,
+            backgroundColor: darkMode
+              ? theme.colors.dark
+              : theme.colors.lightest,
             alignSelf: 'center',
             justifyContent: 'center',
           }}>
