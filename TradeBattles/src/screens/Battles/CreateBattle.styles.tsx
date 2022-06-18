@@ -51,7 +51,10 @@ export const styles = StyleSheet.create({
   search_item_with_button_container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '70%',
-    marginVertical: 2,
+    alignItems: 'center',
+    width: '80%',
+    marginTop: 5,
+    padding: 10,
+    borderBottomWidth: 1,
   },
 });

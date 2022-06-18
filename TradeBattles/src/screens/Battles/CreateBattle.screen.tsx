@@ -15,7 +15,7 @@ import {useTheme} from '../../Contexts/Theme';
 import {styles} from './CreateBattle.styles';
 
 export const CreateBattle = () => {
-  const {theme} = useTheme();
+  const {theme, darkMode} = useTheme();
   const [addedMembers, setAddedMembers] = useState<BattleMember[]>([]);
   const [battleName, setBattleName] = useState('');
   const [search, setSearch] = useState('');
@@ -105,7 +105,14 @@ export const CreateBattle = () => {
           el.last_name.toLowerCase().includes(search.toLowerCase()) ||
           el.email.toLowerCase().includes(search.toLowerCase())) &&
         search.length ? (
-          <View key={el.email} style={styles.search_item_with_button_container}>
+          <View
+            key={el.email}
+            style={{
+              ...styles.search_item_with_button_container,
+              borderBottomColor: darkMode
+                ? theme.colors.dark
+                : theme.colors.lighter,
+            }}>
             <View style={styles.search_item_container}>
               <Image style={styles.search_photo} source={{uri: el.photo}} />
               <Text
@@ -124,7 +131,9 @@ export const CreateBattle = () => {
               }}
               style={{
                 ...styles.addButton,
-                backgroundColor: theme.colors.primary,
+                backgroundColor: darkMode
+                  ? theme.colors.dark
+                  : theme.colors.lighter,
               }}>
               <Text
                 style={{
