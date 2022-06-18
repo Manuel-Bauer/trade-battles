@@ -12,7 +12,7 @@ import {
   UserIcon,
 } from '../components/BottomTabIcons.component';
 import {WatchList} from './Watchlist.screen';
-import {Settings} from './Settings.screen';
+import {Settings} from './Settings/Settings.screen';
 
 /* ---- CONTEXT ---- */
 import {useTheme} from '../Contexts/Theme';
