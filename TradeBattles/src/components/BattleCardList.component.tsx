@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   Animated,
   Dimensions,
@@ -6,8 +6,6 @@ import {
   NativeScrollEvent,
   View,
 } from 'react-native';
-import {useUserContext} from '../App.provider';
-import {ApiClient} from '../services/ApiClient.service';
 import {Battle} from '../shared/Types';
 import {BattleCard} from './BattleCard.component';
 import {theme} from '../shared/themes';
@@ -17,18 +15,8 @@ const height = Dimensions.get('window').height;
 const BATTLE_CONTAINER = width;
 export const BattleCardList: React.FC<{
   myBattles: Battle[];
-  setMyBattles: React.Dispatch<React.SetStateAction<Battle[]>>;
-  setNoBattles: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({myBattles, setMyBattles, setNoBattles}) => {
-  const userContext = useUserContext();
-
+}> = ({myBattles}) => {
   const [currentBattleIndex, setCurrentBattleIndex] = useState(0);
-
-  useEffect(() => {
-    ApiClient.getMyBattles(userContext.user.id)
-      .then(res => setMyBattles(res.data))
-      .catch(error => setNoBattles(true));
-  }, []);
 
   const scrollX = React.useRef(new Animated.Value(0)).current;
 

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View, Text, SafeAreaView, Pressable} from 'react-native';
 import {theme} from '../shared/themes';
 import type {Battle} from '../shared/Types';
@@ -6,14 +6,27 @@ import {useNavigation} from '@react-navigation/native';
 import {ProfileScreenNavigationProp} from '../shared/Types';
 import LottieView from 'lottie-react-native';
 import {BattleCardList} from '../components/BattleCardList.component';
+import {useFocusEffect} from '@react-navigation/native';
+import {useUserContext} from '../App.provider';
+import {ApiClient} from '../services/ApiClient.service';
 
 const pointingArrowSrc = require('../../assets/lotties/pointing_arrow.json');
 
 export const MyBattles: React.FC = () => {
+  const userContext = useUserContext();
   const [myBattles, setMyBattles] = useState<Battle[]>([]);
   const [noBattles, setNoBattles] = useState(false);
 
   const navigation = useNavigation<ProfileScreenNavigationProp>();
+
+  useFocusEffect(
+    React.useCallback(() => {
+      ApiClient.getMyBattles(userContext.user.id)
+        .then(res => setMyBattles(res.data))
+        .then(res => setNoBattles(false))
+        .catch(error => setNoBattles(true));
+    }, [userContext.user.id]),
+  );
 
   return (
     <SafeAreaView style={styles.container}>
