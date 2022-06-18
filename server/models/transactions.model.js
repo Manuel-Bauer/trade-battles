@@ -8,8 +8,6 @@ async function createTransaction(data) {
     return transaction;
   } catch (err) {
     throw err;
-  } finally {
-    await prisma.$disconnect();
   }
 }
 
@@ -19,8 +17,6 @@ async function getAllTransactions() {
     return allTransactions;
   } catch (err) {
     throw err;
-  } finally {
-    await prisma.$disconnect();
   }
 }
 

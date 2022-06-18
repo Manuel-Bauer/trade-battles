@@ -8,8 +8,6 @@ async function createBattle (data) {
     return battle;
   } catch (err) {
     throw err;
-  } finally {
-    await prisma.$disconnect();
   }
 }
 
@@ -27,8 +25,6 @@ async function getMyBattles (userId) {
     return myBattles;
   } catch (err) {
     throw err;
-  } finally {
-    await prisma.$disconnect();
   }
 }
 

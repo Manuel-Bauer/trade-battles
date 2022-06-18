@@ -24,6 +24,15 @@ app.use(router);
 
 // getAllTransactions().then((res) => console.log(res));
 
+// createUser({
+//   id: 'asdfasdf',
+//   email: 'fasdfasdd@gmail.com',
+//   givenName: 'Sam',
+//   familyName: 'Fanhais',
+//   photo: 'dausfgkjahsdgfkjahbsd',
+//   watchlist: ['stuff', 'more stuff'],
+// }).then((res) => console.log(res));
+
 // createTransaction({
 //   battleId: 1,
 //   userId: 1,
