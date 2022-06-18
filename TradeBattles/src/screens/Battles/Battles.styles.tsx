@@ -33,12 +33,16 @@ export const styles = StyleSheet.create({
     fontWeight: '700',
     alignSelf: 'center',
   },
-  no_battle_point_arrows: {
+  arrows: {
     transform: [{rotate: '180deg'}],
     paddingHorizontal: 60,
     marginLeft: 'auto',
     width: 70,
     height: 70,
+  },
+  noBattlesContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   noBattlesMessage: {
     fontSize: 30,

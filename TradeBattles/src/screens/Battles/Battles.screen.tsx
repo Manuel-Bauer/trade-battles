@@ -41,7 +41,7 @@ export const Battles: React.FC = () => {
         </Text>
       </Pressable>
       {noBattles && (
-        <View style={styles.no_battle_point_arrows}>
+        <View style={styles.arrows}>
           <LottieView source={pointingArrowSrc} autoPlay />
         </View>
       )}
@@ -55,11 +55,7 @@ export const Battles: React.FC = () => {
       </Text>
 
       {noBattles ? (
-        <View
-          style={{
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
+        <View style={styles.noBattlesContainer}>
           <Text
             style={{
               ...styles.noBattlesMessage,
