@@ -2,50 +2,50 @@ import React, {FC, useContext, useState} from 'react';
 
 export interface IThemeProvider {
   darkMode: boolean;
-  toggleDarkMode: (theme: boolean) => void;
+  toggleDarkMode: () => void;
   theme: {
-    primary_green: string;
-    primary_yellow: string;
-    primary_red: string;
-    light_mode_white: string;
-    stockCardBackground: string;
-    greyPrimary: string;
-    colorPrimary: string;
-
-    fontFamilyBold: string;
-    fontFamilyRegular: string;
-    fontFamilyLight: string;
+    colors: {
+      darkest: string;
+      darker: string;
+      dark: string;
+      light: string;
+      lighter: string;
+      lightest: string;
+      white: string;
+      lightRed: string;
+      red: string;
+      darkRed: string;
+      lightGreen: string;
+      green: string;
+      darkGreen: string;
+      lightPrimary: string;
+      primary: string;
+      darkPrimary: string;
+      lightSecondary: string;
+      secondary: string;
+      darkSecondary: string;
+      backgroundColor: string;
+    };
+    fonts: {
+      fontFamilyBold: string;
+      fontFamilyRegular: string;
+      fontFamilyLight: string;
+    };
   };
 }
 
-const ThemeContext = React.createContext<IThemeProvider>({
-  darkMode: false,
-  toggleDarkMode: () => {},
-  theme: {
-    primary_green: '#09BE8E',
-    primary_yellow: '#F7E733',
-    primary_red: '#FF4B4B',
-    light_mode_white: 'white',
-    stockCardBackground: 'white',
-
-    colorPrimary: 'black',
-    greyPrimary: '#F8F8F8',
-    fontFamilyBold: 'PlusJakartaSans-Bold',
-    fontFamilyRegular: 'PlusJakartaSans-Regular',
-    fontFamilyLight: 'PlusJakartaSans-Light',
-  },
-});
+const ThemeContext = React.createContext<IThemeProvider | null>(null);
 
 /* ----- HOOK ----- */
 export function useDesign() {
-  return useContext<IThemeProvider>(ThemeContext);
+  return useContext<IThemeProvider | null>(ThemeContext);
 }
 
 /* ----- PROVIDER ----- */
 export const ThemeProvider: FC<any> = ({children}) => {
   const [darkMode, setDarkMode] = useState<boolean>(false);
 
-  const value = {
+  const value: IThemeProvider = {
     darkMode,
     toggleDarkMode: () => setDarkMode(!darkMode),
     theme: {
@@ -63,18 +63,19 @@ export const ThemeProvider: FC<any> = ({children}) => {
         lightGreen: '#C6F6D5',
         green: '#48BB78',
         darkGreen: '#1C4532',
+        lightPrimary: darkMode ? '#FFB2FE' : '#8231fb',
+        primary: darkMode ? '#EA7FFC' : '#6101EE',
+        darkPrimary: darkMode ? '#B54FC8' : '#300399',
+        lightSecondary: darkMode ? '#ffddfe' : '#e7d8fd',
+        secondary: darkMode ? '#f4b8ff' : '#c4a0f9',
+        darkSecondary: darkMode ? '#d794e2' : '#a084e1',
+        backgroundColor: darkMode ? '#00243B' : '#FAFAFA',
       },
-
-      /* primary_green: '#09BE8E',
-      primary_yellow: '#F7E733',
-      primary_red: '#FF4B4B',
-      light_mode_white: 'white',
-      stockCardBackground: 'white',
-      colorPrimary: 'black',
-      greyPrimary: '#F8F8F8',
-      fontFamilyBold: 'PlusJakartaSans-Bold',
-      fontFamilyRegular: 'PlusJakartaSans-Regular',
-      fontFamilyLight: 'PlusJakartaSans-Light', */
+      fonts: {
+        fontFamilyBold: 'PlusJakartaSans-Bold',
+        fontFamilyRegular: 'PlusJakartaSans-Regular',
+        fontFamilyLight: 'PlusJakartaSans-Light',
+      },
     },
   };
 
