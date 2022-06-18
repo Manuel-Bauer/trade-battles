@@ -6,7 +6,6 @@ import {
   StyleSheet,
   TextInput,
   Pressable,
-  Dimensions,
 } from 'react-native';
 import {PortfolioStock, Stock} from '../shared/Types';
 import {stockListForSearch} from '../stockListForSearch';
@@ -17,7 +16,6 @@ import {useNavigation} from '@react-navigation/native';
 import {CustomModal} from './CustomModal';
 import {useTheme} from '../Contexts/Theme';
 
-const SEARCH_TERM_WIDTH = Dimensions.get('window').width * 0.8;
 export const StockSearch: React.FC<{
   battle_id: string;
   user_id: string;
@@ -26,7 +24,7 @@ export const StockSearch: React.FC<{
     React.SetStateAction<PortfolioStock[]>
   >;
 }> = ({battle_id, user_id, currentUserPortfolio, setCurrentUserPortfolio}) => {
-  const {theme, darkMode} = useTheme();
+  const {theme} = useTheme();
 
   const [search, setSearch] = useState('');
   const [badSearch, setBadSearch] = useState(false);
