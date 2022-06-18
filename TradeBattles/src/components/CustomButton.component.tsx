@@ -1,9 +1,7 @@
 import React from 'react';
-import {theme} from '../shared/themes';
 import {
   StyleSheet,
   Text,
-  View,
   Pressable,
   Image,
   ImageSourcePropType,
@@ -33,9 +31,9 @@ export const CustomButton: React.FC<CustomButtonProps> = ({
         styles.container,
         {backgroundColor: backgroundColor},
         type === 'TERCIARY'
-          ? styles['container_TERCIARY']
+          ? styles.container_TERCIARY
           : type === 'PRIMARY'
-          ? styles['container_PRIMARY']
+          ? styles.container_PRIMARY
           : undefined,
       ]}>
       {icon ? <Image source={icon} style={styles.icon} /> : undefined}
@@ -44,9 +42,9 @@ export const CustomButton: React.FC<CustomButtonProps> = ({
           styles.text,
           {color: textColor},
           type === 'TERCIARY'
-            ? styles['text_TERCIARY']
+            ? styles.text_TERCIARY
             : type === 'PRIMARY'
-            ? styles['text_PRIMARY']
+            ? styles.text_PRIMARY
             : undefined,
         ]}>
         {text}

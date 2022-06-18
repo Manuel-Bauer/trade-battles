@@ -2,7 +2,7 @@ import React from 'react';
 
 /* ---- NAVIGATION ---- */
 import {NavigationContainer} from '@react-navigation/native';
-import {Navigation} from './screens/LoginStackNavigator.navigation';
+import {Navigation} from './screens/Entry/LoginStackNavigator.navigation';
 
 /* ---- CONTEXT ---- */
 import {ImageBackground} from 'react-native';

@@ -2,19 +2,19 @@ import React, {useEffect} from 'react';
 
 /* ---- NAVIGATION ---- */
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {BottomTabsNavigator} from './BottomTabs.navigaton';
+import {BottomTabsNavigator} from '../BottomTabs.navigaton';
 import {useNavigation} from '@react-navigation/native';
 
 /* ---- COMPONENTS ---- */
 import {LoginOnlySocial} from './LoginOnlySocial.screen';
 
 /* ---- CONTEXTS ---- */
-import {useAuth} from '../Contexts/Auth';
-import {useTheme} from '../Contexts/Theme';
+import {useAuth} from '../../Contexts/Auth';
+import {useTheme} from '../../Contexts/Theme';
 
 /* ---- TYPES ---- */
-import {LoginScreenNavigationProp} from '../shared/Types';
-import {LoginStackParamList} from '../shared/Types';
+import {LoginScreenNavigationProp} from '../../shared/Types';
+import {LoginStackParamList} from '../../shared/Types';
 
 const Stack = createNativeStackNavigator<LoginStackParamList>();
 

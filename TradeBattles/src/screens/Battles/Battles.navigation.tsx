@@ -1,20 +1,22 @@
 import React from 'react';
-import {RootStackParamList} from '../shared/Types';
+import {RootStackParamList} from '../../shared/Types';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {BattlePortfolio} from './BattlePortfolio.screen';
-import {StockDetails} from './StockDetails.screen';
+import {BattlePortfolio} from '../BattlePortfolio.screen';
+import {StockDetails} from '../StockDetails.screen';
 import {MyBattles} from './MyBattles.screen';
-import {theme} from '../shared/themes';
 import {CreateBattle} from './CreateBattle.screen';
+
+/* ---- CONTEXT ---- */
+import {useTheme} from '../../Contexts/Theme';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-export const StackNavigator = () => {
+export const Battles = () => {
+  const {theme} = useTheme();
   return (
     <Stack.Navigator
       screenOptions={{
-        contentStyle: {backgroundColor: theme.stockCardBackground},
-
+        contentStyle: {backgroundColor: theme.colors.backgroundColor},
         headerShown: false,
       }}>
       <Stack.Screen name={'MyBattles'} component={MyBattles} />

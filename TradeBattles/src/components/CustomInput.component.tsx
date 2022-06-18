@@ -1,5 +1,5 @@
 import React, {SetStateAction} from 'react';
-import {StyleSheet, View, TextInput, useWindowDimensions} from 'react-native';
+import {StyleSheet, View, TextInput} from 'react-native';
 import {theme} from '../shared/themes';
 
 type CustomInputProps = {

@@ -1,15 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View, Text, SafeAreaView, Pressable} from 'react-native';
-import {theme} from '../shared/themes';
-import type {Battle} from '../shared/Types';
+import type {Battle} from '../../shared/Types';
 import {useNavigation} from '@react-navigation/native';
-import {ProfileScreenNavigationProp} from '../shared/Types';
+import {ProfileScreenNavigationProp} from '../../shared/Types';
 import LottieView from 'lottie-react-native';
-import {BattleCardList} from '../components/BattleCardList.component';
+import {BattleCardList} from '../../components/BattleCardList.component';
+import {useTheme} from '../../Contexts/Theme';
 
-const pointingArrowSrc = require('../../assets/lotties/pointing_arrow.json');
+const pointingArrowSrc = require('../../../assets/lotties/pointing_arrow.json');
 
 export const MyBattles: React.FC = () => {
+  const {theme} = useTheme();
   const [myBattles, setMyBattles] = useState<Battle[]>([]);
   const [noBattles, setNoBattles] = useState(false);
 
@@ -18,16 +19,32 @@ export const MyBattles: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Pressable
-        style={styles.create_battle_button}
+        style={{
+          ...styles.createBattleButton,
+          backgroundColor: theme.colors.primary,
+        }}
         onPress={() => navigation.navigate('CreateBattle')}>
-        <Text style={styles.create_battle_button_text}>+</Text>
+        <Text
+          style={{
+            ...styles.createBattleButtonText,
+            color: theme.colors.textPrimary,
+          }}>
+          +
+        </Text>
       </Pressable>
       {noBattles && (
         <View style={styles.no_battle_point_arrows}>
           <LottieView source={pointingArrowSrc} autoPlay />
         </View>
       )}
-      <Text style={styles.header}>My Battles</Text>
+      <Text
+        style={{
+          ...styles.header,
+          color: theme.colors.textPrimary,
+          fontFamily: theme.fonts.bold,
+        }}>
+        My Battles
+      </Text>
 
       {noBattles ? (
         <View
@@ -35,7 +52,11 @@ export const MyBattles: React.FC = () => {
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <Text style={styles.no_battles_message}>
+          <Text
+            style={{
+              ...styles.noBattlesMessage,
+              color: theme.colors.textPrimary,
+            }}>
             You currently have no battles, create one with the top right button!
           </Text>
         </View>
@@ -53,25 +74,22 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: theme.light_mode_white,
   },
   header: {
     fontSize: 30,
     fontWeight: '800',
     marginTop: 20,
     marginBottom: -25,
-    color: theme.colorPrimary,
-    fontFamily: theme.fontFamilyBold,
   },
-  create_battle_button: {
+  createBattleButton: {
     width: 40,
     height: 40,
     marginLeft: 'auto',
     marginRight: 40,
     marginTop: 20,
-    backgroundColor: theme.colorPrimary,
     borderRadius: 50,
     justifyContent: 'center',
+    alignItems: 'center',
     shadowColor: 'black',
     shadowOffset: {
       width: 0,
@@ -80,9 +98,8 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     shadowOpacity: 0.2,
   },
-  create_battle_button_text: {
+  createBattleButtonText: {
     fontSize: 30,
-    color: theme.light_mode_white,
     fontWeight: '700',
     alignSelf: 'center',
   },
@@ -93,8 +110,7 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
   },
-  no_battles_message: {
-    color: theme.colorPrimary,
+  noBattlesMessage: {
     fontSize: 30,
     fontWeight: '300',
     textAlign: 'center',

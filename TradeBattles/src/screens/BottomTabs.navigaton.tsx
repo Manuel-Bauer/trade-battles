@@ -2,7 +2,7 @@ import React from 'react';
 
 /* ---- NAVIGATION ---- */
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {StackNavigator} from './AppStackNavigator.navigation';
+import {Battles} from './Battles/Battles.navigation';
 const BottomTabs = createBottomTabNavigator();
 
 /* ---- COMPONENTS ---- */
@@ -21,9 +21,11 @@ export const BottomTabsNavigator: React.FC = () => {
   const {theme, darkMode} = useTheme();
   return (
     <BottomTabs.Navigator
-      initialRouteName="StackNavigator"
+      initialRouteName="Battles"
       screenOptions={({route}) => ({
-        ...screenOptions,
+        headerShown: false,
+        tabBarHideOnKeyboard: true,
+        tabBarShowLabel: false,
         tabBarActiveTintColor: darkMode
           ? theme.colors.lightest
           : theme.colors.darker,
@@ -34,10 +36,13 @@ export const BottomTabsNavigator: React.FC = () => {
           backgroundColor: darkMode
             ? theme.colors.darker
             : theme.colors.lighter,
+          height: 90,
+          padding: 10,
+          borderTopWidth: 0,
         },
         tabBarIcon: props => {
           switch (route.name) {
-            case 'StackNavigator':
+            case 'Battles':
               return <HomeIcon size={props.size + 10} color={props.color} />;
             case 'Watchlist':
               return (
@@ -49,17 +54,8 @@ export const BottomTabsNavigator: React.FC = () => {
         },
       })}>
       <BottomTabs.Screen name="Watchlist" component={WatchList} />
-      <BottomTabs.Screen name="StackNavigator" component={StackNavigator} />
+      <BottomTabs.Screen name="Battles" component={Battles} />
       <BottomTabs.Screen name="Settings" component={Settings} />
     </BottomTabs.Navigator>
   );
-};
-
-const screenOptions = {
-  headerShown: false,
-  tabBarHideOnKeyboard: true,
-  tabBarShowLabel: false,
-  borderTopWidth: 0,
-  height: 90,
-  padding: 10,
 };

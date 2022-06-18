@@ -2,16 +2,16 @@ import React from 'react';
 
 /* ---- COMPONENTS ---- */
 import {StyleSheet, View, ScrollView, Text} from 'react-native';
-import {CustomButton} from '../components/CustomButton.component';
+import {CustomButton} from '../../components/CustomButton.component';
 import LottieView from 'lottie-react-native';
 
 /* ---- CONTEXTS ---- */
-import {useTheme} from '../Contexts/Theme';
-import {useAuth} from '../Contexts/Auth';
+import {useTheme} from '../../Contexts/Theme';
+import {useAuth} from '../../Contexts/Auth';
 
 /* ---- ASSETS ---- */
-const googleImageSource = require('../../assets/images/Google_logo.png');
-const fallingMoneySrc = require('../../assets/lotties/falling_money.json');
+const googleImageSource = require('../../../assets/images/Google_logo.png');
+const fallingMoneySrc = require('../../../assets/lotties/falling_money.json');
 
 export const LoginOnlySocial: React.FC = () => {
   const {login} = useAuth();
