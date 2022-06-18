@@ -24,6 +24,15 @@ app.use(router);
 
 // getAllTransactions().then((res) => console.log(res));
 
+// createUser({
+//   id: 'asdfasdf',
+//   email: 'fasdfasdd@gmail.com',
+//   givenName: 'Sam',
+//   familyName: 'Fanhais',
+//   photo: 'dausfgkjahsdgfkjahbsd',
+//   watchlist: ['stuff', 'more stuff'],
+// }).then((res) => console.log(res));
+
 // createTransaction({
 //   battleId: 1,
 //   userId: 1,
@@ -33,8 +42,6 @@ app.use(router);
 //   price: 100000,
 //   quantity: 1,
 // }).then((res) => console.log(res));
-
-getMyBattles(1).then((res) => console.log(res));
 
 app.listen(PORT, () => {
   console.log(`We are in boys... http://localhost:${PORT}`);

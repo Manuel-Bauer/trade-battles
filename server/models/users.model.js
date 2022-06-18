@@ -12,8 +12,6 @@ async function getAllUsers() {
     return allUsers;
   } catch (err) {
     throw err;
-  } finally {
-    await prisma.$disconnect();
   }
 }
 
@@ -23,8 +21,6 @@ async function createUser(data) {
     return user;
   } catch (err) {
     throw err;
-  } finally {
-    await prisma.$disconnect();
   }
 }
 
@@ -38,8 +34,6 @@ async function getUser(id) {
     return user;
   } catch (err) {
     throw err;
-  } finally {
-    await prisma.$disconnect();
   }
 }
 
@@ -52,8 +46,6 @@ async function updateWatchlist(id, updatedWatchlist) {
     return user;
   } catch (err) {
     throw err;
-  } finally {
-    await prisma.$disconnect();
   }
 }
 
