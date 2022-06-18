@@ -30,7 +30,7 @@ async function createUser(data) {
 
 async function getUser(id) {
   try {
-    const user = await prisma.user.findUnique({
+    const user = await prisma.user.findFirst({
       where: {
         google_id: id,
       },
