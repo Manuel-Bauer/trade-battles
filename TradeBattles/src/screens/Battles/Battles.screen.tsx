@@ -35,7 +35,7 @@ export const Battles: React.FC = () => {
         <Text
           style={{
             ...styles.createBattleButtonText,
-            color: theme.colors.textPrimary,
+            color: theme.colors.white,
           }}>
           +
         </Text>

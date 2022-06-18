@@ -2,7 +2,7 @@ import React from 'react';
 
 /* ---- NAVIGATION ---- */
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Battles} from './Battles/Battles.navigation';
+import {BattlesNavigation} from './Battles/Battles.navigation';
 const BottomTabs = createBottomTabNavigator();
 
 /* ---- COMPONENTS ---- */
@@ -11,7 +11,7 @@ import {
   WatchlistIcon,
   UserIcon,
 } from '../components/BottomTabIcons.component';
-import {WatchList} from './Watchlist.screen';
+import {WatchList} from './Watchlist/Watchlist.screen';
 import {Settings} from './Settings/Settings.screen';
 
 /* ---- CONTEXT ---- */
@@ -54,7 +54,7 @@ export const BottomTabsNavigator: React.FC = () => {
         },
       })}>
       <BottomTabs.Screen name="Watchlist" component={WatchList} />
-      <BottomTabs.Screen name="Battles" component={Battles} />
+      <BottomTabs.Screen name="Battles" component={BattlesNavigation} />
       <BottomTabs.Screen name="Settings" component={Settings} />
     </BottomTabs.Navigator>
   );
