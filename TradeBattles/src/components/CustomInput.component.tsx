@@ -1,6 +1,6 @@
 import React, {SetStateAction} from 'react';
 import {StyleSheet, View, TextInput} from 'react-native';
-import {theme} from '../shared/themes';
+import {useTheme} from '../Contexts/Theme';
 
 type CustomInputProps = {
   value: any;
@@ -15,14 +15,23 @@ export const CustomInput: React.FC<CustomInputProps> = ({
   placeholder,
   secureTextEntry,
 }) => {
+  const {theme} = useTheme();
   return (
-    <View style={styles.container}>
+    <View
+      style={{
+        ...styles.container,
+        backgroundColor: theme.colors.backgroundColor,
+      }}>
       <TextInput
         value={value}
         onChangeText={setValue}
-        placeholderTextColor={theme.colorPrimary}
+        placeholderTextColor={theme.colors.textSecondary}
         placeholder={placeholder}
-        style={styles.input}
+        style={{
+          ...styles.input,
+          fontFamily: theme.fonts.light,
+          borderColor: theme.colors.dark,
+        }}
         secureTextEntry={secureTextEntry}
       />
     </View>
@@ -31,17 +40,13 @@ export const CustomInput: React.FC<CustomInputProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: theme.greyPrimary,
-    width: 250,
+    width: '82%',
     height: 50,
-    justifyContent: 'center',
-    // alignItems: 'center',
-    paddingHorizontal: 15,
-    borderRadius: 7,
-    marginVertical: 7,
   },
   input: {
-    fontFamily: theme.fontFamilyRegular,
     fontSize: 12,
+    borderRadius: 10,
+    borderWidth: 1,
+    padding: 15,
   },
 });
