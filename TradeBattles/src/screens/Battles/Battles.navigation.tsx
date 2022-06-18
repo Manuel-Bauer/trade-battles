@@ -3,7 +3,7 @@ import {RootStackParamList} from '../../shared/Types';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {BattlePortfolio} from '../BattlePortfolio.screen';
 import {StockDetails} from '../StockDetails.screen';
-import {MyBattles} from './MyBattles.screen';
+import {MyBattles} from './Battles.screen';
 import {CreateBattle} from './CreateBattle.screen';
 
 /* ---- CONTEXT ---- */

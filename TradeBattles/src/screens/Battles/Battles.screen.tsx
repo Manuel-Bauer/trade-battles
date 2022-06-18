@@ -9,7 +9,7 @@ import {useTheme} from '../../Contexts/Theme';
 
 const pointingArrowSrc = require('../../../assets/lotties/pointing_arrow.json');
 
-export const MyBattles: React.FC = () => {
+export const Battles: React.FC = () => {
   const {theme} = useTheme();
   const [myBattles, setMyBattles] = useState<Battle[]>([]);
   const [noBattles, setNoBattles] = useState(false);
