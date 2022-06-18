@@ -11,11 +11,11 @@ async function createBattle(data) {
   }
 }
 
-async function getMyBattles(userId) {
+async function getMyBattles(id) {
   try {
     const myBattles = await prisma.battle.findMany({
       where: {
-        userId,
+        google_id: id,
       },
       include: {
         transaction: true,
