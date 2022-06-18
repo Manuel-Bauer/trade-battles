@@ -23,9 +23,7 @@ export const BottomTabsNavigator: React.FC = () => {
     <BottomTabs.Navigator
       initialRouteName="StackNavigator"
       screenOptions={({route}) => ({
-        headerShown: false,
-        tabBarHideOnKeyboard: true,
-        tabBarShowLabel: false,
+        ...screenOptions,
         tabBarActiveTintColor: darkMode
           ? theme.colors.lightest
           : theme.colors.darker,
@@ -36,9 +34,6 @@ export const BottomTabsNavigator: React.FC = () => {
           backgroundColor: darkMode
             ? theme.colors.darker
             : theme.colors.lighter,
-          borderTopWidth: 0,
-          height: 90,
-          padding: 10,
         },
         tabBarIcon: props => {
           switch (route.name) {
@@ -58,4 +53,13 @@ export const BottomTabsNavigator: React.FC = () => {
       <BottomTabs.Screen name="Settings" component={Settings} />
     </BottomTabs.Navigator>
   );
+};
+
+const screenOptions = {
+  headerShown: false,
+  tabBarHideOnKeyboard: true,
+  tabBarShowLabel: false,
+  borderTopWidth: 0,
+  height: 90,
+  padding: 10,
 };

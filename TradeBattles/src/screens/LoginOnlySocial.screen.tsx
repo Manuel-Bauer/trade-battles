@@ -27,8 +27,12 @@ export const LoginOnlySocial: React.FC = () => {
             autoPlay
             loop={false}
           />
-          <Text style={styles.logo_bold}>TRADE</Text>
-          <Text style={styles.logo_light}>BATTLES</Text>
+          <Text style={{...styles.titlBold, color: theme.colors.textPrimary}}>
+            TRADE
+          </Text>
+          <Text style={{...styles.titleLight, color: theme.colors.textPrimary}}>
+            BATTLES
+          </Text>
         </View>
 
         <View style={{marginBottom: 25, marginTop: 25}} />
@@ -52,6 +56,6 @@ const styles = StyleSheet.create({
     maxWidth: 300,
     maxHeight: 200,
   },
-  logo_bold: {fontSize: 85},
-  logo_light: {fontSize: 60, fontWeight: '900', marginTop: -10},
+  titlBold: {fontSize: 85},
+  titleLight: {fontSize: 60, fontWeight: '900', marginTop: -10},
 });

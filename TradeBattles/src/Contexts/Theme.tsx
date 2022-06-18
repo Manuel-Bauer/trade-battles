@@ -71,7 +71,7 @@ export const ThemeProvider: FC<any> = ({children}) => {
         lightSecondary: darkMode ? '#ffddfe' : '#e7d8fd',
         secondary: darkMode ? '#f4b8ff' : '#c4a0f9',
         darkSecondary: darkMode ? '#d794e2' : '#a084e1',
-        backgroundColor: darkMode ? '#00111c' : '#FAFAFA',
+        backgroundColor: darkMode ? '#141414' : '#FAFAFA',
         textPrimary: darkMode ? '#FAFAFA' : '#171717',
         textSecondary: darkMode ? '#d5d5d5' : '#383838',
       },
