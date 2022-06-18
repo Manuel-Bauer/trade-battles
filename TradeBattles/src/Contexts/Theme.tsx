@@ -37,7 +37,7 @@ export interface IThemeProvider {
 const ThemeContext = React.createContext<IThemeProvider | null>(null);
 
 /* ----- HOOK ----- */
-export function useDesign() {
+export function useTheme() {
   return useContext<IThemeProvider | null>(ThemeContext);
 }
 
