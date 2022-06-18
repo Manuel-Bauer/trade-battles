@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text, Image, Pressable} from 'react-native';
+import {StyleSheet, View, Text, Pressable} from 'react-native';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {RootStackParamList} from '../shared/Types';
 import {useState} from 'react';

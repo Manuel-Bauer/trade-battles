@@ -1,9 +1,8 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {Pressable, View, Dimensions} from 'react-native';
+import {Pressable, Dimensions} from 'react-native';
 import Svg, {Path} from 'react-native-svg';
 import {theme} from '../shared/themes';
-const backIconSrc = require('../../assets/icons/go_back_icon_black.png');
 
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;

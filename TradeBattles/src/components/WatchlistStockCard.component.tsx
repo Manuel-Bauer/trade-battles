@@ -1,6 +1,6 @@
 import LottieView from 'lottie-react-native';
 import React, {useEffect, useState} from 'react';
-import {View, Image, Text, StyleSheet, Pressable} from 'react-native';
+import {View, Image, Text, StyleSheet} from 'react-native';
 import {useUserContext} from '../App.provider';
 import {formatter} from '../shared/Methods';
 import {theme} from '../shared/themes';

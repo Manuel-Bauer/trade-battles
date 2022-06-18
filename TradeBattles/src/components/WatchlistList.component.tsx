@@ -5,7 +5,6 @@ import {StockInitializer} from '../shared/EmptyInitializers';
 import {useUserContext} from '../App.provider';
 import {ApiClient} from '../services/ApiClient.service';
 import {WatchlistStockCard} from './WatchlistStockCard.component';
-import {WatchlistIcon} from './BottomTabIcons.component';
 
 const wait = (timeout: number) => {
   return new Promise(resolve => setTimeout(resolve, timeout));

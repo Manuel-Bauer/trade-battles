@@ -1,45 +1,60 @@
 import React from 'react';
+
+/* ---- NAVIGATION ---- */
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {StackNavigator} from './AppStackNavigator.navigation';
-import {theme} from '../shared/themes';
+import {BattlesNavigation} from './Battles/Battles.navigation';
+const BottomTabs = createBottomTabNavigator();
+
+/* ---- COMPONENTS ---- */
 import {
   HomeIcon,
   WatchlistIcon,
   UserIcon,
 } from '../components/BottomTabIcons.component';
-import {WatchList} from './Watchlist.screen';
-import {Settings} from './Settings.screen';
+import {WatchList} from './Watchlist/Watchlist.screen';
+import {Settings} from './Settings/Settings.screen';
 
-const BottomTabs = createBottomTabNavigator();
+/* ---- CONTEXT ---- */
+import {useTheme} from '../Contexts/Theme';
+
 export const BottomTabsNavigator: React.FC = () => {
+  const {theme, darkMode} = useTheme();
   return (
     <BottomTabs.Navigator
-      initialRouteName="StackNavigator"
+      initialRouteName="Battles"
       screenOptions={({route}) => ({
         headerShown: false,
-        tabBarActiveTintColor: theme.colorPrimary,
         tabBarHideOnKeyboard: true,
         tabBarShowLabel: false,
+        tabBarActiveTintColor: darkMode
+          ? theme.colors.lightest
+          : theme.colors.darker,
+        tabBarInactiveTintColor: darkMode
+          ? theme.colors.light
+          : theme.colors.light,
         tabBarStyle: {
-          backgroundColor: theme.colorPrimary,
-          borderTopWidth: 1,
+          backgroundColor: darkMode
+            ? theme.colors.darker
+            : theme.colors.lighter,
           height: 90,
           padding: 10,
+          borderTopWidth: 0,
         },
-        tabBarIcon: () => {
+        tabBarIcon: props => {
           switch (route.name) {
-            case 'StackNavigator':
-              return <HomeIcon color={theme.light_mode_white} size={38} />;
-
+            case 'Battles':
+              return <HomeIcon size={props.size + 10} color={props.color} />;
             case 'Watchlist':
-              return <WatchlistIcon color={theme.light_mode_white} size={30} />;
+              return (
+                <WatchlistIcon size={props.size + 10} color={props.color} />
+              );
             case 'Settings':
-              return <UserIcon color={theme.light_mode_white} size={33} />;
+              return <UserIcon size={props.size + 10} color={props.color} />;
           }
         },
       })}>
       <BottomTabs.Screen name="Watchlist" component={WatchList} />
-      <BottomTabs.Screen name="StackNavigator" component={StackNavigator} />
+      <BottomTabs.Screen name="Battles" component={BattlesNavigation} />
       <BottomTabs.Screen name="Settings" component={Settings} />
     </BottomTabs.Navigator>
   );
