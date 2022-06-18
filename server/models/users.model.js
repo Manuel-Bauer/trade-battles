@@ -43,36 +43,11 @@ async function getUser(id) {
   }
 }
 
-async function addToWatchlist(id, symbol) {
+async function updateWatchlist(id, updatedWatchlist) {
   try {
     const user = await prisma.user.update({
-      where: {
-        id,
-      },
-      data: {
-        watchlist: {
-          push: symbol,
-        },
-      },
-    });
-    return user;
-  } catch (err) {
-    throw err;
-  } finally {
-    await prisma.$disconnect();
-  }
-}
-async function removeFromWatchlist(id, symbol) {
-  try {
-    const user = await prisma.user.update({
-      where: {
-        id,
-      },
-      data: {
-        watchlist: {
-          unset: symbol,
-        },
-      },
+      where: { id },
+      data: { watchlist: updatedWatchlist },
     });
     return user;
   } catch (err) {
@@ -82,7 +57,7 @@ async function removeFromWatchlist(id, symbol) {
   }
 }
 
-module.exports = { getAllUsers, createUser, getUser, addToWatchlist, removeFromWatchlist };
+module.exports = { getAllUsers, createUser, getUser, updateWatchlist };
 
 // exports.getUser = async (id) => {
 //   const user = await pool.query(`SELECT * FROM ${table_name} WHERE user_id = '${id}'`);
