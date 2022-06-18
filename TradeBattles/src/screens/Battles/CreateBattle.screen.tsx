@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
 /* ---- COMPONENTS ---- */
-import {View, Text, Image, Pressable} from 'react-native';
+import {View, Text, Pressable} from 'react-native';
 import {CustomInput} from '../../components/CustomInput.component';
 import {StartEndDatePicker} from '../../components/StartEndDatePicker.component';
 import {ApiClient} from '../../services/ApiClient.service';
@@ -13,9 +13,10 @@ import {GoBack} from '../../components/GoBack.component';
 /* ---- CONTEXT ---- */
 import {useTheme} from '../../Contexts/Theme';
 import {styles} from './CreateBattle.styles';
+import AddUserCard from '../../components/Users/AddUserCard.component';
 
 export const CreateBattle = () => {
-  const {theme, darkMode} = useTheme();
+  const {theme} = useTheme();
   const [addedMembers, setAddedMembers] = useState<BattleMember[]>([]);
   const [battleName, setBattleName] = useState('');
   const [search, setSearch] = useState('');
@@ -105,46 +106,11 @@ export const CreateBattle = () => {
           el.last_name.toLowerCase().includes(search.toLowerCase()) ||
           el.email.toLowerCase().includes(search.toLowerCase())) &&
         search.length ? (
-          <View
-            key={el.email}
-            style={{
-              ...styles.search_item_with_button_container,
-              borderBottomColor: darkMode
-                ? theme.colors.dark
-                : theme.colors.lighter,
-            }}>
-            <View style={styles.search_item_container}>
-              <Image style={styles.search_photo} source={{uri: el.photo}} />
-              <Text
-                style={{
-                  ...styles.searchUserName,
-                  color: theme.colors.textPrimary,
-                  fontFamily: theme.fonts.bold,
-                }}>
-                {el.first_name} {el.last_name}
-              </Text>
-            </View>
-            <Pressable
-              onPress={() => {
-                setAddedMembers(prevState => [...prevState, el]);
-                setSearch('');
-              }}
-              style={{
-                ...styles.addButton,
-                backgroundColor: darkMode
-                  ? theme.colors.dark
-                  : theme.colors.lighter,
-              }}>
-              <Text
-                style={{
-                  ...styles.addText,
-                  color: theme.colors.textPrimary,
-                  fontFamily: theme.fonts.bold,
-                }}>
-                ADD
-              </Text>
-            </Pressable>
-          </View>
+          <AddUserCard
+            user={el}
+            setAddedMembers={setAddedMembers}
+            setSearch={setSearch}
+          />
         ) : undefined,
       )}
 
