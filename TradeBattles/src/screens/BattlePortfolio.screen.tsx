@@ -3,7 +3,6 @@ import {View, Text, FlatList, RefreshControl, StyleSheet} from 'react-native';
 import {PortfolioStockCard} from '../components/PortfolioStockCard.component';
 import {PortfolioStock} from '../shared/Types';
 import {ApiClient} from '../services/ApiClient.service';
-import {theme} from '../shared/themes';
 import {BattlePortfolioHeader} from '../components/BattlePortfolioHeader.component';
 import {GoBack} from '../components/GoBack.component';
 import type {RootStackParamList} from '../shared/Types';
@@ -11,12 +10,15 @@ import {RouteProp, useRoute} from '@react-navigation/native';
 import {PortfolioInitializer} from '../shared/EmptyInitializers';
 import {StockSearch} from '../components/StockSearch.component';
 import LottieView from 'lottie-react-native';
+import {useTheme} from '../Contexts/Theme';
 const spinnerSrc = require('../../assets/lotties/spinner.json');
 
 const wait = (timeout: number) => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 };
 export const BattlePortfolio: React.FC = () => {
+  const {theme} = useTheme();
+
   const [currentUserPortfolio, setCurrentUserPortfolio] =
     useState<PortfolioStock[]>(PortfolioInitializer);
 
@@ -80,24 +82,24 @@ export const BattlePortfolio: React.FC = () => {
   }, []);
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, backgroundColor: theme.colors.backgroundColor}}>
       <GoBack />
       <View style={{alignSelf: 'center'}}>
         {battleHasStarted ? (
           <Text
             style={{
-              fontFamily: theme.fontFamilyRegular,
+              fontFamily: theme.fonts.regular,
               fontSize: 12,
-              color: theme.colorPrimary,
+              color: theme.colors.textPrimary,
             }}>
             Battle ends on {endDate.split('GMT')[0]}
           </Text>
         ) : (
           <Text
             style={{
-              fontFamily: theme.fontFamilyRegular,
+              fontFamily: theme.fonts.regular,
               fontSize: 12,
-              color: theme.colorPrimary,
+              color: theme.colors.textPrimary,
             }}>
             Battle starts on {startDate.split('GMT')[0]}
           </Text>
@@ -105,7 +107,11 @@ export const BattlePortfolio: React.FC = () => {
       </View>
 
       <View
-        style={{flex: 1, backgroundColor: theme.light_mode_white, padding: 10}}>
+        style={{
+          flex: 1,
+          backgroundColor: theme.colors.backgroundColor,
+          padding: 10,
+        }}>
         {refreshing ? (
           <View style={styles.portfolio_header_container} />
         ) : (
@@ -160,7 +166,6 @@ export const BattlePortfolio: React.FC = () => {
 const styles = StyleSheet.create({
   portfolio_header_container: {
     alignSelf: 'center',
-    backgroundColor: theme.greyPrimary,
     borderRadius: 20,
     padding: 20,
     width: '90%',

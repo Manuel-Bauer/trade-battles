@@ -14,8 +14,8 @@ import {StockInitializer} from '../shared/EmptyInitializers';
 import {ApiClient} from '../services/ApiClient.service';
 import type {ProfileScreenNavigationProp} from '../shared/Types';
 import {useNavigation} from '@react-navigation/native';
-import {theme} from '../shared/themes';
 import {CustomModal} from './CustomModal';
+import {useTheme} from '../Contexts/Theme';
 
 const SEARCH_TERM_WIDTH = Dimensions.get('window').width * 0.8;
 export const StockSearch: React.FC<{
@@ -26,6 +26,8 @@ export const StockSearch: React.FC<{
     React.SetStateAction<PortfolioStock[]>
   >;
 }> = ({battle_id, user_id, currentUserPortfolio, setCurrentUserPortfolio}) => {
+  const {theme, darkMode} = useTheme();
+
   const [search, setSearch] = useState('');
   const [badSearch, setBadSearch] = useState(false);
   const navigation = useNavigation<ProfileScreenNavigationProp>();
@@ -41,45 +43,74 @@ export const StockSearch: React.FC<{
         setViewable={setBadSearch}
       />
       <View style={styles.container}>
-        <TextInput
-          onChangeText={currentSearch => handleSearch(currentSearch)}
-          style={styles.input}
-          placeholder="Search stock market..."
-          placeholderTextColor={theme.colorPrimary}
-          value={search}
-        />
-        <Pressable
-          style={styles.search_button}
-          onPress={() => {
-            let stock: Stock = StockInitializer;
-            ApiClient.getQuote(search)
-              .then(res => {
-                (stock = res.data),
-                  navigation.navigate('BuySellStock', {
-                    stock: stock,
-                    shares_owned: 0, // TODO -> Refactor to be dynamic with api call
-                    average_cost: 0, // TODO -> Refactor to be dynamic with api call
-                    battle_id,
-                    user_id,
-                    currentUserPortfolio,
-                    setCurrentUserPortfolio,
-                  });
-              })
-              .catch(error => {
-                setBadSearch(true);
-              });
+        <View
+          style={{
+            width: '90%',
+            height: 50,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 20,
+            shadowColor: theme.colors.dark,
+            shadowOpacity: 0.3,
+            shadowOffset: {
+              width: 1,
+              height: 1,
+            },
           }}>
-          <Text
+          <TextInput
+            onChangeText={currentSearch => handleSearch(currentSearch)}
             style={{
-              fontWeight: '800',
-              color: theme.light_mode_white,
-              fontFamily: theme.fontFamilyBold,
+              ...styles.input,
+              backgroundColor: theme.colors.lightest,
+              color: theme.colors.textPrimary,
+              fontFamily: theme.fonts.light,
+            }}
+            placeholder="Search stock market..."
+            placeholderTextColor={theme.colors.dark}
+            value={search}
+          />
+          <Pressable
+            style={{
+              ...styles.searchButton,
+              backgroundColor: theme.colors.primary,
+            }}
+            onPress={() => {
+              let stock: Stock = StockInitializer;
+              ApiClient.getQuote(search)
+                .then(res => {
+                  (stock = res.data),
+                    navigation.navigate('BuySellStock', {
+                      stock: stock,
+                      shares_owned: 0, // TODO -> Refactor to be dynamic with api call
+                      average_cost: 0, // TODO -> Refactor to be dynamic with api call
+                      battle_id,
+                      user_id,
+                      currentUserPortfolio,
+                      setCurrentUserPortfolio,
+                    });
+                })
+                .catch(() => {
+                  setBadSearch(true);
+                });
             }}>
-            Search
-          </Text>
-        </Pressable>
+            <Text
+              style={{
+                fontWeight: '800',
+                color: theme.colors.lightest,
+                fontFamily: theme.fonts.bold,
+              }}>
+              Search
+            </Text>
+          </Pressable>
+        </View>
       </View>
-      <View style={{alignSelf: 'center'}}>
+
+      <View
+        style={{
+          width: '90%',
+          alignSelf: 'center',
+        }}>
         {stockListForSearch
           .filter(item => {
             const lowercaseSearch = search.toLowerCase();
@@ -113,14 +144,22 @@ export const StockSearch: React.FC<{
                       });
                   });
                 }}
-                style={styles.result_card_container}>
+                style={{
+                  ...styles.resultCardContainer,
+                  borderBottomColor: theme.colors.light,
+                  backgroundColor: theme.colors.backgroundColor,
+                }}>
                 <Image
                   style={styles.logo}
                   source={{
                     uri: `https://storage.googleapis.com/iexcloud-hl37opg/api/logos/${item.ticker}.png`,
                   }}
                 />
-                <Text style={styles.stock_company_name}>
+                <Text
+                  style={{
+                    color: theme.colors.textPrimary,
+                    fontFamily: theme.fonts.regular,
+                  }}>
                   {item.name.length > textLengthLimit
                     ? item.name.substring(0, textLengthLimit - 3) + ' ...'
                     : item.name}
@@ -136,48 +175,38 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    alignSelf: 'center',
+    justifyContent: 'center',
     marginVertical: 15,
   },
   input: {
-    width: 200,
-    height: 50,
-    alignSelf: 'center',
-    textAlign: 'center',
-    fontSize: 15,
-    backgroundColor: theme.stockCardBackground,
-    color: theme.colorPrimary,
-    fontWeight: '400',
-    fontFamily: theme.fontFamilyLight,
-  },
-  search_button: {
-    backgroundColor: theme.colorPrimary,
+    height: '100%',
+    flex: 4,
+    borderTopLeftRadius: 15,
+    borderBottomLeftRadius: 15,
     padding: 10,
-    borderRadius: 7,
   },
-  result_card_container: {
-    flexDirection: 'row',
+  searchButton: {
+    height: '100%',
     justifyContent: 'center',
-    borderBottomColor: theme.colorPrimary,
+    alignItems: 'center',
+    flex: 1,
+    borderTopRightRadius: 15,
+    borderBottomRightRadius: 15,
+    padding: 10,
+  },
+  resultCardContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     borderBottomWidth: 0.3,
-    margin: 2,
-    width: SEARCH_TERM_WIDTH,
+    padding: 10,
+    width: '100%',
     alignItems: 'center',
     overflow: 'hidden',
-    backgroundColor: theme.stockCardBackground,
   },
   logo: {
-    width: 30,
-    height: 30,
+    width: 35,
+    height: 35,
     borderRadius: 50,
-    marginBottom: 5,
     resizeMode: 'contain',
-  },
-  stock_company_name: {
-    fontSize: 12,
-    marginLeft: 5,
-    marginBottom: 5,
-    color: theme.colorPrimary,
-    fontFamily: theme.fontFamilyRegular,
   },
 });
