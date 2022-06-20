@@ -29,6 +29,8 @@ model Battle {
   start_date DateTime @default(now())
   end_date DateTime
   transaction Transaction[]
+  completed Boolean @default(false)
+  winner String?
 }
 
 model Transaction {
@@ -39,7 +41,7 @@ model Transaction {
   userId Int
   date DateTime @default(now())
   action String
-  symbol String 
+  symbol String
   price Int
   quantity Int
 }
