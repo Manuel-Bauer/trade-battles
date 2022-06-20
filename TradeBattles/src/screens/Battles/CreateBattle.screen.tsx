@@ -21,7 +21,7 @@ export const CreateBattle = () => {
   const {currentUser} = useAuth();
   const [addedMembers, setAddedMembers] = useState<User[]>([]);
   const [battleName, setBattleName] = useState('');
-  const [battleBudget, setBattleBudget] = useState(0);
+  const [battleBudget, setBattleBudget] = useState(100);
   const [search, setSearch] = useState('');
 
   const [startDate, setStartDate] = useState(new Date());

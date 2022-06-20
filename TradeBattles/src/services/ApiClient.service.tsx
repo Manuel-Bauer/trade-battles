@@ -8,9 +8,8 @@ const baseUrl = `http://localhost:${port}`;
 // const baseUrl = `http://localhost:${port}`;
 export const ApiClient = {
   getMyBattles: async (user_id: string) => {
-    const myBattles = await axios.get(
-      `${baseUrl}/battles/mybattles/${user_id}`,
-    );
+    const myBattles = await axios.get(`${baseUrl}/battles/${user_id}`);
+    console.log('BATTTTLEESS', myBattles);
     return myBattles;
   },
 
@@ -27,7 +26,7 @@ export const ApiClient = {
   },
 
   getUserById: async (id: string) => {
-    const user = await axios.get<User[]>(`${baseUrl}/users/${id}`);
+    const user = await axios.get<User>(`${baseUrl}/users/${id}`);
     return user;
   },
 
@@ -90,12 +89,13 @@ export const ApiClient = {
     battle_name: string,
     budget: number,
   ) => {
-    const battle = await axios.post<Battle>(`${baseUrl}/battles`, {
-      users,
-      start_date,
-      end_date,
-      battle_name,
-      budget,
+    const data = {users, start_date, end_date, battle_name, budget};
+    const battle = await fetch(`${baseUrl}/battles`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
     });
     console.log(battle);
     return battle;
