@@ -1,16 +1,18 @@
 import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
-import { withStyleAnimation } from 'react-native-reanimated/lib/types/lib/reanimated2/animation';
+import {useTheme} from '../Contexts/Theme';
 
 export const BudgetPicker: React.FC<{
   setBattleBudget: React.Dispatch<React.SetStateAction<Number>>;
   battleBudget: Number;
 }> = ({setBattleBudget, battleBudget}) => {
+  const {theme} = useTheme();
   return (
     <View style={styles.container}>
       <Picker
         style={{flex: 1}}
+        itemStyle={{color: theme.colors.textPrimary}}
         selectedValue={battleBudget}
         onValueChange={value => setBattleBudget(value)}>
         <Picker.Item label="100k" value="100" />
