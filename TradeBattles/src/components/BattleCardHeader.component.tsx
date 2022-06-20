@@ -11,8 +11,8 @@ export const BattleCardHeader: React.FC<{
   const {currentUser} = useAuth();
 
   let position = 0;
-  battle.battle_members.filter((el, index) => {
-    if (el.user_id === currentUser.id) position = index;
+  battle.users.filter((el, index) => {
+    if (el.id === currentUser.id) position = index;
   });
 
   const determinePositionEnding = (pos: number) => {

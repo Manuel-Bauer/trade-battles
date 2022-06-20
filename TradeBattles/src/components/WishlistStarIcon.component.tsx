@@ -16,11 +16,6 @@ export const WishlistStarIcon: React.FC<{
   const [isInWatchlist, setIsInWatchlist] = useState(defaultYellow);
   const [watchistModal, setWatchlistModal] = useState(false);
 
-  // dont render watchlist if it is empty
-
-  //memory leak or render loop
-
-  //usecaLLBACK USEMEMO
   const getUser = async (user_id: string, symbol: string) => {
     const user = await ApiClient.getUserById(user_id);
     user.data[0].watchlist.includes(symbol) && setIsInWatchlist(true);
