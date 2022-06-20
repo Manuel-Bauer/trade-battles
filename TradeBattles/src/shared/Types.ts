@@ -78,21 +78,11 @@ export type User = {
 
 export type Battle = {
   battle_id: string;
-  battle_members: BattleMember[];
+  battle_members: User[];
   start_date_timestamp: string;
   end_date_timestamp: string;
   battle_name: string;
-};
-
-export type BattleMember = {
-  user_id: string;
-  first_name: string;
-  last_name: string;
-  email: string;
-  photo: string;
-  battles: string[];
-  transactions: Transaction[];
-  current_gains_losses: any;
+  battle_budget: Number;
 };
 
 export type Transaction = {

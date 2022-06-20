@@ -1,12 +1,6 @@
-import {
-  Battle,
-  BattleMember,
-  HistoricalData,
-  PortfolioStock,
-} from '../shared/Types';
+import {Battle, User, HistoricalData, PortfolioStock} from '../shared/Types';
 import axios from 'axios';
 import type {Stock} from '../shared/Types';
-import type {User} from '../shared/Types';
 import type {Transaction, GraphPoint} from '../shared/Types';
 
 const port = 3000;
@@ -85,21 +79,23 @@ export const ApiClient = {
   },
 
   getAllUsers: async () => {
-    const data = await axios.get<BattleMember[]>(`${baseUrl}/users`);
+    const data = await axios.get<User[]>(`${baseUrl}/users`);
     return data;
   },
 
   createBattle: async (
     battle_members: string[],
-    start_date: number,
-    end_date: number,
+    start_date: string,
+    end_date: string,
     battle_name: string,
+    battle_budget: number,
   ) => {
     const battle = await axios.post<Battle>(`${baseUrl}/battles`, {
       battle_members,
       start_date,
       end_date,
       battle_name,
+      battle_budget,
     });
 
     return battle;

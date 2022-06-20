@@ -419,6 +419,8 @@ PODS:
     - React-perflogger (= 0.68.2)
   - RNAppleAuthentication (2.2.0):
     - React-Core
+  - RNCPicker (2.4.1):
+    - React-Core
   - RNCPushNotificationIOS (1.10.1):
     - React-Core
   - RNFBApp (14.11.0):
@@ -529,6 +531,7 @@ DEPENDENCIES:
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNAppleAuthentication (from `../node_modules/@invertase/react-native-apple-authentication`)"
+  - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
   - "RNCPushNotificationIOS (from `../node_modules/@react-native-community/push-notification-ios`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
@@ -639,6 +642,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNAppleAuthentication:
     :path: "../node_modules/@invertase/react-native-apple-authentication"
+  RNCPicker:
+    :path: "../node_modules/@react-native-picker/picker"
   RNCPushNotificationIOS:
     :path: "../node_modules/@react-native-community/push-notification-ios"
   RNFBApp:
@@ -719,6 +724,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: b960b687d2dfef0d3761fbb187e01812ebab8b23
   ReactCommon: 095366164a276d91ea704ce53cb03825c487a3f2
   RNAppleAuthentication: cbe1ab5c0f398ce07a215e6b247048092bf4feb3
+  RNCPicker: abc646b53a3d28ccfa3232c927a0ca52e0cf024d
   RNCPushNotificationIOS: 87b8d16d3ede4532745e05b03c42cff33a36cc45
   RNFBApp: b1b5a80a676a07dea17e778bda7c1e8b69b2f5ec
   RNFBAuth: e28fb7cd1b956086e68233b9ea19fb97c428f86b

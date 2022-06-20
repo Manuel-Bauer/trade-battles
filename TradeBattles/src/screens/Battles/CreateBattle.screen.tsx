@@ -4,8 +4,9 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, Image, Pressable} from 'react-native';
 import {CustomInput} from '../../components/CustomInput.component';
 import {StartEndDatePicker} from '../../components/StartEndDatePicker.component';
+import {BudgetPicker} from '../../components/BudgetPicker.component';
 import {ApiClient} from '../../services/ApiClient.service';
-import {BattleMember} from '../../shared/Types';
+import {User} from '../../shared/Types';
 import {CustomModal} from '../../components/CustomModal';
 import {BattleMemberIcon} from '../../components/BattleMemberIcon.component';
 import {GoBack} from '../../components/GoBack.component';
@@ -16,13 +17,14 @@ import {styles} from './CreateBattle.styles';
 
 export const CreateBattle = () => {
   const {theme} = useTheme();
-  const [addedMembers, setAddedMembers] = useState<BattleMember[]>([]);
+  const [addedMembers, setAddedMembers] = useState<User[]>([]);
   const [battleName, setBattleName] = useState('');
+  const [battleBudget, setBattleBudget] = useState(0);
   const [search, setSearch] = useState('');
 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [members, setMembers] = useState<BattleMember[]>();
+  const [members, setMembers] = useState<User[]>();
   const [errorMessage, setErrorMessage] = useState(false);
   const [successfulCreate, setSuccessfulCreate] = useState(false);
 
@@ -39,16 +41,20 @@ export const CreateBattle = () => {
   }, []);
 
   const handleCreate = () => {
+    const startTime = new Date(startDate.getTime()).toISOString();
+    const endTime = new Date(endDate.getTime()).toISOString();
     formIsValid()
       ? (ApiClient.createBattle(
-          addedMembers.map(el => el.user_id),
-          startDate.getTime(),
-          endDate.getTime(),
+          addedMembers.map(el => el.id),
+          startTime,
+          endTime,
           battleName,
+          battleBudget,
         ),
         setSuccessfulCreate(true),
         setAddedMembers([]),
         setBattleName(''),
+        setBattleBudget(''),
         setEndDate(new Date()),
         setStartDate(new Date()))
       : setErrorMessage(true);
@@ -86,6 +92,10 @@ export const CreateBattle = () => {
         placeholder={'Choose a name for your battle...'}
         secureTextEntry={false}
       />
+      <BudgetPicker
+        setBattleBudget={setBattleBudget}
+        battleBudget={battleBudget}
+      />
       <Text
         style={{
           ...styles.title,
@@ -101,8 +111,8 @@ export const CreateBattle = () => {
         secureTextEntry={false}
       />
       {members?.map(el =>
-        (el.first_name.toLowerCase().includes(search.toLowerCase()) ||
-          el.last_name.toLowerCase().includes(search.toLowerCase()) ||
+        (el.givenName.toLowerCase().includes(search.toLowerCase()) ||
+          el.familyName.toLowerCase().includes(search.toLowerCase()) ||
           el.email.toLowerCase().includes(search.toLowerCase())) &&
         search.length ? (
           <View key={el.email} style={styles.search_item_with_button_container}>
@@ -114,7 +124,7 @@ export const CreateBattle = () => {
                   color: theme.colors.textPrimary,
                   fontFamily: theme.fonts.bold,
                 }}>
-                {el.first_name} {el.last_name}
+                {el.givenName} {el.familyName}
               </Text>
             </View>
             <Pressable
