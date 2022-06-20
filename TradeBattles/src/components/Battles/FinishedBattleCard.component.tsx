@@ -2,7 +2,7 @@ import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 
 /* ---- COMPONENTS ---- */
-import {Text, View, Image, Pressable, StyleSheet} from 'react-native';
+import {Text, View, Image, Pressable } from 'react-native';
 import {Battle} from '../../shared/Types';
 import {ProfileScreenNavigationProp} from '../../shared/Types';
 
