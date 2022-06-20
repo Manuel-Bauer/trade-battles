@@ -2,7 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {Pressable, Dimensions} from 'react-native';
 import Svg, {Path} from 'react-native-svg';
-import {useTheme} from '../Contexts/Theme';
+import {useTheme} from '../../Contexts/Theme';
 
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;

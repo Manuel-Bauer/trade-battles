@@ -2,7 +2,7 @@ import React from 'react';
 
 /* ---- COMPONENTS ---- */
 import {View, Text, Image, Pressable, Switch} from 'react-native';
-import {GoBack} from '../../components/GoBack.component';
+import {GoBack} from '../../components/Misc/GoBack.component';
 
 /* ---- CONTEXT ---- */
 import {useAuth} from '../../Contexts/Auth';

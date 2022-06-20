@@ -2,20 +2,20 @@ import React, {useEffect, useState} from 'react';
 
 /* ---- COMPONENTS ---- */
 import {View, Text, Pressable} from 'react-native';
-import {CustomInput} from '../../components/CustomInput.component';
-import {StartEndDatePicker} from '../../components/StartEndDatePicker.component';
-import {BudgetPicker} from '../../components/BudgetPicker.component';
+import {CustomInput} from '../../components/Misc/CustomInput.component';
+import {StartEndDatePicker} from '../../components/Misc/StartEndDatePicker.component';
 import {ApiClient} from '../../services/ApiClient.service';
-import {User} from '../../shared/Types';
-import {useAuth} from '../../Contexts/Auth';
-import {CustomModal} from '../../components/CustomModal';
-import {BattleMemberIcon} from '../../components/BattleMemberIcon.component';
-import {GoBack} from '../../components/GoBack.component';
+import {CustomModal} from '../../components/Misc/CustomModal';
+import {BattleMemberIcon} from '../../components/Battles/BattleMemberIcon.component';
+import {GoBack} from '../../components/Misc/GoBack.component';
 
 /* ---- CONTEXT ---- */
 import {useTheme} from '../../Contexts/Theme';
 import {styles} from './CreateBattle.styles';
 import AddUserCard from '../../components/Users/AddUserCard.component';
+import {useAuth} from '../../Contexts/Auth';
+import {User} from '../../shared/Types';
+import {BudgetPicker} from '../../components/BudgetPicker.component';
 
 export const CreateBattle = () => {
   const {theme} = useTheme();

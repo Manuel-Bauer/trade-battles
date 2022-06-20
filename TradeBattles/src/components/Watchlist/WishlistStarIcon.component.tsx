@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {Pressable, Image, View} from 'react-native';
-import {ApiClient} from '../services/ApiClient.service';
-import {Stock} from '../shared/Types';
-import {CustomModal} from './CustomModal';
-const greyStarSrc = require('../../assets/icons/star_grey_icon.png');
-const yellowStarSrc = require('../../assets/icons/star_yellow_icon.png');
+import {ApiClient} from '../../services/ApiClient.service';
+import {Stock} from '../../shared/Types';
+import {CustomModal} from '../Misc/CustomModal';
+const greyStarSrc = require('../../../assets/icons/star_grey_icon.png');
+const yellowStarSrc = require('../../../assets/icons/star_yellow_icon.png');
 
 export const WishlistStarIcon: React.FC<{
   user_id: string;

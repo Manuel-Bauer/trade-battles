@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Image} from 'react-native';
-import {useTheme} from '../Contexts/Theme';
+import {useTheme} from '../../Contexts/Theme';
 
 export const BattleMemberIcon: React.FC<{photo: string}> = ({photo}) => {
   const {theme, darkMode} = useTheme();

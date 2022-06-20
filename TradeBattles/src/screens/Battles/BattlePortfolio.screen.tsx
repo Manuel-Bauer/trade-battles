@@ -1,14 +1,14 @@
 import React, {useEffect, useState, useCallback} from 'react';
 import {View, Text, FlatList, RefreshControl} from 'react-native';
-import {PortfolioStockCard} from '../../components/PortfolioStockCard.component';
+import {PortfolioStockCard} from '../../components/Stocks/PortfolioStockCard.component';
 import {PortfolioStock} from '../../shared/Types';
 import {ApiClient} from '../../services/ApiClient.service';
 import {BattlePortfolioHeader} from '../../components/Battles/BattlePortfolioHeader.component';
-import {GoBack} from '../../components/GoBack.component';
+import {GoBack} from '../../components/Misc/GoBack.component';
 import type {RootStackParamList} from '../../shared/Types';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {PortfolioInitializer} from '../../shared/EmptyInitializers';
-import {StockSearch} from '../../components/StockSearch.component';
+import {StockSearch} from '../../components/Stocks/StockSearch.component';
 import LottieView from 'lottie-react-native';
 import {useTheme} from '../../Contexts/Theme';
 import {styles} from './BattlePortfolio.styles';

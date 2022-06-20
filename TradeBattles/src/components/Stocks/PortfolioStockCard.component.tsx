@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image, Pressable} from 'react-native';
-import {theme} from '../shared/themes';
-import {PortfolioStock} from '../shared/Types';
+import {theme} from '../../shared/themes';
+import {PortfolioStock} from '../../shared/Types';
 import {useNavigation} from '@react-navigation/native';
-import type {ProfileScreenNavigationProp} from '../shared/Types';
-import {formatter} from '../shared/Methods';
+import type {ProfileScreenNavigationProp} from '../../shared/Types';
+import {formatter} from '../../shared/utils';
 
 export const PortfolioStockCard: React.FC<{
   stock: PortfolioStock;

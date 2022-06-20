@@ -2,7 +2,7 @@ import React from 'react';
 
 /* ---- COMPONENTS ---- */
 import {StyleSheet, View, ScrollView, Text} from 'react-native';
-import {CustomButton} from '../../components/CustomButton.component';
+import {CustomButton} from '../../components/Misc/CustomButton.component';
 import LottieView from 'lottie-react-native';
 
 /* ---- CONTEXTS ---- */

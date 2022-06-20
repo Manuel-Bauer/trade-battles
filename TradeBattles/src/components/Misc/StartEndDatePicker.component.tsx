@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, Pressable, Text, StyleSheet} from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import {useTheme} from '../Contexts/Theme';
+import {useTheme} from '../../Contexts/Theme';
 
 export const StartEndDatePicker: React.FC<{
   setStartDate: React.Dispatch<React.SetStateAction<Date>>;

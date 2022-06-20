@@ -1,9 +1,9 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {FlatList, RefreshControl} from 'react-native';
-import {Stock} from '../shared/Types';
-import {StockInitializer} from '../shared/EmptyInitializers';
-import {useUserContext} from '../App.provider';
-import {ApiClient} from '../services/ApiClient.service';
+import {Stock} from '../../shared/Types';
+import {StockInitializer} from '../../shared/EmptyInitializers';
+import {useUserContext} from '../../App.provider';
+import {ApiClient} from '../../services/ApiClient.service';
 import {WatchlistStockCard} from './WatchlistStockCard.component';
 
 const wait = (timeout: number) => {

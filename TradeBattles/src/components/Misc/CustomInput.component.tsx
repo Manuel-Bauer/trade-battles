@@ -1,6 +1,6 @@
 import React, {SetStateAction} from 'react';
 import {StyleSheet, View, TextInput} from 'react-native';
-import {useTheme} from '../Contexts/Theme';
+import {useTheme} from '../../Contexts/Theme';
 
 type CustomInputProps = {
   value: any;

@@ -7,8 +7,8 @@ import {useEffect} from 'react';
 import {ApiClient} from '../../services/ApiClient.service';
 import {StockDetailsInfo} from '../../components/Stocks/StockDetailsInfo.component';
 import {StockDetailsBuySell} from '../../components/Stocks/StockDetailsBuySell.component';
-import {GoBack} from '../../components/GoBack.component';
-import {WishlistStarIcon} from '../../components/WishlistStarIcon.component';
+import {GoBack} from '../../components/Misc/GoBack.component';
+import {WishlistStarIcon} from '../../components/Watchlist/WishlistStarIcon.component';
 import {useTheme} from '../../Contexts/Theme';
 import {styles} from './StockDetails.styles';
 
@@ -50,7 +50,7 @@ export const StockDetails: React.FC = () => {
 
   return (
     <View
-      style={{backgroundColor: theme.colors.backgroundColor, height: '100%'}}>
+      style={{backgroundColor: theme.colors.backgroundColor, height: '80%'}}>
       <GoBack />
       <View style={styles.watchlistStar}>
         <WishlistStarIcon user_id={user_id} stock={stock} />

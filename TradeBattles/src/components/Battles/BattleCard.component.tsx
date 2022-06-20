@@ -4,12 +4,12 @@ import {useNavigation} from '@react-navigation/native';
 /* ---- COMPONENTS ---- */
 import {Text, View, Image, Pressable} from 'react-native';
 import {Battle} from '../../shared/Types';
-import {BattleCardHeader} from '../BattleCardHeader.component';
+import {BattleCardHeader} from './BattleCardHeader.component';
 import {ProfileScreenNavigationProp} from '../../shared/Types';
 
 /* ---- STYLING ---- */
 import {styles} from './BattleCard.styles';
-import {formatter} from '../../shared/Methods';
+import {getFormattedPL, getSortedRanks} from '../../shared/utils';
 
 /* ---- CONTEXT ---- */
 import {useAuth} from '../../Contexts/Auth';
@@ -21,23 +21,6 @@ export const BattleCard: React.FC<{
   const {currentUser} = useAuth();
   const {theme, darkMode} = useTheme();
   const navigation = useNavigation<ProfileScreenNavigationProp>();
-
-  function getSortedRanks(members) {
-    const sorted = [...members].sort(
-      (a, b) =>
-        b.current_gains_losses[battle.battle_id] -
-        a.current_gains_losses[battle.battle_id],
-    );
-    return sorted;
-  }
-
-  function getFormattedPL(member) {
-    return formatter.format(
-      member.current_gains_losses[String(battle.battle_id)]
-        ? member.current_gains_losses[String(battle.battle_id)]
-        : 0,
-    );
-  }
 
   return (
     <Pressable
@@ -53,7 +36,7 @@ export const BattleCard: React.FC<{
       }}>
       <BattleCardHeader battle={battle} />
 
-      {getSortedRanks(battle.users).map((member, index) => {
+      {getSortedRanks(battle.users, battle.battle_id).map((member, index) => {
         return (
           <View
             key={member.user_id}
@@ -84,7 +67,7 @@ export const BattleCard: React.FC<{
                     color: theme.colors.textPrimary,
                     fontFamily: theme.fonts.regular,
                   }}>
-                  {getFormattedPL(member)}
+                  {getFormattedPL(member, battle.battle_id)}
                 </Text>
               </View>
             </View>

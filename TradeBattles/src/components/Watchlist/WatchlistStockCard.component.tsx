@@ -1,12 +1,12 @@
 import LottieView from 'lottie-react-native';
 import React, {useEffect} from 'react';
 import {View, Image, Text, StyleSheet} from 'react-native';
-import {useUserContext} from '../App.provider';
-import {formatter} from '../shared/Methods';
-import {theme} from '../shared/themes';
-import {Stock} from '../shared/Types';
+import {useUserContext} from '../../App.provider';
+import {formatter} from '../../shared/utils';
+import {theme} from '../../shared/themes';
+import {Stock} from '../../shared/Types';
 import {WishlistStarIcon} from './WishlistStarIcon.component';
-const spinnerSrc = require('../../assets/lotties/spinner.json');
+const spinnerSrc = require('../../../assets/lotties/spinner.json');
 
 export const WatchlistStockCard: React.FC<{stock: Stock}> = ({stock}) => {
   const userContext = useUserContext();

@@ -6,7 +6,7 @@ import {StockInitializer} from '../../shared/EmptyInitializers';
 import {ApiClient} from '../../services/ApiClient.service';
 import type {ProfileScreenNavigationProp} from '../../shared/Types';
 import {useNavigation} from '@react-navigation/native';
-import {CustomModal} from '../CustomModal';
+import {CustomModal} from '../Misc/CustomModal';
 import {useTheme} from '../../Contexts/Theme';
 import {styles} from './StockSearch.styles';
 
@@ -23,9 +23,6 @@ export const StockSearch: React.FC<{
   const [search, setSearch] = useState('');
   const [badSearch, setBadSearch] = useState(false);
   const navigation = useNavigation<ProfileScreenNavigationProp>();
-  const handleSearch = (currentSearch: string) => {
-    setSearch(currentSearch);
-  };
   const textLengthLimit = 35;
   return (
     <>
@@ -41,7 +38,7 @@ export const StockSearch: React.FC<{
             shadowColor: theme.colors.dark,
           }}>
           <TextInput
-            onChangeText={currentSearch => handleSearch(currentSearch)}
+            onChangeText={value => setSearch(value)}
             style={{
               ...styles.input,
               backgroundColor: theme.colors.lightest,
