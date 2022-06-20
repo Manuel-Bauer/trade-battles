@@ -1,17 +1,18 @@
 import React, {useEffect, useState, useCallback} from 'react';
-import {View, Text, FlatList, RefreshControl, StyleSheet} from 'react-native';
-import {PortfolioStockCard} from '../components/PortfolioStockCard.component';
-import {PortfolioStock} from '../shared/Types';
-import {ApiClient} from '../services/ApiClient.service';
-import {BattlePortfolioHeader} from '../components/Battles/BattlePortfolioHeader.component';
-import {GoBack} from '../components/GoBack.component';
-import type {RootStackParamList} from '../shared/Types';
+import {View, Text, FlatList, RefreshControl} from 'react-native';
+import {PortfolioStockCard} from '../../components/PortfolioStockCard.component';
+import {PortfolioStock} from '../../shared/Types';
+import {ApiClient} from '../../services/ApiClient.service';
+import {BattlePortfolioHeader} from '../../components/Battles/BattlePortfolioHeader.component';
+import {GoBack} from '../../components/GoBack.component';
+import type {RootStackParamList} from '../../shared/Types';
 import {RouteProp, useRoute} from '@react-navigation/native';
-import {PortfolioInitializer} from '../shared/EmptyInitializers';
-import {StockSearch} from '../components/StockSearch.component';
+import {PortfolioInitializer} from '../../shared/EmptyInitializers';
+import {StockSearch} from '../../components/StockSearch.component';
 import LottieView from 'lottie-react-native';
-import {useTheme} from '../Contexts/Theme';
-const spinnerSrc = require('../../assets/lotties/spinner.json');
+import {useTheme} from '../../Contexts/Theme';
+import {styles} from './BattlePortfolio.styles';
+const spinnerSrc = require('../../../assets/lotties/spinner.json');
 
 const wait = (timeout: number) => {
   return new Promise(resolve => setTimeout(resolve, timeout));
@@ -40,13 +41,10 @@ export const BattlePortfolio: React.FC = () => {
       user_id,
       battle.battle_id,
     );
-    console.log('getUserPortfolio: portfolioArray.data', portfolioArray.data);
 
-    // console.warn(portfolioArray);
     profit = 0;
     await Promise.all(
       portfolioArray.data.map(async el => {
-        // console.warn(el.symbol);
         const quote = await ApiClient.getQuote(el.symbol);
         console.log('getQuote', quote);
         el.price = quote.data.close ? quote.data.close : quote.data.latestPrice;
@@ -58,7 +56,6 @@ export const BattlePortfolio: React.FC = () => {
     );
     portfolio.sort((a, b) => a.symbol.charCodeAt(0) - b.symbol.charCodeAt(0));
     console.log('portfolio', portfolio);
-    // console.warn(portfolio.map(el => el.symbol));
     setCurrentUserPortfolio(portfolio);
     setNonLockedGainLoss(prevstate => (prevstate += profit));
   };
@@ -162,20 +159,3 @@ export const BattlePortfolio: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  portfolio_header_container: {
-    alignSelf: 'center',
-    borderRadius: 20,
-    padding: 20,
-    width: '90%',
-    height: 150,
-    shadowColor: 'grey',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowRadius: 1,
-    shadowOpacity: 0.3,
-  },
-});
