@@ -29,7 +29,8 @@ export const Battles: React.FC = () => {
 
   useFocusEffect(
     React.useCallback(() => {
-      ApiClient.getMyBattles(currentUser.id)
+      ApiClient.getUserById(currentUser.id)
+        .then(res => ApiClient.getMyBattles(res.data.id))
         .then(res => setMyBattles(res.data))
         .then(res => setNoBattles(false))
         .catch(error => setNoBattles(true));
