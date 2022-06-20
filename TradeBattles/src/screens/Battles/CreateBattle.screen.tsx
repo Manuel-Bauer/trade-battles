@@ -7,6 +7,7 @@ import {StartEndDatePicker} from '../../components/StartEndDatePicker.component'
 import {BudgetPicker} from '../../components/BudgetPicker.component';
 import {ApiClient} from '../../services/ApiClient.service';
 import {User} from '../../shared/Types';
+import {useAuth} from '../../Contexts/Auth';
 import {CustomModal} from '../../components/CustomModal';
 import {BattleMemberIcon} from '../../components/BattleMemberIcon.component';
 import {GoBack} from '../../components/GoBack.component';
@@ -17,6 +18,7 @@ import {styles} from './CreateBattle.styles';
 
 export const CreateBattle = () => {
   const {theme} = useTheme();
+  const {currentUser} = useAuth();
   const [addedMembers, setAddedMembers] = useState<User[]>([]);
   const [battleName, setBattleName] = useState('');
   const [battleBudget, setBattleBudget] = useState(0);
@@ -30,7 +32,9 @@ export const CreateBattle = () => {
 
   const getMembers = async () => {
     ApiClient.getAllUsers().then(res => {
-      setMembers(res.data);
+      const response = res.data;
+      setMembers(response);
+      setAddedMembers(response.filter(el => el.google_id === currentUser.id));
     });
   };
 

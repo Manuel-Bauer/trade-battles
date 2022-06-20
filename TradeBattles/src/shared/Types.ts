@@ -68,6 +68,7 @@ export type LoginScreenNavigationProp =
 
 export type User = {
   id: string;
+  google_id: string | null;
   name: string | null;
   email: string;
   photo: string | null;

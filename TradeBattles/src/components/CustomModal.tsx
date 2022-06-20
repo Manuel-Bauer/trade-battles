@@ -9,9 +9,11 @@ import {
   Dimensions,
 } from 'react-native';
 import {theme} from '../shared/themes';
+import {useNavigation} from '@react-navigation/native';
 const correctTransactionSrc = require('../../assets/lotties/correct_transaction.json');
 const incorrectTransactionSrc = require('../../assets/lotties/incorrect_transaction.json');
 const confettiSrc = require('../../assets/lotties/confetti.json');
+
 
 const width = Dimensions.get('window').width;
 export const CustomModal: React.FC<{
@@ -20,6 +22,12 @@ export const CustomModal: React.FC<{
   text: string;
 }> = ({viewable = false, setViewable, text}) => {
   const modalIsAPositiveResponse = text.includes('Success');
+  const navigation = useNavigation();
+  function handleConfirm(): void {
+    setViewable(false);
+    navigation.goBack();
+  }
+
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -63,7 +71,7 @@ export const CustomModal: React.FC<{
             </Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setViewable(false)}>
+              onPress={() => handleConfirm()}>
               <Text style={styles.textStyle}>Got it!</Text>
             </Pressable>
           </View>
