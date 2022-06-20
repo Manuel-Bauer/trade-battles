@@ -32,7 +32,6 @@ export const StockDetailsInfo: React.FC<{
   ]);
 
   const [oneYearSelected, setOneYearSelected] = useState(true);
-  const [twoYearsSelected, setTwoYearsSelected] = useState(false);
 
   function subtractYears(numOfYears: number, date = new Date()) {
     date.setFullYear(date.getFullYear() - numOfYears);
@@ -171,18 +170,14 @@ export const StockDetailsInfo: React.FC<{
         </View>
         <View style={styles.durationButtonContainer}>
           <Pressable
-            style={[
-              styles.date_button,
-              {
-                backgroundColor: oneYearSelected
-                  ? theme.colors.primary
-                  : theme.colors.secondary,
-              },
-            ]}
+            style={{
+              ...styles.date_button,
+              backgroundColor: theme.colors.primary,
+              opacity: oneYearSelected ? 1 : 0.5,
+            }}
             onPress={() => {
-              getHistoricals(1),
-                setTwoYearsSelected(false),
-                setOneYearSelected(true);
+              getHistoricals(1);
+              setOneYearSelected(true);
             }}>
             <Text
               style={{
@@ -192,18 +187,14 @@ export const StockDetailsInfo: React.FC<{
             </Text>
           </Pressable>
           <Pressable
-            style={[
-              styles.date_button,
-              {
-                backgroundColor: twoYearsSelected
-                  ? theme.colors.secondary
-                  : theme.colors.secondary,
-              },
-            ]}
+            style={{
+              ...styles.date_button,
+              backgroundColor: theme.colors.primary,
+              opacity: oneYearSelected ? 0.5 : 1,
+            }}
             onPress={() => {
-              getHistoricals(2),
-                setOneYearSelected(false),
-                setTwoYearsSelected(true);
+              getHistoricals(2);
+              setOneYearSelected(false);
             }}>
             <Text
               style={[
