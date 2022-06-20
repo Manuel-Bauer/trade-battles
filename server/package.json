@@ -4,12 +4,13 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/preset-env": "^7.18.2",
     "@prisma/client": "^3.15.2",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
@@ -18,7 +19,12 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.17.12",
+    "@types/jest": "^28.1.2",
+    "jest": "^28.1.1",
+    "jest-mock-extended": "^2.0.4",
     "nodemon": "^2.0.16",
-    "prisma": "^3.15.2"
+    "prisma": "^3.15.2",
+    "typescript": "^4.7.4"
   }
 }

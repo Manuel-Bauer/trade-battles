@@ -1,10 +1,9 @@
 const { PrismaClient } = require('@prisma/client');
-
 const prisma = new PrismaClient();
 
-async function createBattle(data) {
+async function createBattle (data, ctx = { prisma }) {
   try {
-    const battle = await prisma.battle.create({
+    const battle = await ctx.prisma.battle.create({
       data: {
         users: {
           connect: data.users,
@@ -23,9 +22,9 @@ async function createBattle(data) {
   }
 }
 
-async function getMyBattles(userId) {
+async function getMyBattles (userId, ctx = { prisma }) {
   try {
-    const myBattles = await prisma.battle.findMany({
+    const myBattles = await ctx.prisma.battle.findMany({
       where: {
         users: {
           some: {
@@ -44,9 +43,9 @@ async function getMyBattles(userId) {
   }
 }
 
-async function updateBattle(battleId, update) {
+async function updateBattle (battleId, update, ctx = { prisma }) {
   try {
-    const battle = await prisma.battle.update({
+    const battle = await ctx.prisma.battle.update({
       where: { id: battleId },
       data: { ...update },
     });
