@@ -24,12 +24,14 @@ model User {
 
 model Battle {
   id Int @id @default(autoincrement())
-  user User @relation(fields: [userId], references: [id])
-  userId Int
+  users User[]
   battle_name String
+  budget Int
   start_date DateTime @default(now())
   end_date DateTime
   transaction Transaction[]
+  completed Boolean @default(false)
+  winner String?
 }
 
 model Transaction {
@@ -38,7 +40,7 @@ model Transaction {
   battleId Int
   user User @relation(fields: [userId], references: [id])
   userId Int
-  date DateTime
+  date DateTime @default(now())
   action String
   symbol String
   price Int

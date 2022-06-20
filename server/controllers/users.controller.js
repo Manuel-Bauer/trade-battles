@@ -4,8 +4,6 @@ exports.getAllUsers = async (req, res) => {
   try {
     console.log('this runs');
     const users = await users_model.getAllUsers();
-    console.log('these are the users: ', users);
-    // res.send(users.rows);
     res.send(users);
     res.status(200);
   } catch (error) {
@@ -36,7 +34,10 @@ exports.postUser = async (req, res) => {
 };
 exports.addBattleToUser = async (req, res) => {
   try {
-    const user = await users_model.addBattleToUser(req.params['user_id'], req.params['battle_id']);
+    const user = await users_model.addBattleToUser(
+      req.params['user_id'],
+      req.params['battle_id']
+    );
     res.send({ status: 'Update succesful' });
     res.status(200);
   } catch (error) {
@@ -57,7 +58,10 @@ exports.deleteUser = async (req, res) => {
 
 exports.getUserPortfolio = async (req, res) => {
   try {
-    const userPortfolio = await users_model.getUserPortfolio(req.params['user_id'], req.params['battle_id']);
+    const userPortfolio = await users_model.getUserPortfolio(
+      req.params['user_id'],
+      req.params['battle_id']
+    );
     res.send(userPortfolio);
     res.status(200);
   } catch (error) {
@@ -68,7 +72,11 @@ exports.getUserPortfolio = async (req, res) => {
 
 exports.patchProfit = async (req, res) => {
   try {
-    const user = await users_model.updateProfit(req.params['user_id'], req.body, req.params['battle_id']);
+    const user = await users_model.updateProfit(
+      req.params['user_id'],
+      req.body,
+      req.params['battle_id']
+    );
     res.send({ status: 'Update succesful' });
     res.status(200);
   } catch (error) {
@@ -79,7 +87,10 @@ exports.patchProfit = async (req, res) => {
 
 exports.patchWatchlist = async (req, res) => {
   try {
-    const user = await users_model.updateWatchlist(req.params['user_id'], req.body);
+    const user = await users_model.updateWatchlist(
+      req.params['user_id'],
+      req.body
+    );
     res.send({ status: 'Update succesful' });
     res.status(200);
   } catch (error) {
