@@ -26,6 +26,7 @@ model Battle {
   id Int @id @default(autoincrement())
   users User[]
   battle_name String
+  budget Int
   start_date DateTime @default(now())
   end_date DateTime
   transaction Transaction[]

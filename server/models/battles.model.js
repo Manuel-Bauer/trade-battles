@@ -2,20 +2,28 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-async function createBattle (data) {
+async function createBattle(data) {
   try {
-    const battle = await prisma.battle.create({ data });
+    const battle = await prisma.battle.create({
+      data: {
+        // users: data.users,
+        user
+        budget: data.budget,
+        battle_name: data.battle_name,
+        end_date: data.end_date,
+      },
+    });
     return battle;
   } catch (err) {
     throw err;
   }
 }
 
-async function getMyBattles (userId) {
+async function getMyBattles(userId) {
   try {
     const myBattles = await prisma.battle.findMany({
       where: {
-        user: { google_id: userId }
+        user: { google_id: userId },
       },
       include: {
         transaction: true,
@@ -28,7 +36,19 @@ async function getMyBattles (userId) {
   }
 }
 
-module.exports = { createBattle, getMyBattles };
+async function updateBattle(battleId, update) {
+  try {
+    const battle = await prisma.battle.update({
+      where: { id: battleId },
+      data: { ...update },
+    });
+    return battle;
+  } catch (err) {
+    throw err;
+  }
+}
+
+module.exports = { createBattle, getMyBattles, updateBattle };
 
 // const pool = require("./index");
 // const table_name = "battles";

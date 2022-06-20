@@ -43,6 +43,51 @@ app.use(router);
 //   quantity: 1,
 // }).then((res) => console.log(res));
 
+createBattle({
+  // users: [
+  //   {
+  //     id: 2,
+  //     google_id: '106470850040926178456',
+  //     givenName: 'Maxim',
+  //     familyName: 'Buz',
+  //     photo: 'https://lh3.googleusercontent.com/a-/AOh14GhQyMnqvEtZUdTfoXrIRX4tvdplfKyCQzWM7nCUpYs=s120',
+  //     email: 'mbuz.maxim@gmail.com',
+  //     watchlist: [],
+  //   },
+  //   {
+  //     id: 3,
+  //     google_id: '113650057549444546625',
+  //     givenName: 'Samuel',
+  //     familyName: 'Björk Fanhais',
+  //     photo: 'https://lh3.googleusercontent.com/a-/AOh14Gjh-jccpVvTIAzbFEVlWt-AFtizUiHPDhf9YhHv=s120',
+  //     email: 'samuelfanhais@gmail.com',
+  //     watchlist: [],
+  //   },
+  //   {
+  //     id: 4,
+  //     google_id: '104978883313255300075',
+  //     givenName: 'Manuel',
+  //     familyName: 'Bauer',
+  //     photo: 'https://lh3.googleusercontent.com/a/AATXAJxpgVPFSsTFNDmUp75Yx3Ee_-YbRxsRQQojb8eH=s120',
+  //     email: 'manuel.c.bauer@googlemail.com',
+  //     watchlist: [],
+  //   },
+  //   {
+  //     id: 1,
+  //     google_id: '114312890428629542973',
+  //     givenName: 'Mitchell',
+  //     familyName: 'Smith',
+  //     photo: 'https://lh3.googleusercontent.com/a/AATXAJx6G_9ed-1znWVGzNQO1nojcq6XYezTFY5ieHjP=s120',
+  //     email: 'demouser742@gmail.com',
+  //     watchlist: ['tsla', 'aple'],
+  //   },
+  // ],
+
+  budget: 1000,
+  battle_name: 'svelte battle',
+  end_date: new Date(),
+});
+
 app.listen(PORT, () => {
   console.log(`We are in boys... http://localhost:${PORT}`);
 });
