@@ -50,7 +50,7 @@ export const StockDetails: React.FC = () => {
 
   return (
     <View
-      style={{backgroundColor: theme.colors.backgroundColor, height: '100%'}}>
+      style={{backgroundColor: theme.colors.backgroundColor, height: '80%'}}>
       <GoBack />
       <View style={styles.watchlistStar}>
         <WishlistStarIcon user_id={user_id} stock={stock} />
