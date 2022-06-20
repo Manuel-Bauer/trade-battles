@@ -1,12 +1,12 @@
 import React, {Dispatch, SetStateAction} from 'react';
 import {View, Pressable, Text, Image} from 'react-native';
 import {useTheme} from '../../Contexts/Theme';
-import {BattleMember, User} from '../../shared/Types';
+import {User} from '../../shared/Types';
 import {styles} from './AddUserCard.styles';
 
 export interface IAddUserCardProps {
-  user: BattleMember;
-  setAddedMembers: Dispatch<SetStateAction<(User | BattleMember)[]>>;
+  user: User;
+  setAddedMembers: Dispatch<SetStateAction<User[]>>;
   setSearch: Dispatch<SetStateAction<string>>;
 }
 
@@ -18,7 +18,7 @@ const AddUserCard: React.FunctionComponent<IAddUserCardProps> = ({
   const {theme, darkMode} = useTheme();
   return (
     <View
-      key={user.email}
+      key={user.id}
       style={{
         ...styles.searchItemWithButtonContainer,
         borderBottomColor: darkMode ? theme.colors.dark : theme.colors.lighter,
@@ -31,7 +31,7 @@ const AddUserCard: React.FunctionComponent<IAddUserCardProps> = ({
             color: theme.colors.textPrimary,
             fontFamily: theme.fonts.bold,
           }}>
-          {user.first_name} {user.last_name}
+          {user.givenName} {user.familyName}
         </Text>
       </View>
       <Pressable
