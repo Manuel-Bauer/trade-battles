@@ -1,11 +1,8 @@
-const battles_model = require('../models/battles.model');
-const { PrismaClient } = require('@prisma/client');
-
-const prisma = new PrismaClient();
+const { createBattle, getMyBattles, updateBattle } = require("../models/battles.model");
 
 exports.getMyBattles = async (req, res) => {
   try {
-    const myBattles = await battles_model.getMyBattles(req.params['user_id'], prisma);
+    const myBattles = await getMyBattles(req.params['user_id']);
     res.send(myBattles);
     res.status(200);
   } catch (error) {
@@ -16,7 +13,7 @@ exports.getMyBattles = async (req, res) => {
 
 exports.postBattle = async (req, res) => {
   try {
-    const battle = await battles_model.createBattle(req.body, prisma);
+    const battle = await createBattle(req.body);
     res.send(battle);
     res.status(200);
   } catch (error) {
@@ -27,7 +24,7 @@ exports.postBattle = async (req, res) => {
 
 exports.patchBattleMembers = async (req, res) => {
   try {
-    const battle = await battles_model.updateBattleMembers(req.params['battle_id'], req.body, prisma);
+    const battle = await updateBattleMembers(req.params['battle_id'], req.body);
     res.send(battle.rows);
     res.status(200);
   } catch (error) {
@@ -39,7 +36,7 @@ exports.patchBattleMembers = async (req, res) => {
 exports.updateBattle = async (req, res) => {
   try {
     const battle_id = +req.params['battle_id'];
-    const battle = await battles_model.updateBattle(battle_id, req.body, prisma);
+    const battle = await updateBattle(battle_id, req.body);
     res.send(battle);
     res.status(200);
   } catch (error) {
