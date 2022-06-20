@@ -7,8 +7,8 @@ import {useEffect} from 'react';
 import {ApiClient} from '../../services/ApiClient.service';
 import {StockDetailsInfo} from '../../components/Stocks/StockDetailsInfo.component';
 import {StockDetailsBuySell} from '../../components/Stocks/StockDetailsBuySell.component';
-import {GoBack} from '../../components/GoBack.component';
-import {WishlistStarIcon} from '../../components/WishlistStarIcon.component';
+import {GoBack} from '../../components/Misc/GoBack.component';
+import {WishlistStarIcon} from '../../components/Watchlist/WishlistStarIcon.component';
 import {useTheme} from '../../Contexts/Theme';
 import {styles} from './StockDetails.styles';
 

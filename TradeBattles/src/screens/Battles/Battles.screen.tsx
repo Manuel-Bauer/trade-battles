@@ -6,7 +6,7 @@ import {ProfileScreenNavigationProp} from '../../shared/Types';
 
 /* ---- COMPONENTS ---- */
 import {View, Text, SafeAreaView, Pressable} from 'react-native';
-import {BattleCardList} from '../../components/BattleCardList.component';
+import {BattleCardList} from '../../components/Battles/BattleCardList.component';
 import type {Battle} from '../../shared/Types';
 
 /* ---- CONTEXT ---- */

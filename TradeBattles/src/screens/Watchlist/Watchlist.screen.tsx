@@ -1,7 +1,7 @@
 import React from 'react';
 
 /* ---- COMPONENTS ---- */
-import {WatchlistList} from '../../components/WatchlistList.component';
+import {WatchlistList} from '../../components/Watchlist/WatchlistList.component';
 import {View, Text, StyleSheet} from 'react-native';
 
 /* ---- CONTEXT ---- */

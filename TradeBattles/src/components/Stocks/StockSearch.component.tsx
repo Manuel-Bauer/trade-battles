@@ -6,7 +6,7 @@ import {StockInitializer} from '../../shared/EmptyInitializers';
 import {ApiClient} from '../../services/ApiClient.service';
 import type {ProfileScreenNavigationProp} from '../../shared/Types';
 import {useNavigation} from '@react-navigation/native';
-import {CustomModal} from '../CustomModal';
+import {CustomModal} from '../Misc/CustomModal';
 import {useTheme} from '../../Contexts/Theme';
 import {styles} from './StockSearch.styles';
 

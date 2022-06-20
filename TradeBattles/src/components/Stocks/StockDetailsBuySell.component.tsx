@@ -7,7 +7,7 @@ import {PurchaseOrderInitializer} from '../../shared/EmptyInitializers';
 import {formatter} from '../../shared/Methods';
 import {showNotification} from '../../shared/Notification';
 import {BuySellProps} from '../../shared/Types';
-import {CustomModal} from '../CustomModal';
+import {CustomModal} from '../Misc/CustomModal';
 import {QuantitySetter} from './QuantitySetter.component';
 import {styles} from './StockDetailsBuySell.styles';
 const closeIconSrc = require('../../../assets/icons/close_icon_black.png');

@@ -2,13 +2,13 @@ import React, {useEffect, useState} from 'react';
 
 /* ---- COMPONENTS ---- */
 import {View, Text, Pressable} from 'react-native';
-import {CustomInput} from '../../components/CustomInput.component';
-import {StartEndDatePicker} from '../../components/StartEndDatePicker.component';
+import {CustomInput} from '../../components/Misc/CustomInput.component';
+import {StartEndDatePicker} from '../../components/Misc/StartEndDatePicker.component';
 import {ApiClient} from '../../services/ApiClient.service';
 import {BattleMember} from '../../shared/Types';
-import {CustomModal} from '../../components/CustomModal';
-import {BattleMemberIcon} from '../../components/BattleMemberIcon.component';
-import {GoBack} from '../../components/GoBack.component';
+import {CustomModal} from '../../components/Misc/CustomModal';
+import {BattleMemberIcon} from '../../components/Battles/BattleMemberIcon.component';
+import {GoBack} from '../../components/Misc/GoBack.component';
 
 /* ---- CONTEXT ---- */
 import {useTheme} from '../../Contexts/Theme';

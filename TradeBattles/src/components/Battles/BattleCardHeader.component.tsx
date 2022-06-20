@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {useAuth} from '../Contexts/Auth';
-import {useTheme} from '../Contexts/Theme';
-import {Battle} from '../shared/Types';
+import {useAuth} from '../../Contexts/Auth';
+import {useTheme} from '../../Contexts/Theme';
+import {Battle} from '../../shared/Types';
 
 export const BattleCardHeader: React.FC<{
   battle: Battle;
@@ -34,30 +34,21 @@ export const BattleCardHeader: React.FC<{
     <View style={{...styles.container, backgroundColor: theme.colors.primary}}>
       <Text
         style={{
-          ...styles.header_small,
+          ...styles.title,
           color: theme.colors.lightest,
           fontFamily: theme.fonts.bold,
         }}>
         {battle.battle_name}
       </Text>
-      <View
+      <Text
         style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
+          ...styles.subTitle,
+          color: theme.colors.lightest,
+          fontFamily: theme.fonts.regular,
         }}>
-        <Text
-          style={{
-            alignSelf: 'center',
-            fontSize: 25,
-            fontWeight: '300',
-            color: theme.colors.lightest,
-            fontFamily: theme.fonts.regular,
-          }}>
-          #{position + 1}
-          {determinePositionEnding(position + 1)}
-        </Text>
-      </View>
+        You're {position + 1}
+        {determinePositionEnding(position + 1)}!
+      </Text>
     </View>
   );
 };
@@ -69,10 +60,15 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 45,
     marginBottom: 5,
   },
-  header_small: {
+  title: {
     fontSize: 25,
     fontWeight: '600',
     marginTop: 15,
     alignSelf: 'center',
+  },
+  subTitle: {
+    alignSelf: 'center',
+    fontSize: 25,
+    fontWeight: '300',
   },
 });

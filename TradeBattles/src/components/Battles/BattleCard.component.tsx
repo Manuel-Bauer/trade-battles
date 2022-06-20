@@ -4,7 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 /* ---- COMPONENTS ---- */
 import {Text, View, Image, Pressable} from 'react-native';
 import {Battle} from '../../shared/Types';
-import {BattleCardHeader} from '../BattleCardHeader.component';
+import {BattleCardHeader} from './BattleCardHeader.component';
 import {ProfileScreenNavigationProp} from '../../shared/Types';
 
 /* ---- STYLING ---- */

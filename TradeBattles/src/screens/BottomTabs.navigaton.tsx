@@ -10,7 +10,7 @@ import {
   HomeIcon,
   WatchlistIcon,
   UserIcon,
-} from '../components/BottomTabIcons.component';
+} from '../components/Misc/BottomTabIcons.component';
 import {WatchList} from './Watchlist/Watchlist.screen';
 import {Settings} from './Settings/Settings.screen';
 
