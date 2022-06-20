@@ -9,7 +9,7 @@ async function createBattle(data) {
         users: {
           connect: data.users,
         },
-        budget: data.budget,
+        budget: +data.budget,
         battle_name: data.battle_name,
         end_date: data.end_date,
       },
