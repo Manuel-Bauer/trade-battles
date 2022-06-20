@@ -4,7 +4,16 @@ const prisma = new PrismaClient();
 
 async function createTransaction(data) {
   try {
-    const transaction = await prisma.transaction.create({ data });
+    const transaction = await prisma.transaction.create({
+      data: {
+        battleId: data.battleId,
+        userId: data.userId,
+        action: data.action,
+        symbol: data.symbol,
+        price: data.price,
+        quantity: data.quantity,
+      },
+    });
     return transaction;
   } catch (err) {
     throw err;

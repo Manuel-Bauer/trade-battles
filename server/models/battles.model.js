@@ -6,11 +6,15 @@ async function createBattle(data) {
   try {
     const battle = await prisma.battle.create({
       data: {
-        // users: data.users,
-        user
-        budget: data.budget,
+        users: {
+          connect: data.users,
+        },
+        budget: +data.budget,
         battle_name: data.battle_name,
         end_date: data.end_date,
+      },
+      include: {
+        users: true,
       },
     });
     return battle;
@@ -23,11 +27,15 @@ async function getMyBattles(userId) {
   try {
     const myBattles = await prisma.battle.findMany({
       where: {
-        user: { google_id: userId },
+        users: {
+          some: {
+            id: +userId,
+          },
+        },
       },
       include: {
         transaction: true,
-        user: true,
+        users: true,
       },
     });
     return myBattles;
