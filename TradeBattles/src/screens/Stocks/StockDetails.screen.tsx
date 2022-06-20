@@ -5,7 +5,7 @@ import {RootStackParamList} from '../../shared/Types';
 import {useState} from 'react';
 import {useEffect} from 'react';
 import {ApiClient} from '../../services/ApiClient.service';
-import {StockDetailsInfo} from '../../components/StockDetailsInfo.component';
+import {StockDetailsInfo} from '../../components/Stocks/StockDetailsInfo.component';
 import {StockDetailsBuySell} from '../../components/StockDetailsBuySell.component';
 import {GoBack} from '../../components/GoBack.component';
 import {WishlistStarIcon} from '../../components/WishlistStarIcon.component';

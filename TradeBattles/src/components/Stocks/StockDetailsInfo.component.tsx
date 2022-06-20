@@ -1,14 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  Dimensions,
-  Pressable,
-} from 'react-native';
+import {View, Text, Image, Dimensions, Pressable} from 'react-native';
 import {GraphPoint, Stock} from '../../shared/Types';
-import {theme} from '../../shared/themes';
 import LottieView from 'lottie-react-native';
 const {
   ChartDot,
@@ -17,7 +9,9 @@ const {
   ChartYLabel,
 } = require('@rainbow-me/animated-charts');
 import {ApiClient} from '../../services/ApiClient.service';
-const spinnerSrc = require('../../assets/lotties/spinner.json');
+import {useTheme} from '../../Contexts/Theme';
+import {styles} from './StockDetailsInfo.styles';
+const spinnerSrc = require('../../../assets/lotties/spinner.json');
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 export const StockDetailsInfo: React.FC<{
@@ -26,6 +20,7 @@ export const StockDetailsInfo: React.FC<{
   dayChange: number;
   ytdChange: number;
 }> = ({stock, price, dayChange, ytdChange}) => {
+  const {theme} = useTheme();
   price =
     price > 0
       ? price
@@ -68,11 +63,11 @@ export const StockDetailsInfo: React.FC<{
   };
 
   const return_color_day_change =
-    dayChange > 0 ? theme.primary_green : theme.primary_red;
+    dayChange > 0 ? theme.colors.green : theme.colors.red;
   const return_color_ytd_change =
-    ytdChange > 0 ? theme.primary_green : theme.primary_red;
+    ytdChange > 0 ? theme.colors.green : theme.colors.red;
   const return_color_graph =
-    price > graphPoints[0].vw ? theme.primary_green : theme.primary_red;
+    price > graphPoints[0].vw ? theme.colors.green : theme.colors.red;
 
   return (
     <View
@@ -81,7 +76,7 @@ export const StockDetailsInfo: React.FC<{
       }}>
       <ChartPathProvider
         data={{
-          points: graphPoints.map((point, index) => ({
+          points: graphPoints.map(point => ({
             x: point.t,
             y: point.vw,
           })),
@@ -96,37 +91,57 @@ export const StockDetailsInfo: React.FC<{
                 uri: `https://storage.googleapis.com/iexcloud-hl37opg/api/logos/${stock.symbol}.png`,
               }}
             />
-            <Text style={styles.title}>{stock.symbol}</Text>
+            <Text
+              style={{
+                ...styles.title,
+                color: theme.colors.textPrimary,
+                fontFamily: theme.fonts.bold,
+              }}>
+              {stock.symbol}
+            </Text>
           </View>
         </View>
 
         <View>
-          <ChartYLabel format={formatCurrency} style={styles.price} />
+          <ChartYLabel
+            format={formatCurrency}
+            style={{...styles.price, color: theme.colors.textPrimary}}
+          />
         </View>
 
         <View style={styles.changes_row}>
           <View style={styles.change_container}>
-            <Text style={styles.change_text}>Day Change</Text>
+            <Text
+              style={{
+                ...styles.change_text,
+                color: theme.colors.textSecondary,
+              }}>
+              Day Change
+            </Text>
             <View
               style={{
-                borderRadius: 10,
-                padding: 5,
+                ...styles.changePill,
                 backgroundColor: return_color_day_change,
               }}>
-              <Text style={{color: 'white', fontWeight: '700'}}>
+              <Text style={styles.changeText}>
                 {(dayChange * 100).toFixed(2)}%
               </Text>
             </View>
           </View>
           <View style={styles.change_container}>
-            <Text style={styles.change_text}>YTD Change</Text>
+            <Text
+              style={{
+                ...styles.change_text,
+                color: theme.colors.textSecondary,
+              }}>
+              YTD Change
+            </Text>
             <View
               style={{
-                borderRadius: 10,
-                padding: 5,
+                ...styles.changePill,
                 backgroundColor: return_color_ytd_change,
               }}>
-              <Text style={{color: 'white', fontWeight: '700'}}>
+              <Text style={styles.changeText}>
                 {(ytdChange * 100).toFixed(2)}%
               </Text>
             </View>
@@ -154,20 +169,14 @@ export const StockDetailsInfo: React.FC<{
             }}
           />
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            marginTop: 10,
-            marginBottom: -20,
-          }}>
+        <View style={styles.durationButtonContainer}>
           <Pressable
             style={[
               styles.date_button,
               {
                 backgroundColor: oneYearSelected
-                  ? theme.colorPrimary
-                  : theme.greyPrimary,
+                  ? theme.colors.primary
+                  : theme.colors.secondary,
               },
             ]}
             onPress={() => {
@@ -176,14 +185,9 @@ export const StockDetailsInfo: React.FC<{
                 setOneYearSelected(true);
             }}>
             <Text
-              style={[
-                styles.date_text,
-                {
-                  color: oneYearSelected
-                    ? theme.light_mode_white
-                    : theme.colorPrimary,
-                },
-              ]}>
+              style={{
+                color: theme.colors.lightest,
+              }}>
               1Y
             </Text>
           </Pressable>
@@ -192,8 +196,8 @@ export const StockDetailsInfo: React.FC<{
               styles.date_button,
               {
                 backgroundColor: twoYearsSelected
-                  ? theme.colorPrimary
-                  : theme.greyPrimary,
+                  ? theme.colors.secondary
+                  : theme.colors.secondary,
               },
             ]}
             onPress={() => {
@@ -203,11 +207,8 @@ export const StockDetailsInfo: React.FC<{
             }}>
             <Text
               style={[
-                styles.date_text,
                 {
-                  color: twoYearsSelected
-                    ? theme.light_mode_white
-                    : theme.colorPrimary,
+                  color: theme.colors.lightest,
                 },
               ]}>
               2Y
@@ -218,58 +219,3 @@ export const StockDetailsInfo: React.FC<{
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  title: {
-    fontSize: 25,
-    textAlign: 'center',
-    fontWeight: '800',
-    marginLeft: 12,
-    color: theme.colorPrimary,
-    fontFamily: theme.fontFamilyBold,
-  },
-  logo: {
-    width: 40,
-    height: 40,
-    borderRadius: 50,
-  },
-  price: {
-    fontSize: 45,
-    fontWeight: '700',
-    marginBottom: 20,
-    alignSelf: 'center',
-    color: theme.colorPrimary,
-  },
-  change_container: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: 5,
-    marginHorizontal: 12,
-  },
-  change_text: {
-    fontSize: 15,
-    marginBottom: 6,
-    fontFamily: theme.fontFamilyRegular,
-  },
-  logo_ticker_header: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 15,
-  },
-  changes_row: {
-    flexDirection: 'row',
-    alignSelf: 'center',
-  },
-
-  date_button: {
-    paddingHorizontal: 7,
-    paddingVertical: 5,
-    margin: 5,
-    borderRadius: 5,
-  },
-  date_text: {
-    fontFamily: theme.fontFamilyBold,
-  },
-});
