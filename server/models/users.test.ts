@@ -1,42 +1,10 @@
-import { User } from '@prisma/client';
 import { MockContext, Context, createMockContext } from '../context';
+import { firstUser, incorrectUser, secondUser } from '../mocks';
 //@ts-ignore
 import { getAllUsers, createUser, getUser, updateWatchlist } from './users.model';
 
 let mockCtx: MockContext;
 let ctx: Context;
-
-const firstUser: User = {
-  familyName: 'Buz',
-  givenName: 'Maxim',
-  google_id: 'p93712henp237o',
-  photo:
-    'https://thumbs.dreamstime.com/z/italian-supporter-painted-butt-posing-beautiful-italy-colors-41500797.jpg',
-  email: 'test@tester.com',
-  id: 1,
-  watchlist: [],
-};
-
-const secondUser: User = {
-  familyName: 'Luca',
-  givenName: 'Stendardo',
-  google_id: '1302rnou2ü38',
-  photo:
-    'https://thumbs.dreamstime.com/z/italian-supporter-painted-butt-posing-beautiful-italy-colors-41500797.jpg',
-  email: 'luca@stendardo.com',
-  id: 1,
-  watchlist: [],
-};
-
-const incorrectUser = {
-  familyName: 'Luca',
-  givenName: 'Stendardo',
-  id: '1302rnou2ü38',
-  photo:
-    'https://thumbs.dreamstime.com/z/italian-supporter-painted-butt-posing-beautiful-italy-colors-41500797.jpg',
-  email: 'luca@stendardo.com',
-  watchlist: [],
-};
 
 beforeEach(() => {
   mockCtx = createMockContext();
@@ -70,7 +38,6 @@ test('should update watchlist of users', async () => {
 });
 
 test('should not create italian users', async () => {
-  //@ts-ignore
   mockCtx.prisma.user.create.mockRejectedValue(new Error());
   await expect(createUser(incorrectUser, ctx)).rejects.toEqual(new Error());
 });
