@@ -19,15 +19,24 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  avatarContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   winnerName: {
     fontSize: 20,
     fontWeight: '700',
+    alignSelf: 'center',
+    marginTop: 15,
+    marginBottom: 15,
   },
   winnerIcon: {
     height: 200,
     opacity: 0.5,
     resizeMode: 'contain',
-    position: 'absolute',
+    shadowRadius: 5,
+    shadowOpacity: 0.5,
   },
   avatar: {
     width: 100,
@@ -36,7 +45,8 @@ export const styles = StyleSheet.create({
     position: 'absolute',
   },
   header: {
-    height: 90,
+    height: 70,
+    paddingTop: 15,
     borderTopStartRadius: 45,
     borderTopEndRadius: 45,
     alignItems: 'center',

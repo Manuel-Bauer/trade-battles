@@ -18,6 +18,9 @@ export interface IThemeProvider {
       lightGreen: string;
       green: string;
       darkGreen: string;
+      lightYellow: string;
+      yellow: string;
+      darkYellow: string;
       lightPrimary: string;
       primary: string;
       darkPrimary: string;
@@ -65,6 +68,9 @@ export const ThemeProvider: FC<any> = ({children}) => {
         lightGreen: '#C6F6D5',
         green: '#48BB78',
         darkGreen: '#1C4532',
+        lightYellow: '#f6f6c6',
+        yellow: '#ffff00',
+        darkYellow: '#eed219',
         lightPrimary: darkMode ? '#b0ccfc' : '#8231fb',
         primary: darkMode ? '#81b0ff' : '#6101EE',
         darkPrimary: darkMode ? '#5486dc' : '#300399',

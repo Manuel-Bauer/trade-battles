@@ -40,11 +40,11 @@ export const FinishedBattleCard: React.FC<{
         backgroundColor: darkMode ? theme.colors.dark : theme.colors.lightest,
       }}>
       {/* HEADER */}
-      <View style={{...styles.header, backgroundColor: theme.colors.light}}>
+      <View style={{...styles.header}}>
         <Text
           style={{
             ...styles.battleTitle,
-            color: theme.colors.lightest,
+            color: theme.colors.textPrimary,
             fontFamily: theme.fonts.bold,
           }}>
           {battle.battle_name}
@@ -52,7 +52,7 @@ export const FinishedBattleCard: React.FC<{
         <Text
           style={{
             ...styles.finishedOnText,
-            color: theme.colors.lightest,
+            color: theme.colors.textPrimary,
             fontFamily: theme.fonts.bold,
           }}>
           Finished on{' '}
@@ -62,23 +62,34 @@ export const FinishedBattleCard: React.FC<{
         </Text>
       </View>
 
-      {/* WINNER MIT KRANZ */}
-      <View
-        key={winner.user_id}
-        style={{
-          ...styles.winnerContainer,
-          borderBottomColor: darkMode
-            ? theme.colors.darkest
-            : theme.colors.lighter,
-        }}>
-        <Image
-          source={require('../../../assets/images/winner.png')}
-          style={styles.winnerIcon}></Image>
-        <Image
-          key={winner.user_id + winner.photo}
-          style={styles.avatar}
-          source={{uri: winner.photo}}
-        />
+      <View style={styles.winnerContainer}>
+        {/* WINNER MIT KRANZ */}
+        <View
+          key={winner.user_id}
+          style={{
+            ...styles.avatarContainer,
+            borderBottomColor: darkMode
+              ? theme.colors.darkest
+              : theme.colors.lighter,
+          }}>
+          <Image
+            source={require('../../../assets/images/winner.png')}
+            style={{
+              ...styles.winnerIcon,
+              shadowColor: darkMode
+                ? theme.colors.yellow
+                : theme.colors.lightYellow,
+              tintColor: darkMode
+                ? theme.colors.yellow
+                : theme.colors.darkYellow,
+            }}></Image>
+          <Image
+            key={winner.user_id + winner.photo}
+            style={styles.avatar}
+            source={{uri: winner.photo}}
+          />
+        </View>
+
         <Text
           style={{
             ...styles.winnerName,
