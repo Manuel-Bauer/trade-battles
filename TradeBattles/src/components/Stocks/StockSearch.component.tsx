@@ -1,20 +1,14 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  TextInput,
-  Pressable,
-} from 'react-native';
-import {PortfolioStock, Stock} from '../shared/Types';
-import {stockListForSearch} from '../stockListForSearch';
-import {StockInitializer} from '../shared/EmptyInitializers';
-import {ApiClient} from '../services/ApiClient.service';
-import type {ProfileScreenNavigationProp} from '../shared/Types';
+import {View, Text, Image, TextInput, Pressable} from 'react-native';
+import {PortfolioStock, Stock} from '../../shared/Types';
+import {stockListForSearch} from '../../stockListForSearch';
+import {StockInitializer} from '../../shared/EmptyInitializers';
+import {ApiClient} from '../../services/ApiClient.service';
+import type {ProfileScreenNavigationProp} from '../../shared/Types';
 import {useNavigation} from '@react-navigation/native';
-import {CustomModal} from './CustomModal';
-import {useTheme} from '../Contexts/Theme';
+import {CustomModal} from '../CustomModal';
+import {useTheme} from '../../Contexts/Theme';
+import {styles} from './StockSearch.styles';
 
 export const StockSearch: React.FC<{
   battle_id: string;
@@ -50,14 +44,12 @@ export const StockSearch: React.FC<{
             onChangeText={currentSearch => handleSearch(currentSearch)}
             style={{
               ...styles.input,
-              backgroundColor: 'transparent',
-              borderWidth: 1,
-              borderColor: theme.colors.light,
+              backgroundColor: theme.colors.lightest,
               color: theme.colors.textPrimary,
-              fontFamily: theme.fonts.regular,
+              fontFamily: theme.fonts.light,
             }}
             placeholder="Search stock market..."
-            placeholderTextColor={theme.colors.textSecondary}
+            placeholderTextColor={theme.colors.dark}
             value={search}
           />
           <Pressable
@@ -161,50 +153,3 @@ export const StockSearch: React.FC<{
     </>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: 15,
-  },
-  searchContainer: {
-    width: '90%',
-    height: 50,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 20,
-  },
-  input: {
-    height: '100%',
-    flex: 4,
-    borderTopLeftRadius: 15,
-    borderBottomLeftRadius: 15,
-    padding: 10,
-  },
-  searchButton: {
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-    borderTopRightRadius: 15,
-    borderBottomRightRadius: 15,
-    padding: 10,
-  },
-  resultCardContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    borderBottomWidth: 0.3,
-    padding: 10,
-    width: '100%',
-    alignItems: 'center',
-    overflow: 'hidden',
-  },
-  logo: {
-    width: 35,
-    height: 35,
-    borderRadius: 50,
-    resizeMode: 'contain',
-  },
-});

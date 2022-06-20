@@ -23,7 +23,6 @@ export const Battles: React.FC = () => {
   const {theme} = useTheme();
   const {currentUser} = useAuth();
   const [myBattles, setMyBattles] = useState<Battle[]>([]);
-  const [noBattles, setNoBattles] = useState(false);
 
   const navigation = useNavigation<ProfileScreenNavigationProp>();
 
@@ -32,8 +31,7 @@ export const Battles: React.FC = () => {
       ApiClient.getUserById(currentUser.id)
         .then(res => ApiClient.getMyBattles(res.data.id))
         .then(res => setMyBattles(res.data))
-        .then(res => setNoBattles(false))
-        .catch(error => setNoBattles(true));
+        .catch(() => setMyBattles([]));
     }, [currentUser]),
   );
 
@@ -53,7 +51,7 @@ export const Battles: React.FC = () => {
           +
         </Text>
       </Pressable>
-      {noBattles && (
+      {myBattles.length === 0 && (
         <View style={styles.arrows}>
           <LottieView source={pointingArrowSrc} autoPlay />
         </View>
@@ -67,7 +65,7 @@ export const Battles: React.FC = () => {
         My Battles
       </Text>
 
-      {noBattles ? (
+      {myBattles.length === 0 ? (
         <View style={styles.noBattlesContainer}>
           <Text
             style={{
@@ -78,11 +76,7 @@ export const Battles: React.FC = () => {
           </Text>
         </View>
       ) : (
-        <BattleCardList
-          myBattles={myBattles}
-          setMyBattles={setMyBattles}
-          setNoBattles={setNoBattles}
-        />
+        <BattleCardList myBattles={myBattles} />
       )}
     </SafeAreaView>
   );

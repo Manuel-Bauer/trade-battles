@@ -29,7 +29,8 @@ export const CustomInput: React.FC<CustomInputProps> = ({
         placeholder={placeholder}
         style={{
           ...styles.input,
-          fontFamily: theme.fonts.light,
+          color: theme.colors.textPrimary,
+          fontFamily: theme.fonts.regular,
           borderColor: theme.colors.dark,
         }}
         secureTextEntry={secureTextEntry}
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
     height: 50,
   },
   input: {
-    fontSize: 12,
+    fontSize: 15,
     borderRadius: 10,
     borderWidth: 1,
     padding: 15,

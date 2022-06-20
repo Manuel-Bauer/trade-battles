@@ -85,6 +85,8 @@ export type Battle = {
   end_date_timestamp: string;
   battle_name: string;
   budget: Number;
+  completed?: boolean;
+  winner?: string;
 };
 
 export type BattleMember = {

@@ -1,17 +1,19 @@
 import React from 'react';
-import {StyleSheet, View, Text, Pressable} from 'react-native';
+import {View, Text, Pressable} from 'react-native';
 import {RouteProp, useRoute} from '@react-navigation/native';
-import {RootStackParamList} from '../shared/Types';
+import {RootStackParamList} from '../../shared/Types';
 import {useState} from 'react';
 import {useEffect} from 'react';
-import {ApiClient} from '../services/ApiClient.service';
-import {StockDetailsInfo} from '../components/StockDetailsInfo.component';
-import {StockDetailsBuySell} from '../components/StockDetailsBuySell.component';
-import {GoBack} from '../components/GoBack.component';
-import {theme} from '../shared/themes';
-import {WishlistStarIcon} from '../components/WishlistStarIcon.component';
+import {ApiClient} from '../../services/ApiClient.service';
+import {StockDetailsInfo} from '../../components/Stocks/StockDetailsInfo.component';
+import {StockDetailsBuySell} from '../../components/Stocks/StockDetailsBuySell.component';
+import {GoBack} from '../../components/GoBack.component';
+import {WishlistStarIcon} from '../../components/WishlistStarIcon.component';
+import {useTheme} from '../../Contexts/Theme';
+import {styles} from './StockDetails.styles';
 
 export const StockDetails: React.FC = () => {
+  const {theme} = useTheme();
   const route = useRoute<RouteProp<RootStackParamList, 'BuySellStock'>>();
   const {
     stock,
@@ -47,9 +49,10 @@ export const StockDetails: React.FC = () => {
   }, []);
 
   return (
-    <View style={{backgroundColor: theme.light_mode_white}}>
+    <View
+      style={{backgroundColor: theme.colors.backgroundColor, height: '100%'}}>
       <GoBack />
-      <View style={styles.watchlist_star}>
+      <View style={styles.watchlistStar}>
         <WishlistStarIcon user_id={user_id} stock={stock} />
       </View>
       <View style={styles.container}>
@@ -62,16 +65,24 @@ export const StockDetails: React.FC = () => {
 
         <Pressable
           onPress={() => setBuySellViewable(!buySellViewable)}
-          style={styles.trade_button}>
-          <Text style={styles.trade_button_text}>Trade</Text>
+          style={{
+            ...styles.tradeButton,
+            backgroundColor: theme.colors.primary,
+          }}>
+          <Text
+            style={{
+              ...styles.tradeButtonText,
+              color: theme.colors.lightest,
+              fontFamily: theme.fonts.bold,
+            }}>
+            Trade
+          </Text>
         </Pressable>
 
         <Text
           style={{
-            fontSize: 12,
-            textAlign: 'center',
-            marginTop: 5,
-            fontFamily: theme.fontFamilyRegular,
+            ...styles.averageCostText,
+            fontFamily: theme.fonts.regular,
           }}>
           Your average cost per share: ${average_cost.toFixed(2)}
         </Text>
@@ -94,40 +105,3 @@ export const StockDetails: React.FC = () => {
     </View>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-  },
-  title: {
-    fontSize: 15,
-  },
-
-  back: {
-    height: 30,
-    width: 30,
-  },
-  trade_button: {
-    backgroundColor: theme.colorPrimary,
-    width: '80%',
-    height: 60,
-    borderRadius: 15,
-    padding: 10,
-    marginTop: 35,
-    justifyContent: 'center',
-  },
-  trade_button_text: {
-    color: theme.light_mode_white,
-    fontSize: 19,
-    fontWeight: '900',
-    textAlign: 'center',
-    fontFamily: theme.fontFamilyBold,
-  },
-  watchlist_star: {
-    marginLeft: 'auto',
-    marginRight: 35,
-    marginTop: -40,
-    marginBottom: 25,
-  },
-});

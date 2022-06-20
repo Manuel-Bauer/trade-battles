@@ -18,6 +18,9 @@ export interface IThemeProvider {
       lightGreen: string;
       green: string;
       darkGreen: string;
+      lightYellow: string;
+      yellow: string;
+      darkYellow: string;
       lightPrimary: string;
       primary: string;
       darkPrimary: string;
@@ -65,12 +68,15 @@ export const ThemeProvider: FC<any> = ({children}) => {
         lightGreen: '#C6F6D5',
         green: '#48BB78',
         darkGreen: '#1C4532',
-        lightPrimary: darkMode ? '#b0ccfc' : '#8231fb',
-        primary: darkMode ? '#81b0ff' : '#6101EE',
-        darkPrimary: darkMode ? '#5486dc' : '#300399',
-        lightSecondary: darkMode ? '#d2e2fd' : '#e7d8fd',
-        secondary: darkMode ? '#bbd4ff' : '#c4a0f9',
-        darkSecondary: darkMode ? '#a2c4ff' : '#a084e1',
+        lightYellow: '#f6f6c6',
+        yellow: '#ffff00',
+        darkYellow: '#eed219',
+        lightPrimary: darkMode ? '#a6acff' : '#8231fb',
+        primary: darkMode ? '#647bfb' : '#6101EE',
+        darkPrimary: darkMode ? '#2b3898' : '#300399',
+        lightSecondary: darkMode ? '#e7e8ff' : '#e7d8fd',
+        secondary: darkMode ? '#c3c9fd' : '#c4a0f9',
+        darkSecondary: darkMode ? '#a6a7ff' : '#a084e1',
         backgroundColor: darkMode ? '#141414' : '#FAFAFA',
         textPrimary: darkMode ? '#FAFAFA' : '#171717',
         textSecondary: darkMode ? '#d5d5d5' : '#383838',

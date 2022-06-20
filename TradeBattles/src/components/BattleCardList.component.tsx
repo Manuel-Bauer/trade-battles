@@ -7,8 +7,9 @@ import {
   View,
 } from 'react-native';
 import {Battle} from '../shared/Types';
-import {BattleCard} from './BattleCard.component';
-import {theme} from '../shared/themes';
+import {useTheme} from '../Contexts/Theme';
+import {BattleCard} from './Battles/BattleCard.component';
+import {FinishedBattleCard} from './Battles/FinishedBattleCard.component';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -16,6 +17,7 @@ const BATTLE_CONTAINER = width;
 export const BattleCardList: React.FC<{
   myBattles: Battle[];
 }> = ({myBattles}) => {
+  const {theme} = useTheme();
   const [currentBattleIndex, setCurrentBattleIndex] = useState(0);
 
   const scrollX = React.useRef(new Animated.Value(0)).current;
@@ -46,7 +48,7 @@ export const BattleCardList: React.FC<{
         onMomentumScrollEnd={scrollListener}
         scrollEventThrottle={16}
         data={myBattles}
-        renderItem={({item, index}) => {
+        renderItem={({item: battle, index}) => {
           const inputRange = [
             (index - 1) * BATTLE_CONTAINER,
             index * BATTLE_CONTAINER,
@@ -60,7 +62,7 @@ export const BattleCardList: React.FC<{
           });
           return (
             <View
-              key={item.battle_id}
+              key={battle.battle_id}
               style={{
                 width: BATTLE_CONTAINER,
                 height: height * 0.5,
@@ -72,7 +74,17 @@ export const BattleCardList: React.FC<{
                   justifyContent: 'center',
                   transform: [{translateY}],
                 }}>
-                <BattleCard key={item.battle_id + item.users} battle={item} />
+                {battle.completed ? (
+                  <FinishedBattleCard
+                    key={battle.battle_id + battle.users}
+                    battle={battle}
+                  />
+                ) : (
+                  <BattleCard
+                    key={battle.battle_id + battle.users}
+                    battle={battle}
+                  />
+                )}
               </Animated.View>
             </View>
           );
@@ -83,8 +95,7 @@ export const BattleCardList: React.FC<{
           flexDirection: 'row',
         }}>
         {myBattles.map((dot, index) => {
-          const backgroundColor =
-            index === currentBattleIndex ? theme.colorPrimary : 'grey';
+          const backgroundColor = theme.colors.light;
           const size = index === currentBattleIndex ? 8 : 7;
           return (
             <View
