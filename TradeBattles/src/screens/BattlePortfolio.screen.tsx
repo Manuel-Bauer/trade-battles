@@ -3,7 +3,7 @@ import {View, Text, FlatList, RefreshControl, StyleSheet} from 'react-native';
 import {PortfolioStockCard} from '../components/PortfolioStockCard.component';
 import {PortfolioStock} from '../shared/Types';
 import {ApiClient} from '../services/ApiClient.service';
-import {BattlePortfolioHeader} from '../components/BattlePortfolioHeader.component';
+import {BattlePortfolioHeader} from '../components/Battles/BattlePortfolioHeader.component';
 import {GoBack} from '../components/GoBack.component';
 import type {RootStackParamList} from '../shared/Types';
 import {RouteProp, useRoute} from '@react-navigation/native';

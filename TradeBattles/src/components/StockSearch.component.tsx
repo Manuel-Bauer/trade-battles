@@ -50,12 +50,14 @@ export const StockSearch: React.FC<{
             onChangeText={currentSearch => handleSearch(currentSearch)}
             style={{
               ...styles.input,
-              backgroundColor: theme.colors.lightest,
+              backgroundColor: 'transparent',
+              borderWidth: 1,
+              borderColor: theme.colors.light,
               color: theme.colors.textPrimary,
-              fontFamily: theme.fonts.light,
+              fontFamily: theme.fonts.regular,
             }}
             placeholder="Search stock market..."
-            placeholderTextColor={theme.colors.dark}
+            placeholderTextColor={theme.colors.textSecondary}
             value={search}
           />
           <Pressable
@@ -173,11 +175,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 20,
-    shadowOpacity: 0.3,
-    shadowOffset: {
-      width: 1,
-      height: 1,
-    },
   },
   input: {
     height: '100%',
