@@ -12,7 +12,7 @@ export const BudgetPicker: React.FC<{
     <View style={styles.container}>
       <Picker
         style={{flex: 1}}
-        itemStyle={{color: theme.colors.textPrimary}}
+        itemStyle={{color: theme.colors.textPrimary, fontSize: 18}}
         selectedValue={battleBudget}
         onValueChange={value => setBattleBudget(value)}>
         <Picker.Item label="100k USD" value="100" />
@@ -33,7 +33,7 @@ export const BudgetPicker: React.FC<{
 const styles = StyleSheet.create({
   container: {
     width: '85%',
-    height: '5%',
+    height: '2%',
     marginTop: '15%',
     marginBottom: '15%',
     alignItems: 'center',

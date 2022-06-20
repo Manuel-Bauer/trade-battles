@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: '600',
-    marginBottom: 10,
+    marginBottom: 20,
     marginTop: 10,
   },
   addButton: {
