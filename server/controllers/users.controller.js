@@ -2,8 +2,11 @@ const users_model = require('../models/users.model');
 
 exports.getAllUsers = async (req, res) => {
   try {
+    console.log('this runs');
     const users = await users_model.getAllUsers();
-    res.send(users.rows);
+    console.log('these are the users: ', users);
+    // res.send(users.rows);
+    res.send(users);
     res.status(200);
   } catch (error) {
     console.error(error);
