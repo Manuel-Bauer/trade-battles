@@ -14,7 +14,7 @@ exports.getMyBattles = async (req, res) => {
 exports.postBattle = async (req, res) => {
   try {
     const battle = await battles_model.createBattle(req.body);
-    res.send(req.body);
+    res.send(battle);
     res.status(200);
   } catch (error) {
     console.error(error);
@@ -35,7 +35,8 @@ exports.patchBattleMembers = async (req, res) => {
 
 exports.updateBattle = async (req, res) => {
   try {
-    const battle = await battles_model.updateBattle(req.params['battle_id'], req.body);
+    const battle_id = +req.params['battle_id'];
+    const battle = await battles_model.updateBattle(battle_id, req.body);
     res.send(battle);
     res.status(200);
   } catch (error) {

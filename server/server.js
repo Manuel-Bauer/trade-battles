@@ -82,11 +82,11 @@ createBattle({
   //     watchlist: ['tsla', 'aple'],
   //   },
   // ],
-
+  users: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }],
   budget: 1000,
   battle_name: 'svelte battle',
   end_date: new Date(),
-});
+}).then((res) => console.log(res));
 
 app.listen(PORT, () => {
   console.log(`We are in boys... http://localhost:${PORT}`);
