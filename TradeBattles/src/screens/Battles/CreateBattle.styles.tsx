@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
   firstTitle: {
     fontSize: 20,
     fontWeight: '600',
-    marginBottom: 10,
+    marginBottom: 20,
   },
   title: {
     fontSize: 20,

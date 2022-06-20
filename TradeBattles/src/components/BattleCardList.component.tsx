@@ -72,10 +72,7 @@ export const BattleCardList: React.FC<{
                   justifyContent: 'center',
                   transform: [{translateY}],
                 }}>
-                <BattleCard
-                  key={item.battle_id + item.battle_members}
-                  battle={item}
-                />
+                <BattleCard key={item.battle_id + item.users} battle={item} />
               </Animated.View>
             </View>
           );

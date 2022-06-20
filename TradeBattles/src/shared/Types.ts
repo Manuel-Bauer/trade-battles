@@ -75,15 +75,20 @@ export type User = {
   familyName: string | null;
   givenName: string | null;
   watchlist: string[];
+  current_gains_losses: any;
 };
 
 export type Battle = {
   battle_id: string;
-  battle_members: User[];
+  users: User[];
   start_date_timestamp: string;
   end_date_timestamp: string;
   battle_name: string;
-  battle_budget: Number;
+  budget: Number;
+};
+
+export type BattleMember = {
+  id: string;
 };
 
 export type Transaction = {

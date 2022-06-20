@@ -13,7 +13,7 @@ export const BattleCard: React.FC<{
 }> = ({battle}) => {
   const userContext = useUserContext();
   const navigation = useNavigation<ProfileScreenNavigationProp>();
-  battle.battle_members = battle.battle_members.sort(
+  battle.users = battle.users.sort(
     (a, b) =>
       b.current_gains_losses[battle.battle_id] -
       a.current_gains_losses[battle.battle_id],
@@ -30,7 +30,7 @@ export const BattleCard: React.FC<{
       style={styles.container}>
       <BattleCardHeader battle={battle} />
 
-      {battle.battle_members.map((member, index) => {
+      {battle.users.map((member, index) => {
         return (
           <View
             key={member.user_id}

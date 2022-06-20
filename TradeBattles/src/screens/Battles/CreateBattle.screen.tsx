@@ -49,7 +49,7 @@ export const CreateBattle = () => {
     const endTime = new Date(endDate.getTime()).toISOString();
     formIsValid()
       ? (ApiClient.createBattle(
-          addedMembers.map(el => el.id),
+          addedMembers.map(el => ({id: el.id})),
           startTime,
           endTime,
           battleName,
