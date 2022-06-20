@@ -6,18 +6,18 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-async function getAllUsers() {
+async function getAllUsers(ctx = prisma) {
   try {
-    const allUsers = await prisma.user.findMany({});
+    const allUsers = await ctx.prisma.user.findMany({});
     return allUsers;
   } catch (err) {
     throw err;
   }
 }
 
-async function createUser(data) {
+async function createUser(data, ctx = prisma) {
   try {
-    const user = await prisma.user.create({
+    const user = await ctx.prisma.user.create({
       data: {
         google_id: data.id,
         givenName: data.givenName,
@@ -32,9 +32,9 @@ async function createUser(data) {
   }
 }
 
-async function getUser(google_id) {
+async function getUser(google_id, ctx = prisma) {
   try {
-    const user = await prisma.user.findUnique({
+    const user = await ctx.prisma.user.findUnique({
       where: {
         google_id: google_id,
       },
@@ -45,9 +45,9 @@ async function getUser(google_id) {
   }
 }
 
-async function updateWatchlist(id, updatedWatchlist) {
+async function updateWatchlist(id, updatedWatchlist, ctx = prisma) {
   try {
-    const user = await prisma.user.update({
+    const user = await ctx.prisma.user.update({
       where: { id },
       data: { watchlist: updatedWatchlist },
     });
