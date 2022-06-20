@@ -82,6 +82,8 @@ export type Battle = {
   start_date_timestamp: string;
   end_date_timestamp: string;
   battle_name: string;
+  completed?: boolean;
+  winner?: string;
 };
 
 export type BattleMember = {

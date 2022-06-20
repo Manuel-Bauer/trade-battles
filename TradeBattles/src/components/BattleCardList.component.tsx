@@ -9,6 +9,7 @@ import {
 import {Battle} from '../shared/Types';
 import {useTheme} from '../Contexts/Theme';
 import {BattleCard} from './Battles/BattleCard.component';
+import {FinishedBattleCard} from './Battles/FinishedBattleCard.component';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -73,7 +74,11 @@ export const BattleCardList: React.FC<{
                   justifyContent: 'center',
                   transform: [{translateY}],
                 }}>
-                <BattleCard
+                {/* <BattleCard
+                  key={item.battle_id + item.battle_members}
+                  battle={item}
+                /> */}
+                <FinishedBattleCard
                   key={item.battle_id + item.battle_members}
                   battle={item}
                 />
