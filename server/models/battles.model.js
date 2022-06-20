@@ -27,11 +27,15 @@ async function getMyBattles(userId) {
   try {
     const myBattles = await prisma.battle.findMany({
       where: {
-        user: { google_id: userId },
+        users: {
+          some: {
+            id: +userId,
+          },
+        },
       },
       include: {
         transaction: true,
-        user: true,
+        users: true,
       },
     });
     return myBattles;
