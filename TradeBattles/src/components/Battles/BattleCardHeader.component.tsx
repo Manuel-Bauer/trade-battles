@@ -3,6 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import {useAuth} from '../../Contexts/Auth';
 import {useTheme} from '../../Contexts/Theme';
 import {Battle} from '../../shared/Types';
+import {getOrderEnding} from '../../shared/utils';
 
 export const BattleCardHeader: React.FC<{
   battle: Battle;
@@ -14,22 +15,6 @@ export const BattleCardHeader: React.FC<{
   battle.battle_members.filter((el, index) => {
     if (el.user_id === currentUser.id) position = index;
   });
-
-  const determinePositionEnding = (pos: number) => {
-    const lastNumber = Number(String(pos)[String(pos).length - 1]);
-    switch (lastNumber) {
-      case 1:
-        return 'st';
-      case 2:
-        return 'nd';
-      case 3:
-        return 'rd';
-      case 4 || 5 || 6 || 7 || 8 || 9 || 0:
-        return 'th';
-      default:
-        return 'th';
-    }
-  };
   return (
     <View style={{...styles.container, backgroundColor: theme.colors.primary}}>
       <Text
@@ -47,7 +32,7 @@ export const BattleCardHeader: React.FC<{
           fontFamily: theme.fonts.regular,
         }}>
         You're {position + 1}
-        {determinePositionEnding(position + 1)}!
+        {getOrderEnding(position + 1)}!
       </Text>
     </View>
   );

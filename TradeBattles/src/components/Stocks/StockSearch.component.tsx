@@ -23,9 +23,6 @@ export const StockSearch: React.FC<{
   const [search, setSearch] = useState('');
   const [badSearch, setBadSearch] = useState(false);
   const navigation = useNavigation<ProfileScreenNavigationProp>();
-  const handleSearch = (currentSearch: string) => {
-    setSearch(currentSearch);
-  };
   const textLengthLimit = 35;
   return (
     <>
@@ -41,7 +38,7 @@ export const StockSearch: React.FC<{
             shadowColor: theme.colors.dark,
           }}>
           <TextInput
-            onChangeText={currentSearch => handleSearch(currentSearch)}
+            onChangeText={value => setSearch(value)}
             style={{
               ...styles.input,
               backgroundColor: theme.colors.lightest,

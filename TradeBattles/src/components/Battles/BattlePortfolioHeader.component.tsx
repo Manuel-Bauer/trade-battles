@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Text, View} from 'react-native';
 import {Battle} from '../../shared/Types';
-import {formatter} from '../../shared/Methods';
+import {formatter} from '../../shared/utils';
 import LottieView from 'lottie-react-native';
 import {styles} from './BattlePortfolioHeader.styles';
 import {useTheme} from '../../Contexts/Theme';

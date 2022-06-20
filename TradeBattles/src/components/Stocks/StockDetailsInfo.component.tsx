@@ -11,6 +11,7 @@ const {
 import {ApiClient} from '../../services/ApiClient.service';
 import {useTheme} from '../../Contexts/Theme';
 import {styles} from './StockDetailsInfo.styles';
+import {subtractYears} from '../../shared/utils';
 const spinnerSrc = require('../../../assets/lotties/spinner.json');
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -33,10 +34,6 @@ export const StockDetailsInfo: React.FC<{
 
   const [oneYearSelected, setOneYearSelected] = useState(true);
 
-  function subtractYears(numOfYears: number, date = new Date()) {
-    date.setFullYear(date.getFullYear() - numOfYears);
-    return date;
-  }
   const getHistoricals = async (timespan: number) => {
     const now = new Date();
     const oneYear = subtractYears(timespan);

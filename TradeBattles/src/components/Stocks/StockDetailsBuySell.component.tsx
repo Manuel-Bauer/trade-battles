@@ -4,7 +4,7 @@ import {View, Text, Pressable, Modal, Image} from 'react-native';
 import {useTheme} from '../../Contexts/Theme';
 import {ApiClient} from '../../services/ApiClient.service';
 import {PurchaseOrderInitializer} from '../../shared/EmptyInitializers';
-import {formatter} from '../../shared/Methods';
+import {formatter} from '../../shared/utils';
 import {showNotification} from '../../shared/Notification';
 import {BuySellProps} from '../../shared/Types';
 import {CustomModal} from '../Misc/CustomModal';

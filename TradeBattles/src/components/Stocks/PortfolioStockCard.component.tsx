@@ -4,7 +4,7 @@ import {theme} from '../../shared/themes';
 import {PortfolioStock} from '../../shared/Types';
 import {useNavigation} from '@react-navigation/native';
 import type {ProfileScreenNavigationProp} from '../../shared/Types';
-import {formatter} from '../../shared/Methods';
+import {formatter} from '../../shared/utils';
 
 export const PortfolioStockCard: React.FC<{
   stock: PortfolioStock;
