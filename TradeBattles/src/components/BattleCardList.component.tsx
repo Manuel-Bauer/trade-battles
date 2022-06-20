@@ -48,7 +48,7 @@ export const BattleCardList: React.FC<{
         onMomentumScrollEnd={scrollListener}
         scrollEventThrottle={16}
         data={myBattles}
-        renderItem={({item, index}) => {
+        renderItem={({item: battle, index}) => {
           const inputRange = [
             (index - 1) * BATTLE_CONTAINER,
             index * BATTLE_CONTAINER,
@@ -62,7 +62,7 @@ export const BattleCardList: React.FC<{
           });
           return (
             <View
-              key={item.battle_id}
+              key={battle.battle_id}
               style={{
                 width: BATTLE_CONTAINER,
                 height: height * 0.5,
@@ -74,14 +74,17 @@ export const BattleCardList: React.FC<{
                   justifyContent: 'center',
                   transform: [{translateY}],
                 }}>
-                {/* <BattleCard
-                  key={item.battle_id + item.battle_members}
-                  battle={item}
-                /> */}
-                <FinishedBattleCard
-                  key={item.battle_id + item.battle_members}
-                  battle={item}
-                />
+                {battle.completed ? (
+                  <FinishedBattleCard
+                    key={battle.battle_id + battle.battle_members}
+                    battle={battle}
+                  />
+                ) : (
+                  <BattleCard
+                    key={battle.battle_id + battle.battle_members}
+                    battle={battle}
+                  />
+                )}
               </Animated.View>
             </View>
           );
