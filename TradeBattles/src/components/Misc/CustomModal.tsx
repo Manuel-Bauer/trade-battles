@@ -10,9 +10,9 @@ import {
 } from 'react-native';
 import {theme} from '../../shared/themes';
 import {useNavigation} from '@react-navigation/native';
-const correctTransactionSrc = require('../../assets/lotties/correct_transaction.json');
-const incorrectTransactionSrc = require('../../assets/lotties/incorrect_transaction.json');
-const confettiSrc = require('../../assets/lotties/confetti.json');
+const correctTransactionSrc = require('../../../assets/lotties/correct_transaction.json');
+const incorrectTransactionSrc = require('../../../assets/lotties/incorrect_transaction.json');
+const confettiSrc = require('../../../assets/lotties/confetti.json');
 
 const width = Dimensions.get('window').width;
 export const CustomModal: React.FC<{
