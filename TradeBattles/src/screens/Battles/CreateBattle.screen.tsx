@@ -80,7 +80,7 @@ export const CreateBattle = () => {
       </View>
       <Text
         style={{
-          ...styles.title,
+          ...styles.firstTitle,
           fontFamily: theme.fonts.bold,
           color: theme.colors.textPrimary,
         }}>
@@ -92,6 +92,14 @@ export const CreateBattle = () => {
         placeholder={'Choose a name for your battle...'}
         secureTextEntry={false}
       />
+      <Text
+        style={{
+          ...styles.title,
+          fontFamily: theme.fonts.bold,
+          color: theme.colors.textPrimary,
+        }}>
+        Starting Budget
+      </Text>
       <BudgetPicker
         setBattleBudget={setBattleBudget}
         battleBudget={battleBudget}

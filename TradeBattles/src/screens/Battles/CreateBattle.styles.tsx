@@ -6,11 +6,16 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+  firstTitle: {
+    fontSize: 20,
+    fontWeight: '600',
+    marginBottom: 10,
+  },
   title: {
     fontSize: 20,
     fontWeight: '600',
     marginBottom: 10,
-    marginTop: 20,
+    marginTop: 10,
   },
   addButton: {
     width: 45,
@@ -26,7 +31,7 @@ export const styles = StyleSheet.create({
   createButton: {
     width: '80%',
     height: 50,
-    marginTop: 50,
+    marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 12,
