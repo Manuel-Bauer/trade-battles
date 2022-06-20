@@ -2,7 +2,7 @@ import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 
 /* ---- COMPONENTS ---- */
-import {Text, View, Image, Pressable } from 'react-native';
+import {Text, View, Image, Pressable} from 'react-native';
 import {Battle} from '../../shared/Types';
 import {ProfileScreenNavigationProp} from '../../shared/Types';
 
@@ -19,13 +19,7 @@ export const FinishedBattleCard: React.FC<{
   const {currentUser} = useAuth();
   const {theme, darkMode} = useTheme();
   const navigation = useNavigation<ProfileScreenNavigationProp>();
-
-  battle.winner = '113650057549444546625';
-  console.log('FinishedBattleCard: ', battle);
-
-  const winner = battle.battle_members.find(
-    member => member.user_id === battle.winner,
-  );
+  const winner = battle.users.find(member => member.id === battle.winner);
 
   return (
     <Pressable
