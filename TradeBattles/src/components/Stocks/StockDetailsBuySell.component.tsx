@@ -1,25 +1,17 @@
 import React from 'react';
 import {useState} from 'react';
-import {
-  View,
-  Text,
-  Pressable,
-  StyleSheet,
-  Modal,
-  Image,
-  Dimensions,
-} from 'react-native';
-import {useTheme} from '../Contexts/Theme';
-import {ApiClient} from '../services/ApiClient.service';
-import {PurchaseOrderInitializer} from '../shared/EmptyInitializers';
-import {formatter} from '../shared/Methods';
-import {showNotification} from '../shared/Notification';
-import {BuySellProps} from '../shared/Types';
-import {CustomModal} from './CustomModal';
-import {QuantitySetter} from './Stocks/QuantitySetter.component';
-const closeIconSrc = require('../../assets/icons/close_icon_black.png');
+import {View, Text, Pressable, Modal, Image} from 'react-native';
+import {useTheme} from '../../Contexts/Theme';
+import {ApiClient} from '../../services/ApiClient.service';
+import {PurchaseOrderInitializer} from '../../shared/EmptyInitializers';
+import {formatter} from '../../shared/Methods';
+import {showNotification} from '../../shared/Notification';
+import {BuySellProps} from '../../shared/Types';
+import {CustomModal} from '../CustomModal';
+import {QuantitySetter} from './QuantitySetter.component';
+import {styles} from './StockDetailsBuySell.styles';
+const closeIconSrc = require('../../../assets/icons/close_icon_black.png');
 
-const width = Dimensions.get('window').width;
 export const StockDetailsBuySell: React.FC<BuySellProps> = props => {
   const {theme} = useTheme();
   const {
@@ -100,10 +92,7 @@ export const StockDetailsBuySell: React.FC<BuySellProps> = props => {
       ? setCantSellModal(true)
       : quantitySelected <= 0
       ? setCantBuySellZeroModal(true)
-      : // !stock.isUSMarketOpen
-        // ? setMarketClosedModal(true)
-        // :
-        (ApiClient.postTransaction({
+      : (ApiClient.postTransaction({
           ...buySellApiBody,
           action: 'SELL',
         }),
@@ -161,7 +150,8 @@ export const StockDetailsBuySell: React.FC<BuySellProps> = props => {
             <Pressable
               style={[styles.button, {backgroundColor: theme.colors.primary}]}
               onPress={handleBuyOrder}>
-              <Text style={[styles.button_text, {color: theme.colors.lightest}]}>
+              <Text
+                style={[styles.button_text, {color: theme.colors.lightest}]}>
                 Buy
               </Text>
             </Pressable>
@@ -203,49 +193,3 @@ export const StockDetailsBuySell: React.FC<BuySellProps> = props => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    padding: 10,
-    width: width * 0.33,
-    borderRadius: 10,
-    marginHorizontal: 15,
-  },
-  button_text: {
-    textAlign: 'center',
-    fontSize: 22,
-    fontWeight: '600',
-  },
-
-  buy_sell_modal_container: {
-    flexDirection: 'column',
-    marginTop: 250,
-    backgroundColor: 'white',
-    alignSelf: 'center',
-    borderRadius: 20,
-    height: 300,
-    width: '90%',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  close_icon: {
-    marginLeft: 'auto',
-    width: 20,
-    height: 20,
-    marginRight: 20,
-    marginTop: 20,
-  },
-  total_amount: {flexDirection: 'row', alignItems: 'center'},
-
-  buysell_button_container: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    padding: 30,
-  },
-});

@@ -6,7 +6,7 @@ import {useState} from 'react';
 import {useEffect} from 'react';
 import {ApiClient} from '../../services/ApiClient.service';
 import {StockDetailsInfo} from '../../components/Stocks/StockDetailsInfo.component';
-import {StockDetailsBuySell} from '../../components/StockDetailsBuySell.component';
+import {StockDetailsBuySell} from '../../components/Stocks/StockDetailsBuySell.component';
 import {GoBack} from '../../components/GoBack.component';
 import {WishlistStarIcon} from '../../components/WishlistStarIcon.component';
 import {useTheme} from '../../Contexts/Theme';
