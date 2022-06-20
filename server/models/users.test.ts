@@ -51,11 +51,6 @@ test('should creat new users', async () => {
   await expect(createUser(secondUser, ctx)).resolves.toEqual(secondUser);
 });
 
-test('should fail to create user on incorrect input', async () => {
-  mockCtx.prisma.user.create.mockRejectedValue(new Error('Failed to create user!'));
-  await expect(createUser(incorrectUser, ctx)).rejects.toEqual(new Error('Failed to create user!'));
-});
-
 test('should get all users', async () => {
   mockCtx.prisma.user.findMany.mockResolvedValue([firstUser, secondUser]);
   await expect(getAllUsers(ctx)).resolves.toEqual([firstUser, secondUser]);
@@ -72,4 +67,10 @@ test('should update watchlist of users', async () => {
     ...secondUser,
     watchlist: ['TSLA'],
   });
+});
+
+test('should not create italian users', async () => {
+  //@ts-ignore
+  mockCtx.prisma.user.create.mockRejectedValue(new Error());
+  await expect(createUser(incorrectUser, ctx)).rejects.toEqual(new Error());
 });
