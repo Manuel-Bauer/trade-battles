@@ -54,7 +54,6 @@ export const CreateBattle = () => {
         setSuccessfulCreate(true),
         setAddedMembers([]),
         setBattleName(''),
-        setBattleBudget(''),
         setEndDate(new Date()),
         setStartDate(new Date()))
       : setErrorMessage(true);
