@@ -2,7 +2,7 @@ import React from 'react';
 import {RootStackParamList} from '../../shared/Types';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {BattlePortfolio} from '../BattlePortfolio.screen';
-import {StockDetails} from '../StockDetails.screen';
+import {StockDetails} from '../Stocks/StockDetails.screen';
 import {Battles} from './Battles.screen';
 import {CreateBattle} from './CreateBattle.screen';
 
