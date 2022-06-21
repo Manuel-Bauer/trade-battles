@@ -1,7 +1,7 @@
-import { MockContext, Context, createMockContext } from '../testing/context';
-import { firstUser, incorrectUser, secondUser } from '../testing/mocks';
+import { MockContext, Context, createMockContext } from '../../testing/context';
+import { firstUser, incorrectUser, secondUser } from '../../testing/mocks';
 //@ts-ignore
-import { getAllUsers, createUser, getUser, updateWatchlist } from './users.model';
+import { getAllUsers, createUser, getUser, updateWatchlist } from '../users.model';
 
 let mockCtx: MockContext;
 let ctx: Context;
