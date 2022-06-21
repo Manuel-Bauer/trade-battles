@@ -47,12 +47,11 @@ export type User = {
 };
 
 export type Battle = {
-  battle_id: string;
-  users: User[];
-  start_date_timestamp: string;
-  end_date_timestamp: string;
+  id: number;
+  start_date: string;
+  end_date: string;
   battle_name: string;
-  budget: Number;
+  budget: number;
   completed?: boolean;
   winner?: string;
 };
