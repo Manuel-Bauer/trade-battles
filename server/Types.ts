@@ -37,24 +37,21 @@ export type LoginStackParamList = {
 };
 
 export type User = {
-  id: string;
+  id: number;
   google_id: string | null;
-  name: string | null;
   email: string;
   photo: string | null;
   familyName: string | null;
   givenName: string | null;
   watchlist: string[];
-  current_gains_losses: any;
 };
 
 export type Battle = {
-  battle_id: string;
-  users: User[];
-  start_date_timestamp: string;
-  end_date_timestamp: string;
+  id: number;
+  start_date: string;
+  end_date: string;
   battle_name: string;
-  budget: Number;
+  budget: number;
   completed?: boolean;
   winner?: string;
 };
@@ -72,4 +69,12 @@ export type Transaction = {
   price: number;
   quantity: number;
   // transaction_timestamp: string;
+};
+
+export type createUserInput = {
+  id: string;
+  givenName: string;
+  familyName: string;
+  photo: string;
+  email: string;
 };
