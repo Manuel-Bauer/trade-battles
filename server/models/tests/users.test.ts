@@ -1,43 +1,48 @@
-import { MockContext, Context, createMockContext } from '../../testing/context';
-import { firstUser, incorrectUser, secondUser } from '../../testing/mocks';
+import prisma from '../../testing/client';
+import {
+  firstUserInput,
+  firstUserResult,
+  incorrectUserInput,
+  secondUserInput,
+  secondUserResult,
+} from '../../testing/mocks';
+
 //@ts-ignore
 import { getAllUsers, createUser, getUser, updateWatchlist } from '../users.model';
 
-let mockCtx: MockContext;
-let ctx: Context;
-
-beforeEach(() => {
-  mockCtx = createMockContext();
-  ctx = mockCtx as unknown as Context;
+afterAll(async () => {
+  await prisma.user.deleteMany();
 });
 
 test('should creat new users', async () => {
-  mockCtx.prisma.user.create.mockResolvedValue(firstUser);
-  await expect(createUser(firstUser, ctx)).resolves.toEqual(firstUser);
+  const firstUser = await createUser(firstUserInput);
+  expect({ ...firstUser, id: firstUserResult.id }).toEqual(firstUserResult);
 
-  mockCtx.prisma.user.create.mockResolvedValue(secondUser);
-  await expect(createUser(secondUser, ctx)).resolves.toEqual(secondUser);
+  const secondUser = await createUser(secondUserInput);
+  expect({ ...secondUser, id: secondUserResult.id }).toEqual(secondUserResult);
 });
 
 test('should get all users', async () => {
-  mockCtx.prisma.user.findMany.mockResolvedValue([firstUser, secondUser]);
-  await expect(getAllUsers(ctx)).resolves.toEqual([firstUser, secondUser]);
+  const users = await getAllUsers();
+  expect(users.length).toBe(2);
+  expect({ ...users[0], id: firstUserResult.id }).toEqual(firstUserResult);
+  expect({ ...users[1], id: secondUserResult.id }).toEqual(secondUserResult);
 });
 
 test('should get a single user by google id', async () => {
-  mockCtx.prisma.user.findUnique.mockResolvedValue(secondUser);
-  await expect(getUser('1302rnou2ü38', ctx)).resolves.toEqual(secondUser);
+  const user = await getUser('1302rnou2ü38');
+  expect({ ...user, id: secondUserResult.id }).toEqual(secondUserResult);
 });
 
 test('should update watchlist of users', async () => {
-  mockCtx.prisma.user.update.mockResolvedValue({ ...secondUser, watchlist: ['TSLA'] });
-  await expect(updateWatchlist('1302rnou2ü38', ['TSLA'], ctx)).resolves.toEqual({
-    ...secondUser,
+  const user = await getUser('1302rnou2ü38');
+  const updatedUser = await updateWatchlist(user.id, ['TSLA']);
+  expect({ ...updatedUser, id: secondUserResult.id }).toEqual({
+    ...secondUserResult,
     watchlist: ['TSLA'],
   });
 });
 
-test('should not create italian users', async () => {
-  mockCtx.prisma.user.create.mockRejectedValue(new Error());
-  await expect(createUser(incorrectUser, ctx)).rejects.toEqual(new Error());
+test('should not create users on incorrect input', async () => {
+  await expect(createUser(incorrectUserInput)).rejects.toBeInstanceOf(Error);
 });
