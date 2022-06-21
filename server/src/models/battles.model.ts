@@ -1,4 +1,10 @@
-import { Battle, Prisma, PrismaClient } from '@prisma/client';
+import {
+  Battle,
+  User,
+  Transaction,
+  Prisma,
+  PrismaClient,
+} from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -30,7 +36,10 @@ async function createBattle(
   }
 }
 
-async function getMyBattles(userId, ctx = { prisma }) {
+async function getMyBattles(
+  userId: string,
+  ctx = { prisma }
+): Promise<Battle[]> {
   try {
     const myBattles = await ctx.prisma.battle.findMany({
       where: {
