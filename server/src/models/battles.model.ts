@@ -60,15 +60,11 @@ async function getMyBattles(
   }
 }
 
-<<<<<<< HEAD:server/src/models/battles.model.ts
-async function updateBattle(battleId, update, ctx = { prisma }) {
-=======
 async function updateBattle(
   battleId: string,
   update: any,
   ctx = { prisma }
 ): Promise<Battle> {
->>>>>>> TB-39-refactor-the-backend-to-typescript:server/src/models/battles.model.js
   try {
     const battle = await ctx.prisma.battle.update({
       where: { id: +battleId },
