@@ -17,7 +17,6 @@ async function createBattle (data, ctx = { prisma }) {
         users: true,
       },
     });
-    console.log(battle);
     return battle;
   } catch (err) {
     throw err;

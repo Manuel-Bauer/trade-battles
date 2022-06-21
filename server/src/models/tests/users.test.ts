@@ -1,4 +1,4 @@
-import { cleanDB } from '../../../testing/cleanTestDB';
+import { cleanDB } from '../../testing/cleanDb';
 import prisma from '../../testing/client';
 import {
   firstUserInput,
