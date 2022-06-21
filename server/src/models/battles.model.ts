@@ -1,12 +1,21 @@
-import { PrismaClient } from '@prisma/client';
+import {
+  Battle,
+  User,
+  Transaction,
+  Prisma,
+  PrismaClient,
+} from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-import { Battle } from '../../Types';
+import { CreateBattleInput } from '../../Types';
 
 export {};
 
-async function createBattle(data, ctx = { prisma }): Promise<Battle> {
+async function createBattle(
+  data: CreateBattleInput,
+  ctx = { prisma }
+): Promise<Battle> {
   try {
     const battle = await ctx.prisma.battle.create({
       data: {
@@ -27,7 +36,10 @@ async function createBattle(data, ctx = { prisma }): Promise<Battle> {
   }
 }
 
-async function getMyBattles(userId, ctx = { prisma }) {
+async function getMyBattles(
+  userId: string,
+  ctx = { prisma }
+): Promise<Battle[]> {
   try {
     const myBattles = await ctx.prisma.battle.findMany({
       where: {
@@ -48,10 +60,18 @@ async function getMyBattles(userId, ctx = { prisma }) {
   }
 }
 
+<<<<<<< HEAD:server/src/models/battles.model.ts
 async function updateBattle(battleId, update, ctx = { prisma }) {
+=======
+async function updateBattle(
+  battleId: string,
+  update: any,
+  ctx = { prisma }
+): Promise<Battle> {
+>>>>>>> TB-39-refactor-the-backend-to-typescript:server/src/models/battles.model.js
   try {
     const battle = await ctx.prisma.battle.update({
-      where: { id: battleId },
+      where: { id: +battleId },
       data: { ...update },
     });
     return battle;
