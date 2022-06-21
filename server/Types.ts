@@ -73,12 +73,3 @@ export type Transaction = {
   quantity: number;
   // transaction_timestamp: string;
 };
-
-export type GraphPoint = {
-  t: number;
-  vw: number;
-};
-
-export type HistoricalData = {
-  results: GraphPoint[];
-};
