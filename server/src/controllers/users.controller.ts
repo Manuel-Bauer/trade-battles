@@ -1,6 +1,6 @@
 const users_model = require('../models/users.model');
 
-exports.getAllUsers = async (req, res) => {
+exports.getAllUsers = async (req: Express.Request, res: Express.Response) => {
   try {
     console.log('this runs');
     const users = await users_model.getAllUsers();
