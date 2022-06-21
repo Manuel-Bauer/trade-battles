@@ -1,2 +1,4 @@
 server/.env
 server/coverage
+coverage
+.coverage
