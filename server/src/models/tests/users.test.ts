@@ -1,7 +1,12 @@
 import { MockContext, Context, createMockContext } from '../../testing/context';
 import { firstUser, incorrectUser, secondUser } from '../../testing/mocks';
 //@ts-ignore
-import { getAllUsers, createUser, getUser, updateWatchlist } from '../users.model';
+import {
+  getAllUsers,
+  createUser,
+  getUser,
+  updateWatchlist,
+} from '../users.model';
 
 let mockCtx: MockContext;
 let ctx: Context;
@@ -30,11 +35,16 @@ test('should get a single user by google id', async () => {
 });
 
 test('should update watchlist of users', async () => {
-  mockCtx.prisma.user.update.mockResolvedValue({ ...secondUser, watchlist: ['TSLA'] });
-  await expect(updateWatchlist('1302rnou2ü38', ['TSLA'], ctx)).resolves.toEqual({
+  mockCtx.prisma.user.update.mockResolvedValue({
     ...secondUser,
     watchlist: ['TSLA'],
   });
+  await expect(updateWatchlist('1302rnou2ü38', ['TSLA'], ctx)).resolves.toEqual(
+    {
+      ...secondUser,
+      watchlist: ['TSLA'],
+    }
+  );
 });
 
 test('should not create italian users', async () => {
