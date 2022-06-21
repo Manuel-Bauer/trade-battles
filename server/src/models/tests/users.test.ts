@@ -8,13 +8,8 @@ import {
   secondUserResult,
 } from '../../testing/mocks';
 
-import {
-  getAllUsers,
-  createUser,
-  getUser,
-  updateWatchlist,
-  //@ts-ignore
-} from '../users.model';
+//@ts-ignore
+import { getAllUsers, createUser, getUser, updateWatchlist } from '../users.model';
 
 beforeAll(async () => {
   await cleanDB();

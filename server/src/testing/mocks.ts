@@ -67,3 +67,29 @@ export const firstBattleResult: BattleWithUsers = {
   users: [firstUserResult, secondUserResult],
   id: 1,
 };
+
+export function getFirstBattleUpdate(userName: string): Prisma.BattleUpdateInput {
+  return {
+    winner: userName,
+    completed: true,
+  };
+}
+
+export const secondBattleInput = {
+  budget: 20000000, // Note: expects cents
+  battle_name: 'Second Battle',
+  start_date: new Date('2022-06-19T14:19:02.370Z'),
+  end_date: new Date('2022-06-23T14:19:02.370Z'),
+  users: [{ id: 1 }],
+};
+
+export const secondBattleResult: BattleWithUsers = {
+  budget: 20000000, // Note: expects cents
+  battle_name: 'Second Battle',
+  start_date: new Date('2022-06-19T14:19:02.370Z'),
+  end_date: new Date('2022-06-23T14:19:02.370Z'),
+  completed: false,
+  winner: null,
+  users: [firstUserResult],
+  id: 2,
+};
