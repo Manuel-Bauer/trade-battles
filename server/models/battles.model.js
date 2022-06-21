@@ -8,7 +8,7 @@ async function createBattle (data, ctx = { prisma }) {
         users: {
           connect: data.users,
         },
-        budget: +data.budget,
+        budget: +data.budget, // Note: expects string of cents (to be an integer)
         battle_name: data.battle_name,
         end_date: data.end_date,
       },
