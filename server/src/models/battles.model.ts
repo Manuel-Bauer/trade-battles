@@ -60,10 +60,14 @@ async function getMyBattles(
   }
 }
 
-async function updateBattle(battleId, update, ctx = { prisma }) {
+async function updateBattle(
+  battleId: string,
+  update: any,
+  ctx = { prisma }
+): Promise<Battle> {
   try {
     const battle = await ctx.prisma.battle.update({
-      where: { id: battleId },
+      where: { id: +battleId },
       data: { ...update },
     });
     return battle;
