@@ -36,10 +36,10 @@ export const BattleCard: React.FC<{
       }}>
       <BattleCardHeader battle={battle} />
 
-      {getSortedRanks(battle.users, battle.battle_id).map((member, index) => {
+      {getSortedRanks(battle.transaction, battle.id).map((user, index) => {
         return (
           <View
-            key={member.user_id}
+            key={user.id}
             style={{
               ...styles.battleMemberContainer,
               borderBottomColor: darkMode
@@ -48,9 +48,9 @@ export const BattleCard: React.FC<{
             }}>
             <View style={styles.battleMemberContent}>
               <Image
-                key={member.user_id + member.photo}
+                key={user.id + user.photo}
                 style={styles.avatar}
-                source={{uri: member.photo}}
+                source={{uri: user.photo}}
               />
               <View>
                 <Text
@@ -59,7 +59,7 @@ export const BattleCard: React.FC<{
                     color: theme.colors.textPrimary,
                     fontFamily: theme.fonts.regular,
                   }}>
-                  {member.first_name} {member.last_name}
+                  {user.givenName} {user.familyName}
                 </Text>
                 <Text
                   style={{
@@ -67,7 +67,7 @@ export const BattleCard: React.FC<{
                     color: theme.colors.textPrimary,
                     fontFamily: theme.fonts.regular,
                   }}>
-                  {getFormattedPL(member, battle.battle_id)}
+                  {getFormattedPL(user, battle.id)}
                 </Text>
               </View>
             </View>

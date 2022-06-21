@@ -79,12 +79,13 @@ export type User = {
 };
 
 export type Battle = {
-  battle_id: string;
+  id: number;
   users: User[];
+  transaction: Transaction[];
   start_date_timestamp: string;
   end_date_timestamp: string;
   battle_name: string;
-  budget: Number;
+  budget: number;
   completed?: boolean;
   winner?: string;
 };
@@ -94,14 +95,14 @@ export type BattleMember = {
 };
 
 export type Transaction = {
-  // transaction_id: string;
-  battle_id: string;
-  user_id: string;
+  id: number;
+  userId: number;
+  battleId: number;
   action: string;
   symbol: string;
   price: number;
   quantity: number;
-  // transaction_timestamp: string;
+  date: string;
 };
 
 export type GraphPoint = {

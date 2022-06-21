@@ -5,11 +5,10 @@ import type {Transaction, GraphPoint} from '../shared/Types';
 
 const port = 3000;
 const baseUrl = `http://localhost:${port}`;
-// const baseUrl = `http://localhost:${port}`;
+
 export const ApiClient = {
   getMyBattles: async (user_id: string) => {
     const myBattles = await axios.get(`${baseUrl}/battles/${user_id}`);
-    console.log('BATTTTLEESS', myBattles);
     return myBattles;
   },
 
