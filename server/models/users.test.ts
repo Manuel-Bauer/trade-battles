@@ -1,5 +1,5 @@
-import { MockContext, Context, createMockContext } from '../context';
-import { firstUser, incorrectUser, secondUser } from '../mocks';
+import { MockContext, Context, createMockContext } from '../testing/context';
+import { firstUser, incorrectUser, secondUser } from '../testing/mocks';
 //@ts-ignore
 import { getAllUsers, createUser, getUser, updateWatchlist } from './users.model';
 
