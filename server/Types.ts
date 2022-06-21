@@ -48,10 +48,9 @@ export type User = {
 
 export type Battle = {
   id: number;
-  start_date: string;
-  end_date: string;
+  start_date: Date;
+  end_date: Date;
   battle_name: string;
-  budget: number;
   completed?: boolean;
   winner?: string;
 };
@@ -69,4 +68,12 @@ export type Transaction = {
   price: number;
   quantity: number;
   // transaction_timestamp: string;
+};
+
+export type CreateBattleInput = {
+  battle_name: string;
+  budget: string;
+  start_date: Date;
+  end_date: Date;
+  users: { id: number }[];
 };

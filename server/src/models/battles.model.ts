@@ -1,12 +1,15 @@
-import { PrismaClient } from '@prisma/client';
+import { Battle, Prisma, PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-import { Battle } from '../../Types';
+import { CreateBattleInput } from '../../Types';
 
 export {};
 
-async function createBattle(data, ctx = { prisma }): Promise<Battle> {
+async function createBattle(
+  data: CreateBattleInput,
+  ctx = { prisma }
+): Promise<Battle> {
   try {
     const battle = await ctx.prisma.battle.create({
       data: {
