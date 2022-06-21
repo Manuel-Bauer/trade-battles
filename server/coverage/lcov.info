@@ -84,7 +84,7 @@ SF:testing/context.ts
 FN:13,createMockContext
 FNF:1
 FNH:1
-FNDA:5,createMockContext
+FNDA:7,createMockContext
 DA:1,1
 DA:2,1
 DA:3,1
@@ -98,13 +98,13 @@ DA:10,1
 DA:11,1
 DA:12,1
 DA:13,1
-DA:14,5
-DA:15,5
-DA:16,5
-DA:17,5
+DA:14,7
+DA:15,7
+DA:16,7
+DA:17,7
 LF:17
 LH:17
-BRDA:13,0,0,5
+BRDA:13,0,0,7
 BRF:1
 BRH:1
 end_of_record
