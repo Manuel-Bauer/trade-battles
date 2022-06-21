@@ -11,8 +11,6 @@ exports.getQuote = async (symbol) => {
     }`
   ).then((res) => res.json());
 
-  console.log(quote);
-
   return quote;
 };
 
