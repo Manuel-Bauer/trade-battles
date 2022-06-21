@@ -37,15 +37,13 @@ export type LoginStackParamList = {
 };
 
 export type User = {
-  id: string;
+  id: number;
   google_id: string | null;
-  name: string | null;
   email: string;
   photo: string | null;
   familyName: string | null;
   givenName: string | null;
   watchlist: string[];
-  current_gains_losses: any;
 };
 
 export type Battle = {

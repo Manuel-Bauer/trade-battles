@@ -1,8 +1,12 @@
-const { PrismaClient } = require('@prisma/client');
+import { PrismaClient } from '@prisma/client';
+
+import { User } from '../../Types';
+
+export {};
 
 const prisma = new PrismaClient();
 
-async function getAllUsers(ctx = { prisma }) {
+async function getAllUsers(ctx = { prisma }): Promise<User[]> {
   try {
     const allUsers = await ctx.prisma.user.findMany({});
     return allUsers;
