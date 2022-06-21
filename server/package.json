@@ -6,9 +6,8 @@
   "scripts": {
     "test": "dotenv -e .env.test jest",
     "migrate": "dotenv -e .env.development npx prisma migrate dev",
-    "start": "dotenv -e .env.development node ./dist/server.js",
+    "start": "node ./dist/server.js",
     "tsc": "dotenv -e .env.development tsc",
-    "postinstall": "dotenv -e .env.development npm run tsc",
     "dev": "dotenv -e .env.development ts-node-dev --respawn --pretty --transpile-only ./src/server.ts"
   },
   "author": "",
