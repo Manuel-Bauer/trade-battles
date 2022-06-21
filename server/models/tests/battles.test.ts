@@ -6,16 +6,16 @@ import { createBattle, getMyBattles, updateBattle } from '../battles.model';
 //@ts-ignore
 import { createUser } from '../users.model';
 
-beforeEach(async () => {
-  await createUser(firstUserInput);
-  await createUser(secondUserInput);
-});
+// beforeEach(async () => {
+//   await createUser(firstUserInput);
+//   await createUser(secondUserInput);
+// });
 
-afterEach(async () => {
-  await prisma.user.deleteMany();
-  await prisma.battle.deleteMany();
-  await prisma.transaction.deleteMany();
-});
+// afterEach(async () => {
+//   await prisma.user.deleteMany();
+//   await prisma.battle.deleteMany();
+//   await prisma.transaction.deleteMany();
+// });
 
 // test('should create new battle', async () => {
 //   const battle = await createBattle(firstBattleInput);

@@ -1,3 +1,4 @@
+import { cleanDB } from '../../testing/cleanTestDB';
 import prisma from '../../testing/client';
 import {
   firstUserInput,
@@ -10,8 +11,13 @@ import {
 //@ts-ignore
 import { getAllUsers, createUser, getUser, updateWatchlist } from '../users.model';
 
+beforeAll(async () => {
+  await cleanDB();
+});
+
 afterAll(async () => {
   await prisma.user.deleteMany();
+  await cleanDB();
 });
 
 test('should creat new users', async () => {

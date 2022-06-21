@@ -4,8 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "jest",
-    "start": "nodemon server.js"
+    "test": "dotenv -e .env.test jest",
+    "start": "dotenv -e .env.development nodemon server.js",
+    "migrate": "dotenv -e .env.development npx prisma migrate dev"
   },
   "author": "",
   "license": "ISC",
