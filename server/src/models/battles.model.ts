@@ -1,20 +1,30 @@
-import { PrismaClient } from '@prisma/client';
+import {
+  Battle,
+  User,
+  Transaction,
+  Prisma,
+  PrismaClient,
+} from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-import { Battle } from '../../Types';
+import { CreateBattleInput } from '../../Types';
 
 export {};
 
-async function createBattle(data, ctx = { prisma }): Promise<Battle> {
+async function createBattle(
+  data: CreateBattleInput,
+  ctx = { prisma }
+): Promise<Battle> {
   try {
     const battle = await ctx.prisma.battle.create({
       data: {
         users: {
           connect: data.users,
         },
-        budget: +data.budget,
+        budget: +data.budget, // Note: expects string of cents (to be an integer)
         battle_name: data.battle_name,
+        start_date: data.start_date,
         end_date: data.end_date,
       },
       include: {
@@ -27,7 +37,10 @@ async function createBattle(data, ctx = { prisma }): Promise<Battle> {
   }
 }
 
-async function getMyBattles(userId, ctx = { prisma }) {
+async function getMyBattles(
+  userId: string,
+  ctx = { prisma }
+): Promise<Battle[]> {
   try {
     const myBattles = await ctx.prisma.battle.findMany({
       where: {
@@ -48,10 +61,14 @@ async function getMyBattles(userId, ctx = { prisma }) {
   }
 }
 
-async function updateBattle(battleId, update, ctx = { prisma }) {
+async function updateBattle(
+  battleId: string,
+  update: any,
+  ctx = { prisma }
+): Promise<Battle> {
   try {
     const battle = await ctx.prisma.battle.update({
-      where: { id: battleId },
+      where: { id: +battleId },
       data: { ...update },
     });
     return battle;

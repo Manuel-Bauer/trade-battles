@@ -77,4 +77,12 @@ export type createUserInput = {
   familyName: string;
   photo: string;
   email: string;
+}
+
+export type CreateBattleInput = {
+  battle_name: string;
+  budget: string;
+  start_date: Date;
+  end_date: Date;
+  users: { id: number }[];
 };

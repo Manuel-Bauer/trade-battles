@@ -2,9 +2,9 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-async function createTransaction(data) {
+async function createTransaction (data, ctx = { prisma }) {
   try {
-    const transaction = await prisma.transaction.create({
+    const transaction = await ctx.prisma.transaction.create({
       data: {
         battleId: data.battleId,
         userId: data.userId,
@@ -20,9 +20,9 @@ async function createTransaction(data) {
   }
 }
 
-async function getAllTransactions() {
+async function getAllTransactions (ctx = { prisma }) {
   try {
-    const allTransactions = await prisma.transaction.findMany({});
+    const allTransactions = await ctx.prisma.transaction.findMany({});
     return allTransactions;
   } catch (err) {
     throw err;

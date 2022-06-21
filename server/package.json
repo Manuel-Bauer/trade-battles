@@ -4,11 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "jest",
+    "test": "dotenv -e .env.test jest",
+    "migrate": "dotenv -e .env.development npx prisma migrate dev",
     "start": "node ./dist/server.js",
-    "tsc": "tsc",
-    "postinstall": "npm run tsc",
-    "dev": "ts-node-dev --respawn --pretty --transpile-only ./src/server.ts"
+    "tsc": "dotenv -e .env.development tsc",
+    "dev": "dotenv -e .env.development ts-node-dev --respawn --pretty --transpile-only ./src/server.ts"
   },
   "author": "",
   "license": "ISC",
