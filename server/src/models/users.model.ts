@@ -1,6 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-
-import { User } from '../../Types';
+import { PrismaClient, User } from '@prisma/client';
+import { createUserInput } from '../../Types';
 
 export {};
 
@@ -15,7 +14,10 @@ async function getAllUsers(ctx = { prisma }): Promise<User[]> {
   }
 }
 
-async function createUser(data, ctx = { prisma }) {
+async function createUser(
+  data: createUserInput,
+  ctx = { prisma }
+): Promise<User> {
   try {
     const user = await ctx.prisma.user.create({
       data: {
@@ -32,7 +34,7 @@ async function createUser(data, ctx = { prisma }) {
   }
 }
 
-async function getUser(google_id, ctx = { prisma }) {
+async function getUser(google_id: string, ctx = { prisma }): Promise<User> {
   try {
     const user = await ctx.prisma.user.findUnique({
       where: {
@@ -45,7 +47,11 @@ async function getUser(google_id, ctx = { prisma }) {
   }
 }
 
-async function updateWatchlist(id, updatedWatchlist, ctx = { prisma }) {
+async function updateWatchlist(
+  id: number,
+  updatedWatchlist: string[],
+  ctx = { prisma }
+): Promise<User> {
   try {
     const user = await ctx.prisma.user.update({
       where: { id },

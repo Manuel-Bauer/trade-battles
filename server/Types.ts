@@ -70,3 +70,19 @@ export type Transaction = {
   quantity: number;
   // transaction_timestamp: string;
 };
+
+export type createUserInput = {
+  id: string;
+  givenName: string;
+  familyName: string;
+  photo: string;
+  email: string;
+}
+
+export type CreateBattleInput = {
+  battle_name: string;
+  budget: string;
+  start_date: Date;
+  end_date: Date;
+  users: { id: number }[];
+};
