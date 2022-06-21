@@ -43,6 +43,53 @@ async function getMyBattles (userId, ctx = { prisma }) {
   }
 }
 
+const groupBy = (array, key) => {
+  return array.reduce((result, currentValue) => {
+    (result[currentValue[key]] = result[currentValue[key]] || []).push(
+      currentValue
+    );
+    return result;
+  }, {});
+};
+
+async function getMyBattlesWithGroupedTransgenders (userId, ctx = { prisma }) {
+  try {
+    const myBattles = await ctx.prisma.battle.findMany({
+      where: {
+        users: {
+          some: {
+            id: +userId,
+          },
+        },
+      },
+      include: {
+        transaction: true,
+        users: true,
+      },
+    });
+
+    const transactionsByPlayers = [];
+    myBattles.forEach((battle) => {
+      transactionsByPlayers.push(groupBy(battle.transaction, 'userId'));
+    });
+
+    const summed = [];
+    transactionsByPlayers.forEach((battle) => {
+      for (const [key, value] of Object.entries(battle)) {
+        summed.push({
+          userId: key,
+          spend: value.reduce((prev, _, index, arr) => { return prev + (arr[index].price * arr[index].quantity); }, 0),
+          currentValue: "calculate later"
+        });
+      }
+    });
+
+    return myBattles;
+  } catch (err) {
+    throw err;
+  }
+}
+
 async function updateBattle (battleId, update, ctx = { prisma }) {
   try {
     const battle = await ctx.prisma.battle.update({
@@ -55,4 +102,4 @@ async function updateBattle (battleId, update, ctx = { prisma }) {
   }
 }
 
-module.exports = { createBattle, getMyBattles, updateBattle };
+module.exports = { createBattle, getMyBattles, updateBattle, getMyBattlesWithGroupedTransgenders };
