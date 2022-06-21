@@ -1,4 +1,4 @@
-import { cleanDB } from '../../testing/cleanTestDB';
+import { cleanDB } from '../../../testing/cleanTestDB';
 import prisma from '../../testing/client';
 import {
   firstUserInput,
@@ -8,8 +8,13 @@ import {
   secondUserResult,
 } from '../../testing/mocks';
 
-//@ts-ignore
-import { getAllUsers, createUser, getUser, updateWatchlist } from '../users.model';
+import {
+  getAllUsers,
+  createUser,
+  getUser,
+  updateWatchlist,
+  //@ts-ignore
+} from '../users.model';
 
 beforeAll(async () => {
   await cleanDB();
