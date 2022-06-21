@@ -1,8 +1,15 @@
 const { PrismaClient } = require('@prisma/client');
+import { Transaction } from '@prisma/client';
+import { createTransactionInput } from '../../Types';
+
+export {};
 
 const prisma = new PrismaClient();
 
-async function createTransaction (data, ctx = { prisma }) {
+async function createTransaction(
+  data: createTransactionInput,
+  ctx = { prisma }
+): Promise<Transaction> {
   try {
     const transaction = await ctx.prisma.transaction.create({
       data: {
@@ -20,7 +27,7 @@ async function createTransaction (data, ctx = { prisma }) {
   }
 }
 
-async function getAllTransactions (ctx = { prisma }) {
+async function getAllTransactions(ctx = { prisma }): Promise<Transaction[]> {
   try {
     const allTransactions = await ctx.prisma.transaction.findMany({});
     return allTransactions;

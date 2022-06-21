@@ -77,7 +77,7 @@ export type createUserInput = {
   familyName: string;
   photo: string;
   email: string;
-}
+};
 
 export type CreateBattleInput = {
   battle_name: string;
@@ -85,4 +85,13 @@ export type CreateBattleInput = {
   start_date: Date;
   end_date: Date;
   users: { id: number }[];
+};
+
+export type createTransactionInput = {
+  battleId: string;
+  userId: string;
+  action: string;
+  symbol: string;
+  price: number;
+  quantity: number;
 };
