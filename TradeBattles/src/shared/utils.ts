@@ -7,7 +7,35 @@ export const formatter = new Intl.NumberFormat('en-US', {
 });
 
 export async function getSortedRanks(transactions, battleId) {
-  await priceChange(transactions);
+  // await priceChange(transactions);
+  const mappedTransactions = await mapTransactionsToID(transactions);
+  for (let i = 0; i < mappedTransactions.length; i++) {
+    console.log(mapTransactionsToID[i])
+    transactions = {};
+    for (let k = 0; k < mappedTransactions[i].transactions.length; k++) {
+      if (transactions[mappedTransactions[i].transactions[k].symbol]) {
+        transactions[mappedTransactions[i].transactions[k].symbol] += {
+          totalPrice:
+            mappedTransactions[i].transactions[k].quantity *
+            mappedTransactions[i].transactions[k].price,
+        };
+      } else {
+        transactions[mappedTransactions[i].transactions[k].symbol] = {
+          totalPrice:
+            mappedTransactions[i].transactions[k].quantity *
+            mappedTransactions[i].transactions[k].price,
+        };
+      }
+    }
+    const portfolio = {
+      user: mappedTransactions[i].userId,
+      transactions: transactions,
+    };
+    console.log('PORT', portfolio);
+  }
+}
+
+export async function mapTransactionsToID(transactions) {
   const users = [];
   const userTransactions = [];
   transactions.forEach(el => {
@@ -16,18 +44,15 @@ export async function getSortedRanks(transactions, battleId) {
         transaction => transaction.userId === el.userId,
       );
       users.push(el.userId);
-      userTransactions.push({id: el.userId, transactions: filterTransactions});
+      userTransactions.push({
+        userId: el.userId,
+        transactions: filterTransactions,
+      });
     }
   });
-
-  console.log('USERS', users);
-  console.log('bsada', userTransactions[0].transactions);
-  console.log('FILTEREDTRANSACTIONS', userTransactions);
-
-  // const sorted = [...transaction].sort(
-  //   (a, b) =>
-  //     b.current_gains_losses[battleId] - a.current_gains_losses[battleId],
-  // );
+  // console.log('bsada', userTransactions[0].transactions);
+  // console.log('FILTEREDTRANSACTIONS', userTransactions);
+  return userTransactions;
 }
 
 export function getFormattedPL(member, battleId) {
