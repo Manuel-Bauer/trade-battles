@@ -1,6 +1,7 @@
 const { getQuote } = require('./quotes.model');
+var memoize = require('underscore/cjs/memoize.js');
 
-const groupBy = (array, key) => {
+const groupBy = memoize(function (array, key) {
   if (!array) return null;
   return array.reduce((result, currentValue) => {
     (result[currentValue[key]] = result[currentValue[key]] || []).push(
@@ -8,34 +9,40 @@ const groupBy = (array, key) => {
     );
     return result;
   }, {});
-};
+});
 
-function calculateAverage (values) {
+
+const calculateAverage = memoize(function (values) {
   return values.reduce((m, x, i) => m + (x - m) / (i + 1), 0);
-}
+});
 
-function calculateTotalBought (transactions) {
+
+const calculateTotalBought = memoize(function (transactions) {
   return transactions.reduce((prev, _, index, arr) => {
     if (arr[index].action == "BUY") return prev + (arr[index].price * arr[index].quantity);
     else return prev;
   }, 0);
-}
+});
 
-function calculateTotalSold (transactions) {
+
+const calculateTotalSold = memoize(function (transactions) {
   return transactions.reduce((prev, _, index, arr) => {
     if (arr[index].action == "SELL") return prev + (arr[index].price * arr[index].quantity);
     else return prev;
   }, 0);
 }
+);
 
-function calculateQuantity (transactions) {
+
+const calculateQuantity = memoize(function (transactions) {
   return transactions.reduce((prev, _, index, arr) => {
     if (arr[index].action == "BUY") return prev + (arr[index].quantity);
     if (arr[index].action == "SELL") return prev - (arr[index].quantity);
   }, 0);
-}
+});
 
-const calculateStockStats = (transactionsPerStock, currentPrices) => {
+
+const calculateStockStats = memoize(function (transactionsPerStock, currentPrices) {
   if (!transactionsPerStock) return null;
   const result = {};
   Object.entries(transactionsPerStock).map((transaction) => {
@@ -55,9 +62,9 @@ const calculateStockStats = (transactionsPerStock, currentPrices) => {
     };
   });
   return result;
-};
+});
 
-const calculatePortfolioStats = (startBudget, stockTransactions) => {
+const calculatePortfolioStats = memoize(function (startBudget, stockTransactions) {
   let remainingBudget = startBudget;
   let portfolioValue = null;
   if (stockTransactions) {
@@ -70,7 +77,7 @@ const calculatePortfolioStats = (startBudget, stockTransactions) => {
     }
   }
   return { remainingBudget, portfolioValue };
-};
+});
 
 async function getCurrentPrices (tickers) {
   try {
@@ -86,18 +93,20 @@ async function getCurrentPrices (tickers) {
   }
 }
 
-function getUsersFromBattles (battles) {
+const getUsersFromBattles = memoize(function (battles) {
   const users = {};
   battles.forEach(battle => {
     battle.users.forEach(user => { users[user.id] = user; });
   });
   return users;
-}
+});
 
-function getTickersFromBattles (battles) {
+
+const getTickersFromBattles = memoize(function (battles) {
   const allTransactions = battles.reduce((prev, curr) => [...prev, ...curr.transaction], []);
   return [... new Set(allTransactions.map(transaction => transaction.symbol))];
-}
+});
+
 
 module.exports = {
   groupBy,
