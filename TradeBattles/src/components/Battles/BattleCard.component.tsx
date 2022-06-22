@@ -3,7 +3,7 @@ import {useNavigation} from '@react-navigation/native';
 
 /* ---- COMPONENTS ---- */
 import {Text, View, Image, Pressable} from 'react-native';
-import {Battle} from '../../shared/Types';
+import {Battle, User} from '../../shared/Types';
 import {BattleCardHeader} from './BattleCardHeader.component';
 import {ProfileScreenNavigationProp} from '../../shared/Types';
 
@@ -17,7 +17,8 @@ import {useTheme} from '../../Contexts/Theme';
 
 export const BattleCard: React.FC<{
   battle: Battle;
-}> = ({battle}) => {
+  currentUserDB: User;
+}> = ({battle, currentUserDB}) => {
   const {currentUser} = useAuth();
   const {theme, darkMode} = useTheme();
   const navigation = useNavigation<ProfileScreenNavigationProp>();
@@ -34,12 +35,12 @@ export const BattleCard: React.FC<{
         ...styles.container,
         backgroundColor: darkMode ? theme.colors.dark : theme.colors.lightest,
       }}>
-      <BattleCardHeader battle={battle} />
+      <BattleCardHeader battle={battle} currentUserDB={currentUserDB} />
 
-      {getSortedRanks(battle.users, battle.battle_id).map((member, index) => {
+      {getSortedRanks(battle.users, battle.id).map((member, index) => {
         return (
           <View
-            key={member.user_id}
+            key={member.userId}
             style={{
               ...styles.battleMemberContainer,
               borderBottomColor: darkMode
@@ -48,7 +49,7 @@ export const BattleCard: React.FC<{
             }}>
             <View style={styles.battleMemberContent}>
               <Image
-                key={member.user_id + member.photo}
+                key={member.userId + member.photo}
                 style={styles.avatar}
                 source={{uri: member.photo}}
               />
@@ -59,7 +60,7 @@ export const BattleCard: React.FC<{
                     color: theme.colors.textPrimary,
                     fontFamily: theme.fonts.regular,
                   }}>
-                  {member.first_name} {member.last_name}
+                  {member.givenName} {member.familyName}
                 </Text>
                 <Text
                   style={{
@@ -67,7 +68,7 @@ export const BattleCard: React.FC<{
                     color: theme.colors.textPrimary,
                     fontFamily: theme.fonts.regular,
                   }}>
-                  {getFormattedPL(member, battle.battle_id)}
+                  {getFormattedPL(member, battle.id)}
                 </Text>
               </View>
             </View>

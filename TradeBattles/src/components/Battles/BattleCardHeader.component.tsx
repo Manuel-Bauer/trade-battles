@@ -1,19 +1,20 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {useAuth} from '../../Contexts/Auth';
 import {useTheme} from '../../Contexts/Theme';
-import {Battle} from '../../shared/Types';
+import {Battle, User} from '../../shared/Types';
 import {getOrderEnding} from '../../shared/utils';
 
 export const BattleCardHeader: React.FC<{
   battle: Battle;
-}> = ({battle}) => {
+  currentUserDB: User;
+}> = ({battle, currentUserDB}) => {
   const {theme} = useTheme();
-  const {currentUser} = useAuth();
 
   let position = 0;
-  battle.battle_members.filter((el, index) => {
-    if (el.user_id === currentUser.id) position = index;
+  battle.users.filter((el, index) => {
+    if (el.id === currentUserDB.id) {
+      position = index;
+    }
   });
   return (
     <View style={{...styles.container, backgroundColor: theme.colors.primary}}>
