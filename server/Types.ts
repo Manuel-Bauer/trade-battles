@@ -147,8 +147,8 @@ export type CreateBattleInput = {
 };
 
 export type createTransactionInput = {
-  battleId: string;
-  userId: string;
+  battleId: number;
+  userId: number;
   action: string;
   symbol: string;
   price: number;

@@ -1,12 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-import { Transaction } from '@prisma/client';
-import { createTransactionInput } from '../../Types';
 
-export {};
-
-const prisma = new PrismaClient();
-
-async function createTransaction(
+export async function createTransaction(
   data: createTransactionInput,
   ctx = { prisma }
 ): Promise<Transaction> {
@@ -27,7 +20,7 @@ async function createTransaction(
   }
 }
 
-async function getAllTransactions(ctx = { prisma }): Promise<Transaction[]> {
+export async function getAllTransactions(ctx = { prisma }): Promise<Transaction[]> {
   try {
     const allTransactions = await ctx.prisma.transaction.findMany({});
     return allTransactions;
@@ -36,4 +29,3 @@ async function getAllTransactions(ctx = { prisma }): Promise<Transaction[]> {
   }
 }
 
-module.exports = { createTransaction, getAllTransactions };
