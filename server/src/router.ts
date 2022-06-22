@@ -7,14 +7,20 @@ const quote_controller = require('./controllers/quotes.controller');
 // Transactions
 router.get('/transactions', transactions_controller.getAllTransactions);
 router.get('/transactions/:id', transactions_controller.getTransaction);
-router.get('/transactions/battle/:id', transactions_controller.getTransactionsByBattle);
+router.get(
+  '/transactions/battle/:id',
+  transactions_controller.getTransactionsByBattle
+);
 router.post('/transactions', transactions_controller.postTransaction);
 router.delete('/transactions/:id', transactions_controller.deleteTransaction);
 
 // Battles
 router.post('/battles', battles_controller.postBattle);
 router.get('/battles/:user_id', battles_controller.getMyBattles);
-router.patch('/battles/members/:battle_id', battles_controller.patchBattleMembers);
+// router.patch(
+//   '/battles/members/:battle_id',
+//   battles_controller.patchBattleMembers
+// );
 router.patch('/battles/:battle_id', battles_controller.updateBattle);
 
 // Users
