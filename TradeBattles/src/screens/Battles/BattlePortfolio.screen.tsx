@@ -25,7 +25,7 @@ export const BattlePortfolio: React.FC = () => {
 
   const route = useRoute<RouteProp<RootStackParamList, 'BattlePortfolio'>>();
 
-  const {battle, user_id} = route.params;
+  const {battle, userId} = route.params;
   const battleHasStarted = Number(battle.start_date_timestamp) < Date.now();
   const startDate = new Date(Number(battle.start_date_timestamp)).toString();
   const endDate = new Date(Number(battle.end_date_timestamp)).toString();
@@ -37,10 +37,7 @@ export const BattlePortfolio: React.FC = () => {
   const setPortfolio = async () => {
     setNonLockedGainLoss(0);
     const portfolio: PortfolioStock[] = [];
-    const portfolioArray = await ApiClient.getUserPortfolio(
-      user_id,
-      battle.battle_id,
-    );
+    const portfolioArray = await ApiClient.getUserPortfolio(userId, battle.id);
 
     profit = 0;
     await Promise.all(
@@ -66,7 +63,7 @@ export const BattlePortfolio: React.FC = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      ApiClient.updateUserProfit(user_id, profit, battle.battle_id);
+      ApiClient.updateUserProfit(userId, profit, battle.id);
     }, 3000);
   }, []);
 
@@ -119,8 +116,8 @@ export const BattlePortfolio: React.FC = () => {
         )}
 
         <StockSearch
-          battle_id={battle.battle_id}
-          user_id={user_id}
+          battleId={battle.id}
+          userId={userId}
           currentUserPortfolio={currentUserPortfolio}
           setCurrentUserPortfolio={setCurrentUserPortfolio}
         />
@@ -145,8 +142,8 @@ export const BattlePortfolio: React.FC = () => {
               data={currentUserPortfolio}
               renderItem={({item}: {item: PortfolioStock}) => (
                 <PortfolioStockCard
-                  battleid={battle.battle_id}
-                  userid={user_id}
+                  battleId={battle.id}
+                  userId={userId}
                   stock={item}
                   currentUserPortfolio={currentUserPortfolio}
                   setCurrentUserPortfolio={setCurrentUserPortfolio}

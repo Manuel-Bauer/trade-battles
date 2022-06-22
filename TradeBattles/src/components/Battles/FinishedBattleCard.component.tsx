@@ -59,7 +59,7 @@ export const FinishedBattleCard: React.FC<{
       <View style={styles.winnerContainer}>
         {/* WINNER MIT KRANZ */}
         <View
-          key={winner.user_id}
+          key={winner.id}
           style={{
             ...styles.avatarContainer,
             borderBottomColor: darkMode

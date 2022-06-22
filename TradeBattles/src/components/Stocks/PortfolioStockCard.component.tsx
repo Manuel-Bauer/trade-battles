@@ -16,8 +16,8 @@ export const PortfolioStockCard: React.FC<{
   >;
 }> = ({
   stock,
-  battleid,
-  userid,
+  battleId,
+  userId,
   currentUserPortfolio,
   setCurrentUserPortfolio,
 }) => {
@@ -31,8 +31,8 @@ export const PortfolioStockCard: React.FC<{
           stock: stock.quote,
           shares_owned: stock.quantity,
           average_cost: stock.averageCost,
-          battle_id: battleid,
-          user_id: userid,
+          battleId: battleId,
+          userId: userId,
           currentUserPortfolio,
           setCurrentUserPortfolio,
         });

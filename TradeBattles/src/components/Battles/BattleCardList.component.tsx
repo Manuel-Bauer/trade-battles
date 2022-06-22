@@ -29,6 +29,8 @@ export const BattleCardList: React.FC<{
     setCurrentBattleIndex(Math.floor(xPosition / totalWidth));
   };
 
+  console.log('MYBATTLES', myBattles[1])
+
   return (
     <>
       <Animated.FlatList

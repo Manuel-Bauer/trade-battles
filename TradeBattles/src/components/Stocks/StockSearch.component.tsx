@@ -11,13 +11,13 @@ import {useTheme} from '../../Contexts/Theme';
 import {styles} from './StockSearch.styles';
 
 export const StockSearch: React.FC<{
-  battle_id: string;
-  user_id: string;
+  battleId: string;
+  userId: string;
   currentUserPortfolio: PortfolioStock[];
   setCurrentUserPortfolio: React.Dispatch<
     React.SetStateAction<PortfolioStock[]>
   >;
-}> = ({battle_id, user_id, currentUserPortfolio, setCurrentUserPortfolio}) => {
+}> = ({battleId, userId, currentUserPortfolio, setCurrentUserPortfolio}) => {
   const {theme} = useTheme();
 
   const [search, setSearch] = useState('');
@@ -63,8 +63,8 @@ export const StockSearch: React.FC<{
                       stock: stock,
                       shares_owned: 0, // TODO -> Refactor to be dynamic with api call
                       average_cost: 0, // TODO -> Refactor to be dynamic with api call
-                      battle_id,
-                      user_id,
+                      battleId,
+                      userId,
                       currentUserPortfolio,
                       setCurrentUserPortfolio,
                     });
@@ -116,8 +116,8 @@ export const StockSearch: React.FC<{
                         stock: stock,
                         shares_owned: 0, // TODO -> Refactor to be dynamic with api call
                         average_cost: 0, // TODO -> Refactor to be dynamic with api call
-                        battle_id,
-                        user_id,
+                        battleId,
+                        userId,
                         currentUserPortfolio,
                         setCurrentUserPortfolio,
                       });

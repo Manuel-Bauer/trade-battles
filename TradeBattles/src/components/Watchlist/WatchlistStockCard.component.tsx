@@ -45,7 +45,7 @@ export const WatchlistStockCard: React.FC<{stock: Stock}> = ({stock}) => {
             )}
           </Text>
           <WishlistStarIcon
-            user_id={userContext.user.id}
+            userId={userContext.user.id}
             size={20}
             stock={stock}
             // setViewable={setViewable}

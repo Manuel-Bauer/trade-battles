@@ -41,21 +41,21 @@ export type LoginStackParamList = {
 export type RootStackParamList = {
   BattlePortfolio: {
     battle: Battle;
-    user_id: string;
+    userId: string;
   };
   BuySellStock: {
     stock: Stock;
     shares_owned: number;
     average_cost: number;
-    battle_id: string;
-    user_id: string;
+    battleId: string;
+    userId: string;
     currentUserPortfolio: PortfolioStock[];
     setCurrentUserPortfolio: React.Dispatch<
       React.SetStateAction<PortfolioStock[]>
     >;
   };
   MyBattles: {
-    user_id: string;
+    userId: string;
   };
   CreateBattle: undefined;
 };
@@ -94,8 +94,8 @@ export type BattleMember = {
 
 export type Transaction = {
   // transaction_id: string;
-  battle_id: string;
-  user_id: string;
+  battleId: string;
+  userId: string;
   action: string;
   symbol: string;
   price: number;
@@ -125,6 +125,6 @@ export type BuySellProps = {
   currentUserPortfolio: PortfolioStock[];
   buySellViewable: boolean;
   stock: Stock;
-  battle_id: string;
-  user_id: string;
+  battleId: string;
+  userId: string;
 };

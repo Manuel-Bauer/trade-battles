@@ -7,14 +7,14 @@ const port = 3000;
 const baseUrl = `http://localhost:${port}`;
 // const baseUrl = `http://localhost:${port}`;
 export const ApiClient = {
-  getMyBattles: async (user_id: string) => {
-    const myBattles = await axios.get(`${baseUrl}/battles/${user_id}`);
+  getMyBattles: async (userId: string) => {
+    const myBattles = await axios.get(`${baseUrl}/battles/${userId}`);
     return myBattles;
   },
 
-  getUserPortfolio: async (user_id: string, battle_id: string) => {
+  getUserPortfolio: async (userId: string, battleId: string) => {
     const portfolio = await axios.get<PortfolioStock[]>(
-      `${baseUrl}/users/portfolio/${user_id}/${battle_id}`,
+      `${baseUrl}/users/portfolio/${userId}/${battleId}`,
     );
     return portfolio;
   },
@@ -52,11 +52,11 @@ export const ApiClient = {
 
   postTransaction: async (transaction: Transaction) => {
     axios.post(`${baseUrl}/transactions`, {
-      battle_id: transaction.battle_id,
-      user_id: transaction.user_id,
+      battleId: transaction.battleId,
+      userId: transaction.userId,
       action: transaction.action,
       symbol: transaction.symbol,
-      price: transaction.price,
+      price: Math.floor(transaction.price),
       quantity: transaction.quantity,
     });
   },
@@ -101,12 +101,12 @@ export const ApiClient = {
   },
 
   updateUserProfit: async (
-    user_id: string,
+    userId: string,
     gain_loss: number,
-    battle_id: string,
+    battleId: string,
   ) => {
     const user = await axios.patch(
-      `${baseUrl}/users/profit/${user_id}/${battle_id}`,
+      `${baseUrl}/users/profit/${userId}/${battleId}`,
       {
         gain_loss: gain_loss,
       },
@@ -114,8 +114,8 @@ export const ApiClient = {
     return user;
   },
 
-  updateUserWatchlist: async (user_id: string, stock: string) => {
-    const user = await axios.patch(`${baseUrl}/users/watchlist/${user_id}`, {
+  updateUserWatchlist: async (userId: string, stock: string) => {
+    const user = await axios.patch(`${baseUrl}/users/watchlist/${userId}`, {
       stock: stock,
     });
     return user;

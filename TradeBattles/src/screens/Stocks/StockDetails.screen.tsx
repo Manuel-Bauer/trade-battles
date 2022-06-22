@@ -19,8 +19,8 @@ export const StockDetails: React.FC = () => {
     stock,
     shares_owned,
     average_cost,
-    battle_id,
-    user_id,
+    battleId,
+    userId,
     setCurrentUserPortfolio,
     currentUserPortfolio,
   } = route.params;
@@ -53,7 +53,7 @@ export const StockDetails: React.FC = () => {
       style={{backgroundColor: theme.colors.backgroundColor, height: '80%'}}>
       <GoBack />
       <View style={styles.watchlistStar}>
-        <WishlistStarIcon user_id={user_id} stock={stock} />
+        <WishlistStarIcon userId={userId} stock={stock} />
       </View>
       <View style={styles.container}>
         <StockDetailsInfo
@@ -96,8 +96,8 @@ export const StockDetails: React.FC = () => {
           buySellViewable={buySellViewable}
           price={price == null ? 0 : price}
           stock={stock}
-          battle_id={battle_id}
-          user_id={user_id}
+          battleId={battleId}
+          userId={userId}
           setCurrentUserPortfolio={setCurrentUserPortfolio}
           currentUserPortfolio={currentUserPortfolio}
         />
