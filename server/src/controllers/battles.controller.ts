@@ -7,7 +7,7 @@ import { Request, Response } from 'express';
 
 export const getMyBattles = async (req: Request, res: Response): Promise<void> => {
   try {
-    const myBattles = await getBattlesWithPortfolios(req.params['user_id']);
+    const myBattles = await getBattlesWithPortfolios(req.params['userId']);
     res.send(myBattles);
     res.status(200);
   } catch (error) {
@@ -30,7 +30,7 @@ export const postBattle = async (req: Request, res: Response): Promise<void> => 
 
 export const updateBattle = async (req: Request, res: Response): Promise<void> => {
   try {
-    const battle_id = +req.params['battle_id'];
+    const battle_id = +req.params['battleId'];
     const battle = await update(battle_id, req.body);
     res.send(battle);
     res.status(200);

@@ -1,5 +1,5 @@
 //@ts-nocheck
-import { fetch } from 'node-fetch';
+import fetch from 'node-fetch';
 import { Quote, historicalData } from '../../Types';
 import { Response } from 'express';
 require('dotenv').config(); // ❓❔

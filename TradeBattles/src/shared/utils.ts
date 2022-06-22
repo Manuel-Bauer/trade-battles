@@ -3,12 +3,9 @@ export const formatter = new Intl.NumberFormat('en-US', {
   currency: 'USD',
 });
 
-export function getSortedRanks(members, battleId) {
+export function getSortedRanks(members) {
   console.log('MEMBERS', members);
-  console.log('BATTLEID', battleId);
-  const sorted = [...members].sort(
-    (a, b) => b.currentValue[battleId] - a.currentValue[battleId],
-  );
+  const sorted = [...members].sort((a, b) => b.currentValue - a.currentValue);
   return sorted;
 }
 

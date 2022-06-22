@@ -8,8 +8,8 @@ import {formatter} from '../../shared/utils';
 
 export const PortfolioStockCard: React.FC<{
   stock: PortfolioStock;
-  battleid: string;
-  userid: string;
+  battleId: string;
+  userId: string;
   currentUserPortfolio: PortfolioStock[];
   setCurrentUserPortfolio: React.Dispatch<
     React.SetStateAction<PortfolioStock[]>

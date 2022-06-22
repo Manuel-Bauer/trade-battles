@@ -10,14 +10,14 @@ router.post('/transactions', postTransaction);
 
 // Battles
 router.post('/battles', postBattle);
-router.get('/battles/:user_id', getMyBattles);
-router.patch('/battles/:battle_id', updateBattle);
+router.get('/battles/:userId', getMyBattles);
+router.patch('/battles/:battleId', updateBattle);
 
 // Users
 router.get('/users', getAllUsers);
 router.get('/users/:id',getUser);
 router.post('/users', postUser);
-router.patch('/users/watchlist/:user_id', patchWatchlist);
+router.patch('/users/watchlist/:userId', patchWatchlist);
 
 // Quote
 router.get('/quote/:symbol', getQuote);

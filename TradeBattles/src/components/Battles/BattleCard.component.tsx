@@ -36,7 +36,7 @@ export const BattleCard: React.FC<{
       }}>
       <BattleCardHeader battle={battle} />
 
-      {getSortedRanks(battle.users, battle.id).map((member, index) => {
+      {getSortedRanks(battle.users).map((member, index) => {
         return (
           <View
             key={member.userId}

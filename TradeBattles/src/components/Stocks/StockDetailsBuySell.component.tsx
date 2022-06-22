@@ -21,11 +21,10 @@ export const StockDetailsBuySell: React.FC<BuySellProps> = props => {
     setQuantitySelected,
     setQuantityAvailable,
     setBuySellViewable,
-    setCurrentUserPortfolio,
     buySellViewable,
     stock,
-    battle_id,
-    user_id,
+    battleId,
+    userId,
   } = props;
   const [cantSellModal, setCantSellModal] = useState(false);
   const [cantBuySellZeroModal, setCantBuySellZeroModal] = useState(false);
@@ -34,8 +33,8 @@ export const StockDetailsBuySell: React.FC<BuySellProps> = props => {
   const [marketClosedModal, setMarketClosedModal] = useState(false);
 
   const buySellApiBody = {
-    battle_id,
-    user_id,
+    battleId,
+    userId,
     symbol: stock.symbol,
     price: price > 0 ? price : stock.latestPrice,
     quantity: quantitySelected,
@@ -72,18 +71,7 @@ export const StockDetailsBuySell: React.FC<BuySellProps> = props => {
               "'Codeworks Battle' starts in 1 day",
             ),
           10000,
-        ),
-        setCurrentUserPortfolio(prevState => [
-          ...prevState,
-          {
-            price: price > 0 ? price : stock.latestPrice,
-            symbol: stock.symbol,
-            change: 0,
-            quantity: quantitySelected,
-            averageCost: price > 0 ? price : stock.latestPrice,
-            quote: stock,
-          },
-        ]))
+        ))
       : setCantBuySellZeroModal(true);
   };
 

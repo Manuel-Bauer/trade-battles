@@ -75,7 +75,7 @@ export type BattleMember = {
 
 export type Transaction = {
   // transaction_id: string;
-  battle_id: string;
+  battleId: string;
   user_id: string;
   action: string;
   symbol: string;

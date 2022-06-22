@@ -35,7 +35,7 @@ export const postUser = async (req: Request, res: Response) => {
 };
 export const addBattleToUser = async (req: Request, res: Response) => {
   try {
-    const user = await users_model.addBattleToUser(req.params['user_id'], req.params['battle_id']);
+    const user = await users_model.addBattleToUser(req.params['userId'], req.params['battleId']);
     res.send({ status: 'Update succesful' });
     res.status(200);
   } catch (error) {
@@ -56,7 +56,7 @@ export const deleteUser = async (req: Request, res: Response) => {
 
 export const getUserPortfolio = async (req: Request, res: Response) => {
   try {
-    const userPortfolio = await users_model.getUserPortfolio(req.params['user_id'], req.params['battle_id']);
+    const userPortfolio = await users_model.getUserPortfolio(req.params['userId'], req.params['battleId']);
     res.send(userPortfolio);
     res.status(200);
   } catch (error) {
@@ -67,7 +67,7 @@ export const getUserPortfolio = async (req: Request, res: Response) => {
 
 export const patchProfit = async (req: Request, res: Response) => {
   try {
-    const user = await users_model.updateProfit(req.params['user_id'], req.body, req.params['battle_id']);
+    const user = await users_model.updateProfit(req.params['userId'], req.body, req.params['battleId']);
     res.send({ status: 'Update succesful' });
     res.status(200);
   } catch (error) {
@@ -78,7 +78,7 @@ export const patchProfit = async (req: Request, res: Response) => {
 
 export const patchWatchlist = async (req: Request, res: Response) => {
   try {
-    const user = await users_model.updateWatchlist(req.params['user_id'], req.body);
+    const user = await users_model.updateWatchlist(req.params['userId'], req.body);
     res.send({ status: 'Update succesful' });
     res.status(200);
   } catch (error) {

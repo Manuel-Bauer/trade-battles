@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useCallback} from 'react';
 import {View, Text, FlatList, RefreshControl} from 'react-native';
 import {PortfolioStockCard} from '../../components/Stocks/PortfolioStockCard.component';
-import {PortfolioStock} from '../../shared/Types';
+import {Portfolio} from '../../shared/Types';
 import {ApiClient} from '../../services/ApiClient.service';
 import {BattlePortfolioHeader} from '../../components/Battles/BattlePortfolioHeader.component';
 import {GoBack} from '../../components/Misc/GoBack.component';
@@ -142,8 +142,10 @@ export const BattlePortfolio: React.FC = () => {
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
               }
               showsVerticalScrollIndicator={false}
-              data={currentUserPortfolio}
-              renderItem={({item}: {item: PortfolioStock}) => (
+              data={
+                battle.users.filter(el => el.id === Number(userId))[0].stocks
+              }
+              renderItem={({item}: {item: any}) => (
                 <PortfolioStockCard
                   battleId={battle.id}
                   userId={userId}

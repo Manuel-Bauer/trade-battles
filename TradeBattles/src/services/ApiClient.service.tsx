@@ -2,6 +2,7 @@ import {Battle, User, HistoricalData, PortfolioStock, BattleMember} from '../sha
 import axios from 'axios';
 import type {Stock} from '../shared/Types';
 import type {Transaction, GraphPoint} from '../shared/Types';
+import { transformSync } from '@babel/core';
 
 const port = 3000;
 const baseUrl = `http://localhost:${port}`;
@@ -52,6 +53,7 @@ export const ApiClient = {
   },
 
   postTransaction: async (transaction: Transaction) => {
+    console.log('TRANS', transaction);
     axios.post(`${baseUrl}/transactions`, {
       battleId: transaction.battleId,
       userId: transaction.userId,

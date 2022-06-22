@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {useTheme} from '../../Contexts/Theme';
 import {Battle} from '../../shared/Types';
-import {getOrderEnding} from '../../shared/utils';
+import {getOrderEnding, getSortedRanks} from '../../shared/utils';
 import {useAuth} from '../../Contexts/Auth';
 
 export const BattleCardHeader: React.FC<{
@@ -12,7 +12,7 @@ export const BattleCardHeader: React.FC<{
   const {currentUser} = useAuth();
 
   let position = 0;
-  battle.users.filter((el, index) => {
+  getSortedRanks(battle.users).filter((el, index) => {
     if (el.id === currentUser.id) {
       position = index;
     }
