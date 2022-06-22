@@ -4,19 +4,16 @@ export const formatter = new Intl.NumberFormat('en-US', {
 });
 
 export function getSortedRanks(members, battleId) {
+  console.log('MEMBERS', members);
+  console.log('BATTLEID', battleId);
   const sorted = [...members].sort(
-    (a, b) =>
-      b.current_gains_losses[battleId] - a.current_gains_losses[battleId],
+    (a, b) => b.currentValue[battleId] - a.currentValue[battleId],
   );
   return sorted;
 }
 
-export function getFormattedPL(member, battleId) {
-  return formatter.format(
-    member.current_gains_losses[String(battleId)]
-      ? member.current_gains_losses[String(battleId)]
-      : 0,
-  );
+export function getFormattedPL(member) {
+  return formatter.format(member.currentValue ? member.currentValue : 0);
 }
 
 export function getOrderEnding(pos: number) {

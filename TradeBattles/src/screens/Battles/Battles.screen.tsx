@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 /* ---- NAVIGATION ---- */
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
@@ -7,7 +7,7 @@ import {ProfileScreenNavigationProp} from '../../shared/Types';
 /* ---- COMPONENTS ---- */
 import {View, Text, SafeAreaView, Pressable} from 'react-native';
 import {BattleCardList} from '../../components/Battles/BattleCardList.component';
-import type {Battle} from '../../shared/Types';
+import type {Battle, User} from '../../shared/Types';
 
 /* ---- CONTEXT ---- */
 import {useTheme} from '../../Contexts/Theme';
@@ -22,18 +22,35 @@ const pointingArrowSrc = require('../../../assets/lotties/pointing_arrow.json');
 export const Battles: React.FC = () => {
   const {theme} = useTheme();
   const {currentUser} = useAuth();
+  const [currentUserDB, setCurrentUserDB] = useState<User>({
+    id: null,
+    google_id: null,
+    name: null,
+    email: null,
+    photo: null,
+    familyName: null,
+    givenName: null,
+    watchlist: [],
+  });
   const [myBattles, setMyBattles] = useState<Battle[]>([]);
 
   const navigation = useNavigation<ProfileScreenNavigationProp>();
 
+  useEffect(() => {
+    ApiClient.getUserById(currentUser.id).then(res =>
+      setCurrentUserDB(res.data),
+    );
+  }, []);
+
   useFocusEffect(
     React.useCallback(() => {
-      ApiClient.getUserById(currentUser.id)
-        .then(res => ApiClient.getMyBattles(res.data.id))
+      ApiClient.getMyBattles(currentUserDB.id)
         .then(res => setMyBattles(res.data))
         .catch(() => setMyBattles([]));
-    }, [currentUser]),
+    }, [currentUserDB]),
   );
+
+  console.log('MYBATTLES', myBattles);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -76,7 +93,7 @@ export const Battles: React.FC = () => {
           </Text>
         </View>
       ) : (
-        <BattleCardList myBattles={myBattles} />
+        <BattleCardList myBattles={myBattles} currentUserDB={currentUserDB} />
       )}
     </SafeAreaView>
   );
