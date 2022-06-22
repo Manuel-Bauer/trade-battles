@@ -4,16 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-<<<<<<< HEAD
-    "test": "jest",
-    "start": "nodemon server.js"
-=======
+    "start": "nodemon server.js",
     "test": "dotenv -e .env.test jest",
     "migrate": "dotenv -e .env.development npx prisma migrate dev",
-    "start": "nodemon ./dist/src/server.js",
     "tsc": "dotenv -e .env.development tsc",
     "dev": "dotenv -e .env.development ts-node-dev --respawn --pretty --transpile-only ./src/server.ts"
->>>>>>> origin/TB-39-refactor-the-backend-to-typescript-Luca
   },
   "author": "",
   "license": "ISC",
@@ -29,6 +24,7 @@
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.17.12",
+    "@types/express": "^4.17.13",
     "@types/jest": "^28.1.2",
     "jest-mock-extended": "^2.0.4",
     "nodemon": "^2.0.16",

@@ -1,7 +1,8 @@
-const { getQuote } = require('./quotes.model');
+//@ts-nocheck
+const { getQuote } = require('../../models/quotes.model');
 var memoize = require('underscore/cjs/memoize.js');
 
-const groupBy = memoize(function (array, key) {
+export const groupBy = memoize(function (array, key) {
   if (!array) return null;
   return array.reduce((result, currentValue) => {
     (result[currentValue[key]] = result[currentValue[key]] || []).push(
@@ -12,12 +13,12 @@ const groupBy = memoize(function (array, key) {
 });
 
 
-const calculateAverage = memoize(function (values) {
+export const calculateAverage = memoize(function (values) {
   return values.reduce((m, x, i) => m + (x - m) / (i + 1), 0);
 });
 
 
-const calculateTotalBought = memoize(function (transactions) {
+export const calculateTotalBought = memoize(function (transactions) {
   return transactions.reduce((prev, _, index, arr) => {
     if (arr[index].action == "BUY") return prev + (arr[index].price * arr[index].quantity);
     else return prev;
@@ -25,7 +26,7 @@ const calculateTotalBought = memoize(function (transactions) {
 });
 
 
-const calculateTotalSold = memoize(function (transactions) {
+export const calculateTotalSold = memoize(function (transactions) {
   return transactions.reduce((prev, _, index, arr) => {
     if (arr[index].action == "SELL") return prev + (arr[index].price * arr[index].quantity);
     else return prev;
@@ -34,7 +35,7 @@ const calculateTotalSold = memoize(function (transactions) {
 );
 
 
-const calculateQuantity = memoize(function (transactions) {
+export const calculateQuantity = memoize(function (transactions) {
   return transactions.reduce((prev, _, index, arr) => {
     if (arr[index].action == "BUY") return prev + (arr[index].quantity);
     if (arr[index].action == "SELL") return prev - (arr[index].quantity);
@@ -42,7 +43,7 @@ const calculateQuantity = memoize(function (transactions) {
 });
 
 
-function calculateStockStats (transactionsPerStock, currentPrices) {
+export function calculateStockStats (transactionsPerStock, currentPrices) {
   if (!transactionsPerStock) return null;
   const result = {};
   Object.entries(transactionsPerStock).map((transaction) => {
@@ -58,28 +59,31 @@ function calculateStockStats (transactionsPerStock, currentPrices) {
       totalValue: quote * owning,
       totalBought,
       totalSold,
+      //@ts-ignore
       averageBuyIn: calculateAverage(value.filter(transaction => transaction.action == "BUY").map(transaction => transaction.price))
     };
   });
   return result;
 };
 
-function calculatePortfolioStats (startBudget, stockTransactions) {
+export function calculatePortfolioStats (startBudget, stockTransactions) {
   let remainingBudget = startBudget;
   let portfolioValue = null;
   if (stockTransactions) {
-    for ([_, stock] of Object.entries(stockTransactions)) {
+    for (const [_, stock] of Object.entries(stockTransactions)) {
+      //@ts-ignore
       remainingBudget = remainingBudget - stock.totalBought + stock.totalSold;
     }
     portfolioValue = remainingBudget;
-    for ([_, stock] of Object.entries(stockTransactions)) {
+    for (const [_, stock] of Object.entries(stockTransactions)) {
+      //@ts-ignore
       portfolioValue = portfolioValue + stock.totalValue;
     }
   }
   return { remainingBudget, portfolioValue };
 };
 
-async function getCurrentPrices (tickers) {
+export async function getCurrentPrices (tickers) {
   try {
     const stockPrices = {};
     await Promise.all(tickers.map(async (ticker) => {
@@ -93,7 +97,7 @@ async function getCurrentPrices (tickers) {
   }
 }
 
-const getUsersFromBattles = memoize(function (battles) {
+export const getUsersFromBattles = memoize(function (battles) {
   const users = {};
   battles.forEach(battle => {
     battle.users.forEach(user => { users[user.id] = user; });
@@ -102,17 +106,8 @@ const getUsersFromBattles = memoize(function (battles) {
 });
 
 
-const getTickersFromBattles = memoize(function (battles) {
+export const getTickersFromBattles = memoize(function (battles) {
   const allTransactions = battles.reduce((prev, curr) => [...prev, ...curr.transaction], []);
   return [... new Set(allTransactions.map(transaction => transaction.symbol))];
 });
 
-
-module.exports = {
-  groupBy,
-  calculateStockStats,
-  calculatePortfolioStats,
-  getCurrentPrices,
-  getUsersFromBattles,
-  getTickersFromBattles,
-};

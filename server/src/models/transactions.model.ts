@@ -1,4 +1,4 @@
-const { PrismaClient } = require('@prisma/client');
+import { PrismaClient } from '@prisma/client';
 import { Transaction } from '@prisma/client';
 import { createTransactionInput } from '../../Types';
 

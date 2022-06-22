@@ -2,12 +2,13 @@ const {
   createBattle,
   getMyBattles,
   updateBattle,
+  getBattlesWithPortfolios
 } = require('../models/battles.model');
 import { Request, Response } from 'express';
 
 exports.getMyBattles = async (req: Request, res: Response): Promise<void> => {
   try {
-    const myBattles = await getMyBattles(req.params['user_id']);
+    const myBattles = await getBattlesWithPortfolios(req.params['user_id']);
     res.send(myBattles);
     res.status(200);
   } catch (error) {
