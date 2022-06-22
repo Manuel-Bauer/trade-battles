@@ -5,7 +5,7 @@ import {formatter} from '../../shared/utils';
 import LottieView from 'lottie-react-native';
 import {styles} from './BattlePortfolioHeader.styles';
 import {useTheme} from '../../Contexts/Theme';
-import { PortfolioInitializer } from '../../shared/EmptyInitializers';
+import {PortfolioInitializer} from '../../shared/EmptyInitializers';
 const spinnerSrc = require('../../../assets/lotties/spinner.json');
 
 export const BattlePortfolioHeader: React.FC<{
@@ -15,6 +15,7 @@ export const BattlePortfolioHeader: React.FC<{
 }> = ({battle, userId, currentGainLoss}) => {
   const {theme, darkMode} = useTheme();
   const [wait, setWait] = useState(false);
+  const [loss, setLoss] = useState(0);
   const [userPortfolio, setUserPortfolio] = useState<Portfolio[]>([
     PortfolioInitializer,
   ]);
@@ -29,7 +30,13 @@ export const BattlePortfolioHeader: React.FC<{
     setUserPortfolio(selectedUser);
   }, []);
 
-  console.log('PORTHEADER', userPortfolio);
+  useEffect(() => {
+    const totalLoss = (
+      (Number(battle.budget) - userPortfolio[0].remainingBudget) *
+      100
+    ).toFixed(2);
+    setLoss(Number(totalLoss));
+  }, []);
 
   const returnColor =
     currentGainLoss > 0 ? theme.colors.green : theme.colors.red;
@@ -64,7 +71,7 @@ export const BattlePortfolioHeader: React.FC<{
                 style={{
                   color: theme.colors.lightest,
                 }}>
-                {((currentGainLoss / 100000) * 100).toFixed(2)}%
+                {loss}%
               </Text>
             </View>
           </View>
