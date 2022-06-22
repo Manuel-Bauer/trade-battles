@@ -42,7 +42,7 @@ const calculateQuantity = memoize(function (transactions) {
 });
 
 
-const calculateStockStats = memoize(function (transactionsPerStock, currentPrices) {
+function calculateStockStats (transactionsPerStock, currentPrices) {
   if (!transactionsPerStock) return null;
   const result = {};
   Object.entries(transactionsPerStock).map((transaction) => {
@@ -62,9 +62,9 @@ const calculateStockStats = memoize(function (transactionsPerStock, currentPrice
     };
   });
   return result;
-});
+};
 
-const calculatePortfolioStats = memoize(function (startBudget, stockTransactions) {
+function calculatePortfolioStats (startBudget, stockTransactions) {
   let remainingBudget = startBudget;
   let portfolioValue = null;
   if (stockTransactions) {
@@ -77,7 +77,7 @@ const calculatePortfolioStats = memoize(function (startBudget, stockTransactions
     }
   }
   return { remainingBudget, portfolioValue };
-});
+};
 
 async function getCurrentPrices (tickers) {
   try {
