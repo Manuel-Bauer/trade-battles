@@ -130,7 +130,7 @@ async function getMyBattlesWithGroupedTransgenders (userId, ctx = { prisma }) {
     const budgets = [];
     myBattles.forEach((battle) => {
       transactionsByPlayers.push(groupBy(battle.transaction, 'userId'));
-      budgets.push(battle.budget)
+      budgets.push(battle.budget);
     });
 
 
@@ -147,7 +147,7 @@ async function getMyBattlesWithGroupedTransgenders (userId, ctx = { prisma }) {
         });
       }
     }));
-    return summed;
+    return myBattles.map(battle => ({ ...battle, users: summed.sort((a, b) => b.currentValue - a.currentValue) }));
   } catch (err) {
     throw err;
   }
