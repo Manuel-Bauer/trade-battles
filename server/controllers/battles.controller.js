@@ -1,8 +1,8 @@
-const { createBattle, getMyBattles, updateBattle, getMyBattlesWithGroupedTransgenders } = require("../models/battles.model");
+const { createBattle, updateBattle, getBattlesWithPortfolios } = require("../models/battles.model");
 
 exports.getMyBattles = async (req, res) => {
   try {
-    const myBattles = await getMyBattlesWithGroupedTransgenders(req.params['user_id']);
+    const myBattles = await getBattlesWithPortfolios(req.params['user_id']);
     res.send(myBattles);
     res.status(200);
   } catch (error) {
