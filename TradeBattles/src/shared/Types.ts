@@ -77,11 +77,22 @@ export type User = {
   watchlist: string[];
 };
 
+export type Portfolio = {
+  currentValue: number;
+  familyName: string;
+  givenName: string;
+  google_id: string;
+  id: number;
+  photo: string;
+  remainingBudget: number;
+  stocks: object;
+};
+
 export type Battle = {
   id: string;
-  users: User[];
-  start_date_timestamp: string;
-  end_date_timestamp: string;
+  users: Portfolio[];
+  start_date: string;
+  end_date: string;
   battle_name: string;
   budget: Number;
   completed?: boolean;

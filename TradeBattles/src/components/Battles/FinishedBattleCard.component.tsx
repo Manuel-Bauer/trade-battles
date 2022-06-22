@@ -26,7 +26,7 @@ export const FinishedBattleCard: React.FC<{
       onPress={() => {
         navigation.navigate('BattlePortfolio', {
           battle: battle,
-          user_id: currentUser.id,
+          userId: currentUser.id,
         });
       }}
       style={{
@@ -78,7 +78,7 @@ export const FinishedBattleCard: React.FC<{
                 : theme.colors.darkYellow,
             }}></Image>
           <Image
-            key={winner.user_id + winner.photo}
+            key={winner.id + winner.photo}
             style={styles.avatar}
             source={{uri: winner.photo}}
           />

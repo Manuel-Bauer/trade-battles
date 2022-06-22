@@ -6,7 +6,7 @@ import {
   NativeScrollEvent,
   View,
 } from 'react-native';
-import {Battle, User} from '../../shared/Types';
+import {Battle} from '../../shared/Types';
 import {useTheme} from '../../Contexts/Theme';
 import {BattleCard} from './BattleCard.component';
 import {FinishedBattleCard} from './FinishedBattleCard.component';
@@ -16,8 +16,7 @@ const height = Dimensions.get('window').height;
 const BATTLE_CONTAINER = width;
 export const BattleCardList: React.FC<{
   myBattles: Battle[];
-  currentUserDB: User;
-}> = ({myBattles, currentUserDB}) => {
+}> = ({myBattles}) => {
   const {theme} = useTheme();
   const [currentBattleIndex, setCurrentBattleIndex] = useState(0);
 
@@ -28,8 +27,6 @@ export const BattleCardList: React.FC<{
     const xPosition = event.nativeEvent.contentOffset.x;
     setCurrentBattleIndex(Math.floor(xPosition / totalWidth));
   };
-
-  console.log('MYBATTLES', myBattles[1])
 
   return (
     <>
@@ -83,11 +80,7 @@ export const BattleCardList: React.FC<{
                     battle={battle}
                   />
                 ) : (
-                  <BattleCard
-                    key={battle.id + battle.users}
-                    battle={battle}
-                    currentUserDB={currentUserDB}
-                  />
+                  <BattleCard key={battle.id + battle.users} battle={battle} />
                 )}
               </Animated.View>
             </View>

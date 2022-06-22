@@ -22,35 +22,23 @@ const pointingArrowSrc = require('../../../assets/lotties/pointing_arrow.json');
 export const Battles: React.FC = () => {
   const {theme} = useTheme();
   const {currentUser} = useAuth();
-  const [currentUserDB, setCurrentUserDB] = useState<User>({
-    id: null,
-    google_id: null,
-    name: null,
-    email: null,
-    photo: null,
-    familyName: null,
-    givenName: null,
-    watchlist: [],
-  });
   const [myBattles, setMyBattles] = useState<Battle[]>([]);
 
   const navigation = useNavigation<ProfileScreenNavigationProp>();
 
-  useEffect(() => {
-    ApiClient.getUserById(currentUser.id).then(res =>
-      setCurrentUserDB(res.data),
-    );
-  }, []);
+  // useEffect(() => {
+  //   ApiClient.getUserById(currentUser.id).then(res =>
+  //     setCurrentUserDB(res.data),
+  //   );
+  // }, []);
 
   useFocusEffect(
     React.useCallback(() => {
-      ApiClient.getMyBattles(currentUserDB.id)
+      ApiClient.getMyBattles(currentUser.id)
         .then(res => setMyBattles(res.data))
         .catch(() => setMyBattles([]));
-    }, [currentUserDB]),
+    }, [currentUser]),
   );
-
-  console.log('MYBATTLES', myBattles);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -93,7 +81,7 @@ export const Battles: React.FC = () => {
           </Text>
         </View>
       ) : (
-        <BattleCardList myBattles={myBattles} currentUserDB={currentUserDB} />
+        <BattleCardList myBattles={myBattles} currentUser={currentUser} />
       )}
     </SafeAreaView>
   );

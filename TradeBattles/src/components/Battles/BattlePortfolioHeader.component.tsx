@@ -1,22 +1,35 @@
 import React, {useEffect, useState} from 'react';
 import {Text, View} from 'react-native';
-import {Battle} from '../../shared/Types';
+import {Battle, Portfolio} from '../../shared/Types';
 import {formatter} from '../../shared/utils';
 import LottieView from 'lottie-react-native';
 import {styles} from './BattlePortfolioHeader.styles';
 import {useTheme} from '../../Contexts/Theme';
+import { PortfolioInitializer } from '../../shared/EmptyInitializers';
 const spinnerSrc = require('../../../assets/lotties/spinner.json');
 
 export const BattlePortfolioHeader: React.FC<{
   battle: Battle;
+  userId: String;
   currentGainLoss: number;
-}> = ({battle, currentGainLoss}) => {
+}> = ({battle, userId, currentGainLoss}) => {
   const {theme, darkMode} = useTheme();
   const [wait, setWait] = useState(false);
+  const [userPortfolio, setUserPortfolio] = useState<Portfolio[]>([
+    PortfolioInitializer,
+  ]);
 
   useEffect(() => {
     setTimeout(() => setWait(true), 1500);
   }, []);
+
+  useEffect(() => {
+    const selectedUser = battle.users.filter(el => Number(userId) === el.id);
+    console.log(battle.users);
+    setUserPortfolio(selectedUser);
+  }, []);
+
+  console.log('PORTHEADER', userPortfolio);
 
   const returnColor =
     currentGainLoss > 0 ? theme.colors.green : theme.colors.red;
@@ -43,7 +56,7 @@ export const BattlePortfolioHeader: React.FC<{
                 fontFamily: theme.fonts.bold,
                 color: theme.colors.textPrimary,
               }}>
-              {formatter.format(100000 + currentGainLoss)}
+                   {formatter.format(userPortfolio[0].currentValue)}
             </Text>
             <View
               style={[styles.returnContainer, {backgroundColor: returnColor}]}>
@@ -75,8 +88,7 @@ export const BattlePortfolioHeader: React.FC<{
               fontFamily: theme.fonts.light,
               color: theme.colors.textPrimary,
             }}>
-            {/* {formatter.format(Math.random() * 30000)} */}
-            $35,742.20
+            {formatter.format(userPortfolio[0].remainingBudget)}
           </Text>
         </View>
       </View>

@@ -3,7 +3,7 @@ import {useNavigation} from '@react-navigation/native';
 
 /* ---- COMPONENTS ---- */
 import {Text, View, Image, Pressable} from 'react-native';
-import {Battle, User} from '../../shared/Types';
+import {Battle} from '../../shared/Types';
 import {BattleCardHeader} from './BattleCardHeader.component';
 import {ProfileScreenNavigationProp} from '../../shared/Types';
 
@@ -17,8 +17,7 @@ import {useTheme} from '../../Contexts/Theme';
 
 export const BattleCard: React.FC<{
   battle: Battle;
-  currentUserDB: User;
-}> = ({battle, currentUserDB}) => {
+}> = ({battle}) => {
   const {currentUser} = useAuth();
   const {theme, darkMode} = useTheme();
   const navigation = useNavigation<ProfileScreenNavigationProp>();
@@ -28,14 +27,14 @@ export const BattleCard: React.FC<{
       onPress={() => {
         navigation.navigate('BattlePortfolio', {
           battle: battle,
-          user_id: currentUser.id,
+          userId: currentUser.id,
         });
       }}
       style={{
         ...styles.container,
         backgroundColor: darkMode ? theme.colors.dark : theme.colors.lightest,
       }}>
-      <BattleCardHeader battle={battle} currentUserDB={currentUserDB} />
+      <BattleCardHeader battle={battle} />
 
       {getSortedRanks(battle.users, battle.id).map((member, index) => {
         return (
@@ -68,7 +67,7 @@ export const BattleCard: React.FC<{
                     color: theme.colors.textPrimary,
                     fontFamily: theme.fonts.regular,
                   }}>
-                  {getFormattedPL(member, battle.id)}
+                  {getFormattedPL(member)}
                 </Text>
               </View>
             </View>

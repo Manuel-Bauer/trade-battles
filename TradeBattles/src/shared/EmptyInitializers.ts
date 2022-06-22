@@ -24,38 +24,38 @@ export const StockInitializer: Stock = {
   latestPrice: 0,
 };
 
-export const PortfolioInitializer: PortfolioStock[] = [
-  {
-    price: 0,
-    symbol: '',
-    change: 0,
-    quantity: 0,
-    averageCost: 0,
-    quote: {
-      open: 0,
-      close: 0,
-      change: 0,
-      changePercent: 0,
-      currency: '',
-      companyName: '',
-      iexAskPrice: 0,
-      iexBidPrice: 0,
-      symbol: '',
-      peRatio: 0,
-      ytdChange: 0,
-      week52High: 0,
-      week52Low: 0,
-      previousClose: 0,
-      low: 0,
-      high: 0,
-      iexRealtimePrice: 0,
-      primaryExchange: '',
-      isUSMarketOpen: false,
-      // iexClose: 0,
-      latestPrice: 0,
-    },
-  },
-];
+// export const PortfolioInitializer: PortfolioStock[] = [
+//   {
+//     price: 0,
+//     symbol: '',
+//     change: 0,
+//     quantity: 0,
+//     averageCost: 0,
+//     quote: {
+//       open: 0,
+//       close: 0,
+//       change: 0,
+//       changePercent: 0,
+//       currency: '',
+//       companyName: '',
+//       iexAskPrice: 0,
+//       iexBidPrice: 0,
+//       symbol: '',
+//       peRatio: 0,
+//       ytdChange: 0,
+//       week52High: 0,
+//       week52Low: 0,
+//       previousClose: 0,
+//       low: 0,
+//       high: 0,
+//       iexRealtimePrice: 0,
+//       primaryExchange: '',
+//       isUSMarketOpen: false,
+//       // iexClose: 0,
+//       latestPrice: 0,
+//     },
+//   },
+// ];
 
 export const PurchaseOrderInitializer = {
   quantity: 0,
@@ -66,10 +66,22 @@ export const PurchaseOrderInitializer = {
 
 export const UserInitializer = {
   id: 'DEFAULT',
+  google_id: '',
   name: '',
   email: '',
   photo: '',
   familyName: '',
   givenName: '',
   watchlist: [],
+};
+
+export const PortfolioInitializer = {
+  currentValue: 0,
+  familyName: '',
+  givenName: '',
+  google_id: '',
+  id: 0,
+  photo: '',
+  remainingBudget: 0,
+  stocks: {},
 };

@@ -26,13 +26,15 @@ export const BattlePortfolio: React.FC = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'BattlePortfolio'>>();
 
   const {battle, userId} = route.params;
-  const battleHasStarted = Number(battle.start_date_timestamp) < Date.now();
-  const startDate = new Date(Number(battle.start_date_timestamp)).toString();
-  const endDate = new Date(Number(battle.end_date_timestamp)).toString();
+  const battleHasStarted = Number(battle.start_date) < Date.now();
+  const startDate = battle.start_date.substring(0, 10);
+  const endDate = battle.end_date.substring(0, 10);
   const [nonLockedGainLoss, setNonLockedGainLoss] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
 
   let profit: number;
+
+  console.log(battle);
 
   const setPortfolio = async () => {
     setNonLockedGainLoss(0);
@@ -111,6 +113,7 @@ export const BattlePortfolio: React.FC = () => {
         ) : (
           <BattlePortfolioHeader
             battle={battle}
+            userId={userId}
             currentGainLoss={nonLockedGainLoss}
           />
         )}

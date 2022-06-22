@@ -38,6 +38,7 @@ export const ApiClient = {
     } else {
       console.warn('User succesfully logged in');
     }
+    return dbUser;
   },
 
   createUser: async (user: User) => {

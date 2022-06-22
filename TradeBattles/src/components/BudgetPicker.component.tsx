@@ -15,16 +15,16 @@ export const BudgetPicker: React.FC<{
         itemStyle={{color: theme.colors.textPrimary, fontSize: 18}}
         selectedValue={battleBudget}
         onValueChange={value => setBattleBudget(value)}>
-        <Picker.Item label="100k USD" value="100" />
-        <Picker.Item label="200k USD" value="200" />
-        <Picker.Item label="300k USD" value="300" />
-        <Picker.Item label="400k USD" value="400" />
-        <Picker.Item label="500k USD" value="500" />
-        <Picker.Item label="600k USD" value="600" />
-        <Picker.Item label="700k USD" value="700" />
-        <Picker.Item label="800k USD" value="800" />
-        <Picker.Item label="900k USD" value="900" />
-        <Picker.Item label="1M USD" value="1000" />
+        <Picker.Item label="100k USD" value="100000" />
+        <Picker.Item label="200k USD" value="200000" />
+        <Picker.Item label="300k USD" value="300000" />
+        <Picker.Item label="400k USD" value="400000" />
+        <Picker.Item label="500k USD" value="500000" />
+        <Picker.Item label="600k USD" value="600000" />
+        <Picker.Item label="700k USD" value="700000" />
+        <Picker.Item label="800k USD" value="800000" />
+        <Picker.Item label="900k USD" value="900000" />
+        <Picker.Item label="1M USD" value="1000000" />
       </Picker>
     </View>
   );

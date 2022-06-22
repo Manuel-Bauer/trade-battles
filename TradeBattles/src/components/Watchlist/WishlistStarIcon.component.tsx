@@ -7,30 +7,30 @@ const greyStarSrc = require('../../../assets/icons/star_grey_icon.png');
 const yellowStarSrc = require('../../../assets/icons/star_yellow_icon.png');
 
 export const WishlistStarIcon: React.FC<{
-  user_id: string;
+  userId: string;
   stock: Stock;
   size?: number;
   setViewable?: React.Dispatch<React.SetStateAction<boolean>>;
   defaultYellow?: boolean;
-}> = ({user_id, stock, size, setViewable, defaultYellow}) => {
+}> = ({userId, stock, size, setViewable, defaultYellow}) => {
   const [isInWatchlist, setIsInWatchlist] = useState(defaultYellow);
   const [watchistModal, setWatchlistModal] = useState(false);
 
-  const getUser = async (user_id: string, symbol: string) => {
-    const user = await ApiClient.getUserById(user_id);
+  const getUser = async (userId: string, symbol: string) => {
+    const user = await ApiClient.getUserById(userId);
     user.data[0].watchlist.includes(symbol) && setIsInWatchlist(true);
     return user.data[0].watchlist;
   };
 
   useEffect(() => {
-    getUser(user_id, stock.symbol);
+    getUser(userId, stock.symbol);
   }, []);
 
   return (
     <View>
       <Pressable
         onPress={() => {
-          ApiClient.updateUserWatchlist(user_id, stock.symbol);
+          ApiClient.updateUserWatchlist(userId, stock.symbol);
           setWatchlistModal(true);
           setIsInWatchlist(!isInWatchlist);
           setViewable && setViewable(false);

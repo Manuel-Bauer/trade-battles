@@ -36,16 +36,16 @@ export const UserProvider: FC<any> = ({children}) => {
     return GoogleSignin.signIn().then(async ({user}) => {
       console.log('login() => GoogleSignin => .then(user ...', user);
       const userObject: User = {...user, watchlist: []} as unknown as User;
-      setCurrentUser(userObject);
-      await ApiClient.handleSignIn(userObject);
-      return userObject;
+      const signedInUser = await ApiClient.handleSignIn(userObject);
+      setCurrentUser(signedInUser.data as unknown as User);
+      return signedInUser.data;
     });
   }
 
   async function logout(): Promise<void> {
     setCurrentUser(UserInitializer);
   }
-  /* 
+  /*
     const [idToken, setIdToken] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(true);
 
