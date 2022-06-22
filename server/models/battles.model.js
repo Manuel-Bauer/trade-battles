@@ -79,14 +79,14 @@ function calculateQuantity (transactions) {
   }, 0);
 }
 
-const calculateStats = async (transactionsPerStock) => {
+const calculateStats = (transactionsPerStock, currentPrices) => {
   const result = {};
-  await Promise.all(Object.entries(transactionsPerStock).map(async (transaction) => {
+  Object.entries(transactionsPerStock).map((transaction) => {
     const [key, value] = transaction;
     const totalBought = calculateTotalBought(value);
     const totalSold = calculateTotalSold(value);
     const owning = calculateQuantity(value);
-    const quote = (await getQuote(value[0].symbol)).latestPrice;
+    const quote = currentPrices[value[0].symbol];
 
     result[key] = {
       owning,
@@ -96,7 +96,7 @@ const calculateStats = async (transactionsPerStock) => {
       totalSold,
       averageBuyIn: calculateAverage(value.filter(transaction => transaction.action == "BUY").map(transaction => transaction.price))
     };
-  }));
+  });
   return result;
 };
 
@@ -109,6 +109,49 @@ const calculatePortfolio = (startBudget, stockTransactions) => {
   }
   return { remainingBudget, portfolioValue };
 };
+
+async function getCurrentPrices (userId, ctx = { prisma }) {
+  try {
+    const myBattles = await ctx.prisma.battle.findMany({
+      where: {
+        users: {
+          some: {
+            id: +userId,
+          },
+        },
+      }
+    });
+    const tickers = await ctx.prisma.transaction.groupBy({
+      by: ["symbol"],
+      where: {
+        battle: {
+          id: {
+            in: myBattles.map(battle => battle.id)
+          }
+        }
+      }
+    });
+
+    // Populate with current prices
+    const stockPrices = {};
+    await Promise.all(tickers.map(async (ticker) => {
+      const quote = (await getQuote(ticker.symbol)).latestPrice;
+      stockPrices[ticker.symbol] = quote;
+    }));
+
+    return stockPrices;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+function getUsersInfo (battles) {
+  const users = {};
+  battles.forEach(battle => {
+    battle.users.forEach(user => { users[user.id] = user; });
+  });
+  return users;
+}
 
 async function getMyBattlesWithGroupedTransgenders (userId, ctx = { prisma }) {
   try {
@@ -126,6 +169,9 @@ async function getMyBattlesWithGroupedTransgenders (userId, ctx = { prisma }) {
       },
     });
 
+    const currentPrices = await getCurrentPrices(userId);
+    const usersInfo = getUsersInfo(myBattles);
+
     const transactionsByPlayers = [];
     const budgets = [];
     myBattles.forEach((battle) => {
@@ -135,18 +181,23 @@ async function getMyBattlesWithGroupedTransgenders (userId, ctx = { prisma }) {
 
 
     const summed = [];
-    await Promise.all(transactionsByPlayers.map(async (battle, index) => {
+    transactionsByPlayers.forEach((battle, index) => {
       for (const [key, value] of Object.entries(battle)) {
-        const stocks = await calculateStats(groupBy(value, "symbol"));
+        const stocks = calculateStats(groupBy(value, "symbol"), currentPrices);
         const portfolio = calculatePortfolio(budgets[index], stocks);
+
+        // Get rid of shit
+        const { watchlist, email, googleId, ...userInfo } = usersInfo[key];
+
         summed.push({
-          userId: key,
+          ...userInfo,
           stocks,
           currentValue: portfolio.portfolioValue,
           remainingBudget: portfolio.remainingBudget
         });
       }
-    }));
+    });
+
     return myBattles.map(battle => ({ ...battle, users: summed.sort((a, b) => b.currentValue - a.currentValue) }));
   } catch (err) {
     throw err;
@@ -165,4 +216,4 @@ async function updateBattle (battleId, update, ctx = { prisma }) {
   }
 }
 
-module.exports = { createBattle, getMyBattles, updateBattle, getMyBattlesWithGroupedTransgenders };
+module.exports = { createBattle, getMyBattles, updateBattle, getCurrentPrices, getMyBattlesWithGroupedTransgenders };
