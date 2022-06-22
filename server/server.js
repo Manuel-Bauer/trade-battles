@@ -5,8 +5,10 @@ const PORT = 3000;
 const { getAllUsers, createUser, getUser, updateWatchlist } = require('./models/users.model');
 const { createTransaction, getAllTransactions } = require('./models/transactions.model');
 const { createBattle, getMyBattles } = require('./models/battles.model');
+
 app.use(express.json());
 app.use(router);
+
 // getAllUsers().then((res) => console.log('getAllUser     ', res));
 // addToWatchlist(1, 'AAPL').then((res) => console.log(res));
 // getAllUsers().then((res) => console.log('getAllUser     ', res));
@@ -19,7 +21,9 @@ app.use(router);
 //   battle_name: 'Codewars',
 //   end_date: new Date(),
 // }).then((res) => console.log(res));
+
 // getAllTransactions().then((res) => console.log(res));
+
 // createUser({
 //   id: 'asdfasdf',
 //   email: 'fasdfasdd@gmail.com',
@@ -28,6 +32,7 @@ app.use(router);
 //   photo: 'dausfgkjahsdgfkjahbsd',
 //   watchlist: ['stuff', 'more stuff'],
 // }).then((res) => console.log(res));
+
 // createTransaction({
 //   battleId: 1,
 //   userId: 1,
@@ -37,6 +42,7 @@ app.use(router);
 //   price: 100000,
 //   quantity: 1,
 // }).then((res) => console.log(res));
+
 // createBattle({
 // users: [
 //   {
@@ -81,6 +87,7 @@ app.use(router);
 //   battle_name: 'svelte battle',
 //   end_date: new Date(),
 // }).then((res) => console.log(res));
+
 app.listen(PORT, () => {
-    console.log(`We are in boys... http://localhost:${PORT}`);
+  console.log(`We are in boys... http://localhost:${PORT}`);
 });
