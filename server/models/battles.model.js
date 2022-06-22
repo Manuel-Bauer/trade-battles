@@ -110,23 +110,15 @@ const calculatePortfolioStats = (startBudget, stockTransactions) => {
   return { remainingBudget, portfolioValue };
 };
 
-async function getCurrentPrices (battleIds, ctx = { prisma }) {
+async function getCurrentPrices (transactions, ctx = { prisma }) {
   try {
-    const tickers = await ctx.prisma.transaction.groupBy({
-      by: ["symbol"],
-      where: {
-        battle: {
-          id: {
-            in: battleIds
-          }
-        }
-      }
-    });
+    //remove dublicates
+    const tickers = [...new Set(transactions.map(transaction => transaction.symbol))];
     // Populate with current prices
     const stockPrices = {};
     await Promise.all(tickers.map(async (ticker) => {
-      const quote = (await getQuote(ticker.symbol)).latestPrice;
-      stockPrices[ticker.symbol] = quote;
+      const quote = (await getQuote(ticker)).latestPrice;
+      stockPrices[ticker] = quote;
     }));
 
     return stockPrices;
@@ -159,7 +151,11 @@ async function getMyBattlesWithGroupedTransgenders (userId, ctx = { prisma }) {
       },
     });
 
-    const currentPrices = await getCurrentPrices(myBattles.map(battle => battle.id));
+    // get all transactions
+    let allTransactions = [];
+    myBattles.forEach(battle => allTransactions = [...allTransactions, ...battle.transaction]);
+
+    const currentPrices = await getCurrentPrices(allTransactions);
     const usersInfo = getUsersInfo(myBattles);
 
     const transactionsByUsersPerBattle = myBattles.map((battle) => {
@@ -171,7 +167,7 @@ async function getMyBattlesWithGroupedTransgenders (userId, ctx = { prisma }) {
       const users = [];
       const transactionsByUsersInBattle = transactionsByUsersPerBattle[index];
       battle.users.forEach((user) => {
-        const { watchlist, email, googleId, ...userInfo } = usersInfo[userId];
+        const { watchlist, email, googleId, ...userInfo } = usersInfo[user.id];
         const transactions = transactionsByUsersInBattle[user.id];
         const stocks = transactions && calculateStockStats(groupBy(transactions, "symbol"), currentPrices);
         const portfolio = transactions && calculatePortfolioStats(battle.budget, stocks);
@@ -179,8 +175,8 @@ async function getMyBattlesWithGroupedTransgenders (userId, ctx = { prisma }) {
         users.push({
           ...userInfo,
           stocks: transactions ? stocks : null,
-          currentValue: transactions ? portfolio.portfolioValue : null,
-          remainingBudget: transactions ? portfolio.remainingBudget : null
+          currentValue: transactions ? portfolio.portfolioValue : battle.budget,
+          remainingBudget: transactions ? portfolio.remainingBudget : battle.budget
         });
       });
       return users;

@@ -10,7 +10,6 @@ exports.getQuote = async (symbol) => {
       process.env.IEX_API_KEY
     }`
   ).then((res) => res.json());
-
   return quote;
 };
 
