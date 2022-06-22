@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,8 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const { createBattle, getMyBattles, updateBattle } = require("../models/battles.model");
-exports.getMyBattles = (req, res) => __awaiter(this, void 0, void 0, function* () {
+Object.defineProperty(exports, "__esModule", { value: true });
+const { createBattle, getMyBattles, updateBattle, } = require('../models/battles.model');
+exports.getMyBattles = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const myBattles = yield getMyBattles(req.params['user_id']);
         res.send(myBattles);
@@ -19,7 +21,7 @@ exports.getMyBattles = (req, res) => __awaiter(this, void 0, void 0, function* (
         res.sendStatus(500);
     }
 });
-exports.postBattle = (req, res) => __awaiter(this, void 0, void 0, function* () {
+exports.postBattle = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const battle = yield createBattle(req.body);
         res.send(battle);
@@ -30,18 +32,17 @@ exports.postBattle = (req, res) => __awaiter(this, void 0, void 0, function* () 
         res.sendStatus(500);
     }
 });
-exports.patchBattleMembers = (req, res) => __awaiter(this, void 0, void 0, function* () {
-    try {
-        const battle = yield updateBattleMembers(req.params['battle_id'], req.body);
-        res.send(battle.rows);
-        res.status(200);
-    }
-    catch (error) {
-        console.error(error);
-        res.sendStatus(500);
-    }
-});
-exports.updateBattle = (req, res) => __awaiter(this, void 0, void 0, function* () {
+// exports.patchBattleMembers = async (req: Request, res: Response): Promise<void> => {
+//   try {
+//     const battle = await updateBattleMembers(req.params['battle_id'], req.body);
+//     res.send(battle.rows);
+//     res.status(200);
+//   } catch (error) {
+//     console.error(error);
+//     res.sendStatus(500);
+//   }
+// };
+exports.updateBattle = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const battle_id = +req.params['battle_id'];
         const battle = yield updateBattle(battle_id, req.body);

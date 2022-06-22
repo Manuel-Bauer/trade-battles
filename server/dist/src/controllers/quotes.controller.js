@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,10 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const quotes_model = require("../models/quotes.model");
-exports.getQuote = (req, res) => __awaiter(this, void 0, void 0, function* () {
+Object.defineProperty(exports, "__esModule", { value: true });
+const quotes_model = require('../models/quotes.model');
+exports.getQuote = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const quote = yield quotes_model.getQuote(req.params["symbol"]);
+        const quote = yield quotes_model.getQuote(req.params['symbol']);
         res.send(quote);
         res.status(200);
     }
@@ -19,9 +21,9 @@ exports.getQuote = (req, res) => __awaiter(this, void 0, void 0, function* () {
         res.sendStatus(500);
     }
 });
-exports.getHistoricalData = (req, res) => __awaiter(this, void 0, void 0, function* () {
+exports.getHistoricalData = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = yield quotes_model.getHistoricalData(req.params["ticker"], req.params["periodicity"], req.params["periodicity_unit"], req.params["start_date"], req.params["end_date"]);
+        const data = yield quotes_model.getHistoricalData(req.params['ticker'], req.params['periodicity'], req.params['periodicity_unit'], req.params['start_date'], req.params['end_date']);
         res.send(data);
         res.status(200);
     }

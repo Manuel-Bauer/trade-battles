@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,8 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const transactions_model = require("../models/transactions.model");
-exports.getAllTransactions = (req, res) => __awaiter(this, void 0, void 0, function* () {
+Object.defineProperty(exports, "__esModule", { value: true });
+const transactions_model = require('../models/transactions.model');
+exports.getAllTransactions = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const transactions = yield transactions_model.getAllTransactions();
         res.send(transactions.rows);
@@ -19,9 +21,9 @@ exports.getAllTransactions = (req, res) => __awaiter(this, void 0, void 0, funct
         res.sendStatus(500);
     }
 });
-exports.getTransactionsByBattle = (req, res) => __awaiter(this, void 0, void 0, function* () {
+exports.getTransactionsByBattle = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const transactions = yield transactions_model.getTransactionsByBattle(req.params["id"]);
+        const transactions = yield transactions_model.getTransactionsByBattle(req.params['id']);
         res.send(transactions.rows);
         res.status(200);
     }
@@ -30,9 +32,9 @@ exports.getTransactionsByBattle = (req, res) => __awaiter(this, void 0, void 0, 
         res.sendStatus(500);
     }
 });
-exports.getTransaction = (req, res) => __awaiter(this, void 0, void 0, function* () {
+exports.getTransaction = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const transaction = yield transactions_model.getTransaction(req.params["id"]);
+        const transaction = yield transactions_model.getTransaction(req.params['id']);
         res.send(transaction.rows);
         res.status(200);
     }
@@ -41,7 +43,7 @@ exports.getTransaction = (req, res) => __awaiter(this, void 0, void 0, function*
         res.sendStatus(500);
     }
 });
-exports.postTransaction = (req, res) => __awaiter(this, void 0, void 0, function* () {
+exports.postTransaction = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const transaction = yield transactions_model.createTransaction(req.body);
         res.status(201);
@@ -52,9 +54,9 @@ exports.postTransaction = (req, res) => __awaiter(this, void 0, void 0, function
         res.sendStatus(500);
     }
 });
-exports.deleteTransaction = (req, res) => __awaiter(this, void 0, void 0, function* () {
+exports.deleteTransaction = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const transaction = yield transactions_model.deleteTransaction(req.params["id"]);
+        const transaction = yield transactions_model.deleteTransaction(req.params['id']);
         res.status(200);
         res.send(transaction);
     }

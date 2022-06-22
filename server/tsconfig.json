@@ -98,6 +98,13 @@
 
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
+<<<<<<< HEAD
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   }
+=======
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */,
+    "watch": true
+  },
+  "include": ["src/**/*"]
+>>>>>>> origin/TB-5-add-tests-to-backend-Luca
 }

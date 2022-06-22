@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,31 +8,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const fetch = require('node-fetch');
-require('dotenv').config();
+Object.defineProperty(exports, "__esModule", { value: true });
+const node_fetch_1 = require("node-fetch");
+require('dotenv').config(); // ❓❔
 const IEXapibaseurl = 'https://cloud.iexapis.com/stable';
 const PoligonApiBaseUrl = 'https://api.polygon.io/v2/aggs/ticker';
-exports.getQuote = (symbol) => __awaiter(this, void 0, void 0, function* () {
-    const quote = yield fetch(`${IEXapibaseurl}/stock/${symbol.toLowerCase()}/quote?token=${process.env.IEX_API_KEY}`).then((res) => res.json());
-    console.log(quote);
+exports.getQuote = (symbol) => __awaiter(void 0, void 0, void 0, function* () {
+    const quote = yield (0, node_fetch_1.fetch)(`${IEXapibaseurl}/stock/${symbol.toLowerCase()}/quote?token=${process.env.IEX_API_KEY}`).then((res) => res.json());
     return quote;
 });
-exports.getHistoricalData = (ticker, periodicity, periodicity_unit, start_date, end_date) => __awaiter(this, void 0, void 0, function* () {
-    console.log('inside getHistorical');
-    const convertDate = (timestamp) => {
-        date = new Date(Number(timestamp));
-        return date.toISOString().split('T').slice(0, 1).join('');
-    };
-    const startDate = convertDate(start_date);
-    const endDate = convertDate(end_date);
+exports.getHistoricalData = (ticker, periodicity, periodicity_unit, start_date, end_date) => __awaiter(void 0, void 0, void 0, function* () {
     const url = `${PoligonApiBaseUrl}/${ticker.toUpperCase()}/range/${periodicity_unit}/${periodicity}/${start_date}/${end_date}?adjusted=true&sort=asc`;
-    console.log(url);
-    const data = yield fetch(url, {
+    const data = yield (0, node_fetch_1.fetch)(url, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${process.env.POLYGON_API_KEY}`,
         },
     }).then((res) => res.json());
-    console.log(data);
     return data;
 });

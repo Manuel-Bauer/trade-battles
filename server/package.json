@@ -10,7 +10,7 @@
 =======
     "test": "dotenv -e .env.test jest",
     "migrate": "dotenv -e .env.development npx prisma migrate dev",
-    "start": "node ./dist/server.js",
+    "start": "nodemon ./dist/src/server.js",
     "tsc": "dotenv -e .env.development tsc",
     "dev": "dotenv -e .env.development ts-node-dev --respawn --pretty --transpile-only ./src/server.ts"
 >>>>>>> origin/TB-39-refactor-the-backend-to-typescript-Luca

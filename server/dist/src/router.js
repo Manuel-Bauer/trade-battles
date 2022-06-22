@@ -12,7 +12,10 @@ router.delete('/transactions/:id', transactions_controller.deleteTransaction);
 // Battles
 router.post('/battles', battles_controller.postBattle);
 router.get('/battles/:user_id', battles_controller.getMyBattles);
-router.patch('/battles/members/:battle_id', battles_controller.patchBattleMembers);
+// router.patch(
+//   '/battles/members/:battle_id',
+//   battles_controller.patchBattleMembers
+// );
 router.patch('/battles/:battle_id', battles_controller.updateBattle);
 // Users
 router.get('/users', users_controller.getAllUsers);

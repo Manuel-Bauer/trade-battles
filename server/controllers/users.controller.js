@@ -1,6 +1,8 @@
 const users_model = require('../models/users.model');
+import { Request, Response } from 'express';
+import { User } from '@prisma/client';
 
-exports.getAllUsers = async (req: Express.Request, res: Express.Response) => {
+exports.getAllUsers = async (req: Request, res: Response): Promise<void> => {
   try {
     const users = await users_model.getAllUsers();
     res.send(users);
@@ -10,7 +12,7 @@ exports.getAllUsers = async (req: Express.Request, res: Express.Response) => {
     res.sendStatus(500);
   }
 };
-exports.getUser = async (req, res) => {
+exports.getUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const user = await users_model.getUser(req.params['id']);
     res.send(user);
@@ -20,7 +22,7 @@ exports.getUser = async (req, res) => {
     res.sendStatus(500);
   }
 };
-exports.postUser = async (req, res) => {
+exports.postUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const user = await users_model.createUser(req.body);
     res.send(user);
@@ -31,9 +33,15 @@ exports.postUser = async (req, res) => {
     res.sendStatus(500);
   }
 };
-exports.addBattleToUser = async (req, res) => {
+exports.addBattleToUser = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
-    const user = await users_model.addBattleToUser(req.params['user_id'], req.params['battle_id']);
+    const user = await users_model.addBattleToUser(
+      req.params['user_id'],
+      req.params['battle_id']
+    );
     res.send({ status: 'Update succesful' });
     res.status(200);
   } catch (error) {
@@ -41,7 +49,8 @@ exports.addBattleToUser = async (req, res) => {
     res.sendStatus(500);
   }
 };
-exports.deleteUser = async (req, res) => {
+
+exports.deleteUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const user = await users_model.deleteUser(req.params['id']);
     res.send(user);
@@ -52,9 +61,15 @@ exports.deleteUser = async (req, res) => {
   }
 };
 
-exports.getUserPortfolio = async (req, res) => {
+exports.getUserPortfolio = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
-    const userPortfolio = await users_model.getUserPortfolio(req.params['user_id'], req.params['battle_id']);
+    const userPortfolio = await users_model.getUserPortfolio(
+      req.params['user_id'],
+      req.params['battle_id']
+    );
     res.send(userPortfolio);
     res.status(200);
   } catch (error) {
@@ -63,9 +78,13 @@ exports.getUserPortfolio = async (req, res) => {
   }
 };
 
-exports.patchProfit = async (req, res) => {
+exports.patchProfit = async (req: Request, res: Response): Promise<void> => {
   try {
-    const user = await users_model.updateProfit(req.params['user_id'], req.body, req.params['battle_id']);
+    const user = await users_model.updateProfit(
+      req.params['user_id'],
+      req.body,
+      req.params['battle_id']
+    );
     res.send({ status: 'Update succesful' });
     res.status(200);
   } catch (error) {
@@ -74,9 +93,12 @@ exports.patchProfit = async (req, res) => {
   }
 };
 
-exports.patchWatchlist = async (req, res) => {
+exports.patchWatchlist = async (req: Request, res: Response): Promise<void> => {
   try {
-    const user = await users_model.updateWatchlist(req.params['user_id'], req.body);
+    const user = await users_model.updateWatchlist(
+      req.params['user_id'],
+      req.body
+    );
     res.send({ status: 'Update succesful' });
     res.status(200);
   } catch (error) {
