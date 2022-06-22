@@ -21,6 +21,7 @@ function createBattle(data, ctx = { prisma }) {
                     },
                     budget: +data.budget,
                     battle_name: data.battle_name,
+                    start_date: data.start_date,
                     end_date: data.end_date,
                 },
                 include: {
@@ -61,7 +62,7 @@ function updateBattle(battleId, update, ctx = { prisma }) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const battle = yield ctx.prisma.battle.update({
-                where: { id: battleId },
+                where: { id: +battleId },
                 data: Object.assign({}, update),
             });
             return battle;
