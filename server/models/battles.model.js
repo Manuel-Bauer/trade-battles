@@ -24,6 +24,28 @@ async function createBattle (data, ctx = { prisma }) {
   }
 }
 
+async function getMyBattles (userId, ctx = { prisma }) {
+  try {
+    const myBattles = await ctx.prisma.battle.findMany({
+      where: {
+        users: {
+          some: {
+            id: +userId,
+          },
+        },
+      },
+      include: {
+        transaction: true,
+        users: true,
+      },
+    });
+    return myBattles;
+  } catch (err) {
+    throw err;
+  }
+}
+
+
 
 async function getBattlesWithPortfolios (userId, ctx = { prisma }) {
   try {
