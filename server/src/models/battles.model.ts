@@ -2,7 +2,11 @@ const { PrismaClient } = require('@prisma/client');
 const { getUsersFromBattles, getTickersFromBattles, getCurrentPrices, groupBy, calculateStockStats, calculatePortfolioStats } = require('./battles.utils');
 const prisma = new PrismaClient();
 
-async function createBattle (data, ctx = { prisma }) {
+import { Battle } from '../../Types';
+
+export {};
+
+async function createBattle(data, ctx = { prisma }): Promise<Battle> {
   try {
     const battle = await ctx.prisma.battle.create({
       data: {
@@ -24,7 +28,7 @@ async function createBattle (data, ctx = { prisma }) {
   }
 }
 
-async function getMyBattles (userId, ctx = { prisma }) {
+async function getMyBattles(userId, ctx = { prisma }) {
   try {
     const myBattles = await ctx.prisma.battle.findMany({
       where: {

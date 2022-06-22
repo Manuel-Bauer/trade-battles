@@ -1,8 +1,12 @@
-const { PrismaClient } = require('@prisma/client');
+import { PrismaClient } from '@prisma/client';
+
+import { User } from '../../Types';
+
+export {};
 
 const prisma = new PrismaClient();
 
-async function getAllUsers (ctx = {prisma}) {
+async function getAllUsers(ctx = { prisma }): Promise<User[]> {
   try {
     const allUsers = await ctx.prisma.user.findMany({});
     return allUsers;
@@ -11,7 +15,7 @@ async function getAllUsers (ctx = {prisma}) {
   }
 }
 
-async function createUser(data, ctx = {prisma}) {
+async function createUser(data, ctx = { prisma }) {
   try {
     const user = await ctx.prisma.user.create({
       data: {
@@ -28,7 +32,7 @@ async function createUser(data, ctx = {prisma}) {
   }
 }
 
-async function getUser(google_id, ctx = {prisma}) {
+async function getUser(google_id, ctx = { prisma }) {
   try {
     const user = await ctx.prisma.user.findUnique({
       where: {
@@ -41,7 +45,7 @@ async function getUser(google_id, ctx = {prisma}) {
   }
 }
 
-async function updateWatchlist(id, updatedWatchlist, ctx = {prisma}) {
+async function updateWatchlist(id, updatedWatchlist, ctx = { prisma }) {
   try {
     const user = await ctx.prisma.user.update({
       where: { id },
