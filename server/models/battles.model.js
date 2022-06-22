@@ -172,22 +172,21 @@ async function getMyBattlesWithGroupedTransgenders (userId, ctx = { prisma }) {
     const currentPrices = await getCurrentPrices(userId);
     const usersInfo = getUsersInfo(myBattles);
 
-    const transactionsByPlayers = [];
-    const budgets = [];
-    myBattles.forEach((battle) => {
-      transactionsByPlayers.push(groupBy(battle.transaction, 'userId'));
-      budgets.push(battle.budget);
+    const transactionsByUsersPerBattle = myBattles.map((battle) => {
+      const transactionsByUsers = groupBy(battle.transaction, 'userId');
+      return transactionsByUsers;
     });
 
+    const playerData = transactionsByUsersPerBattle.map((transactionsByUserInBattle, index) => {
+      const summed = [];
+      for (const [userId, transactions] of Object.entries(transactionsByUserInBattle)) {
+        console.log("battleid:", myBattles[index].id, "userId:", userId, "transactions:", transactions);
+        const startingBudget = myBattles[index].budget;
+        const stocks = calculateStats(groupBy(transactions, "symbol"), currentPrices);
+        const portfolio = calculatePortfolio(startingBudget, stocks);
 
-    const summed = [];
-    transactionsByPlayers.forEach((battle, index) => {
-      for (const [key, value] of Object.entries(battle)) {
-        const stocks = calculateStats(groupBy(value, "symbol"), currentPrices);
-        const portfolio = calculatePortfolio(budgets[index], stocks);
-
-        // Get rid of shit
-        const { watchlist, email, googleId, ...userInfo } = usersInfo[key];
+        // Get rid of some shit
+        const { watchlist, email, googleId, ...userInfo } = usersInfo[userId];
 
         summed.push({
           ...userInfo,
@@ -196,9 +195,13 @@ async function getMyBattlesWithGroupedTransgenders (userId, ctx = { prisma }) {
           remainingBudget: portfolio.remainingBudget
         });
       }
+      return summed;
     });
 
-    return myBattles.map(battle => ({ ...battle, users: summed.sort((a, b) => b.currentValue - a.currentValue) }));
+    return myBattles.map((battle, index) => {
+      battle.users = playerData[index];
+      return battle;
+    });
   } catch (err) {
     throw err;
   }
