@@ -8,7 +8,7 @@ import {
 
 const prisma = new PrismaClient();
 
-import { CreateBattleInput } from '../../Types';
+import { CreateBattleInput, userPorfolio } from '../../Types';
 import { calculatePortfolioStats, calculateStockStats, getCurrentPrices, getTickersFromBattles, getUsersFromBattles, groupBy } from './battles.utils';
 
 export {};
@@ -41,7 +41,7 @@ async function createBattle(
 async function getMyBattles(
   userId: string,
   ctx = { prisma }
-): Promise<Battle[]> {
+): Promise<Battle[] | null> {
   try {
     const myBattles = await ctx.prisma.battle.findMany({
       where: {
@@ -66,7 +66,7 @@ async function updateBattle(
   battleId: string,
   update: any,
   ctx = { prisma }
-): Promise<Battle> {
+): Promise<Battle | null> {
   try {
     const battle = await ctx.prisma.battle.update({
       where: { id: +battleId },
@@ -78,7 +78,7 @@ async function updateBattle(
   }
 }
 
-async function getBattlesWithPortfolios (userId, ctx = { prisma }) {
+async function getBattlesWithPortfolios (userId: number, ctx = { prisma }) {
   try {
     const myBattles = await ctx.prisma.battle.findMany({
       where: {
@@ -108,7 +108,7 @@ async function getBattlesWithPortfolios (userId, ctx = { prisma }) {
     // For each Battle, create an array of users and their portfolios
     const playerData = myBattles.map((battle, index) => {
       const transactionsByUsersInBattle = transactionsByUsersPerBattle[index];
-      const users = [];
+      const users: userPorfolio[] = [];
       battle.users.forEach((user) => {
         const { id, givenName, familyName, photo, } = usersInfo[user.id];
         const transactions = transactionsByUsersInBattle[user.id];
@@ -130,8 +130,10 @@ async function getBattlesWithPortfolios (userId, ctx = { prisma }) {
 
     // Add user portfolios to battle objects
     const battles = myBattles.map((battle, index) => {
-      battle.users = playerData[index];
-      return battle;
+      return {
+        ...battle,
+        users: playerData[index]
+      };
     });
 
     return battles;

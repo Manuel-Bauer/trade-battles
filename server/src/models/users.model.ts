@@ -1,4 +1,4 @@
-import { PrismaClient, User } from '@prisma/client';
+import { Prisma, PrismaClient, User } from '@prisma/client';
 import { createUserInput } from '../../Types';
 
 export {};
@@ -17,7 +17,7 @@ async function getAllUsers (ctx = {prisma}) {
 async function createUser(
   data: createUserInput,
   ctx = { prisma }
-): Promise<User> {
+): Promise<User | null> {
   try {
     const user = await ctx.prisma.user.create({
       data: {
@@ -34,7 +34,7 @@ async function createUser(
   }
 }
 
-async function getUser(google_id: string, ctx = { prisma }): Promise<User> {
+async function getUser(google_id: string, ctx = { prisma }): Promise<User | null> {
   try {
     const user = await ctx.prisma.user.findUnique({
       where: {

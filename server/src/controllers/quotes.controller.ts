@@ -1,8 +1,7 @@
 const quotes_model = require('../models/quotes.model');
-// import { quotes_model } from '../models/quotes.model';
 import { Request, Response } from 'express';
 
-exports.getQuote = async (req: Request, res: Response): Promise<void> => {
+export const getQuote = async (req: Request, res: Response): Promise<void> => {
   try {
     const quote = await quotes_model.getQuote(req.params['symbol']);
     res.send(quote);
@@ -13,7 +12,7 @@ exports.getQuote = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-exports.getHistoricalData = async (
+export const getHistoricalData = async (
   req: Request,
   res: Response
 ): Promise<void> => {

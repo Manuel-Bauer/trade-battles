@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { fetch } from 'node-fetch';
 import { Quote, historicalData } from '../../Types';
 import { Response } from 'express';
@@ -6,7 +7,7 @@ require('dotenv').config(); // ❓❔
 const IEXapibaseurl: string = 'https://cloud.iexapis.com/stable';
 const PoligonApiBaseUrl: string = 'https://api.polygon.io/v2/aggs/ticker';
 
-exports.getQuote = async (symbol): Promise<Quote> => {
+export const getQuote = async (symbol): Promise<Quote> => {
   const quote = await fetch(
     `${IEXapibaseurl}/stock/${symbol.toLowerCase()}/quote?token=${
       process.env.IEX_API_KEY
@@ -16,7 +17,7 @@ exports.getQuote = async (symbol): Promise<Quote> => {
   return quote;
 };
 
-exports.getHistoricalData = async (
+export const getHistoricalData = async (
   ticker: string,
   periodicity: any,
   periodicity_unit: string,

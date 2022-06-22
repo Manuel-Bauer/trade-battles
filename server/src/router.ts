@@ -1,39 +1,29 @@
+import { postBattle, getMyBattles, updateBattle } from "./controllers/battles.controller";
+import { getHistoricalData, getQuote } from "./controllers/quotes.controller";
+import { postTransaction } from "./controllers/transactions.controller";
+import { getAllUsers, getUser, patchWatchlist, postUser } from "./controllers/users.controller";
+
 const router = require('express').Router();
-const transactions_controller = require('./controllers/transactions.controller');
-const battles_controller = require('./controllers/battles.controller');
-const users_controller = require('./controllers/users.controller');
-const quote_controller = require('./controllers/quotes.controller');
 
 // Transactions
-router.get('/transactions', transactions_controller.getAllTransactions);
-router.get('/transactions/:id', transactions_controller.getTransaction);
-router.get(
-  '/transactions/battle/:id',
-  transactions_controller.getTransactionsByBattle
-);
-router.post('/transactions', transactions_controller.postTransaction);
-router.delete('/transactions/:id', transactions_controller.deleteTransaction);
+router.post('/transactions', postTransaction);
 
 // Battles
-router.post('/battles', battles_controller.postBattle);
-router.get('/battles/:user_id', battles_controller.getMyBattles);
-// router.patch(
-//   '/battles/members/:battle_id',
-//   battles_controller.patchBattleMembers
-// );
-router.patch('/battles/:battle_id', battles_controller.updateBattle);
+router.post('/battles', postBattle);
+router.get('/battles/:user_id', getMyBattles);
+router.patch('/battles/:battle_id', updateBattle);
 
 // Users
-router.get('/users', users_controller.getAllUsers);
-router.get('/users/:id', users_controller.getUser);
-router.post('/users', users_controller.postUser);
-router.patch('/users/watchlist/:user_id', users_controller.patchWatchlist);
+router.get('/users', getAllUsers);
+router.get('/users/:id',getUser);
+router.post('/users', postUser);
+router.patch('/users/watchlist/:user_id', patchWatchlist);
 
 // Quote
-router.get('/quote/:symbol', quote_controller.getQuote);
+router.get('/quote/:symbol', getQuote);
 router.get(
   '/quote/historical/data/:ticker/:periodicity/:periodicity_unit/:start_date/:end_date',
-  quote_controller.getHistoricalData
+  getHistoricalData
 );
 
 module.exports = router;

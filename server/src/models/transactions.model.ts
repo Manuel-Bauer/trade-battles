@@ -1,3 +1,6 @@
+import { createTransactionInput } from "../../Types";
+import { PrismaClient, Transaction } from '@prisma/client'
+const prisma = new PrismaClient()
 
 export async function createTransaction(
   data: createTransactionInput,

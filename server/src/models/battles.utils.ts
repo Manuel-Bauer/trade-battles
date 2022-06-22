@@ -1,5 +1,5 @@
 //@ts-nocheck
-const { getQuote } = require('../../models/quotes.model');
+import { getQuote } from "./quotes.model";
 var memoize = require('underscore/cjs/memoize.js');
 
 export const groupBy = memoize(function (array, key) {

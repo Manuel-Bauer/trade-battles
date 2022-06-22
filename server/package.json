@@ -2,9 +2,9 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "./src/server.ts",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon ./src/server.ts",
     "test": "dotenv -e .env.test jest",
     "migrate": "dotenv -e .env.development npx prisma migrate dev",
     "tsc": "dotenv -e .env.development tsc",

@@ -46,6 +46,17 @@ export type User = {
   watchlist: string[];
 };
 
+export type userPorfolio = {
+  id: number;
+  givenName: string;
+  familyName: string;
+  photo: string;
+  stocks: any;
+  currentValue: number | null;
+  remainingBudget: number;
+}
+
+
 export type Battle = {
   id: number;
   start_date: string;
@@ -55,6 +66,8 @@ export type Battle = {
   completed?: boolean;
   winner?: string;
 };
+
+
 
 export type BattleMember = {
   id: string;

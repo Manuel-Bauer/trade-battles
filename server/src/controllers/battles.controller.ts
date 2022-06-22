@@ -1,12 +1,11 @@
 const {
   createBattle,
-  getMyBattles,
-  updateBattle,
+  updateBattle: update,
   getBattlesWithPortfolios
 } = require('../models/battles.model');
 import { Request, Response } from 'express';
 
-exports.getMyBattles = async (req: Request, res: Response): Promise<void> => {
+export const getMyBattles = async (req: Request, res: Response): Promise<void> => {
   try {
     const myBattles = await getBattlesWithPortfolios(req.params['user_id']);
     res.send(myBattles);
@@ -17,7 +16,7 @@ exports.getMyBattles = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-exports.postBattle = async (req: Request, res: Response): Promise<void> => {
+export const postBattle = async (req: Request, res: Response): Promise<void> => {
   try {
     const battle = await createBattle(req.body);
     res.send(battle);
@@ -28,21 +27,11 @@ exports.postBattle = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-// exports.patchBattleMembers = async (req: Request, res: Response): Promise<void> => {
-//   try {
-//     const battle = await updateBattleMembers(req.params['battle_id'], req.body);
-//     res.send(battle.rows);
-//     res.status(200);
-//   } catch (error) {
-//     console.error(error);
-//     res.sendStatus(500);
-//   }
-// };
 
-exports.updateBattle = async (req: Request, res: Response): Promise<void> => {
+export const updateBattle = async (req: Request, res: Response): Promise<void> => {
   try {
     const battle_id = +req.params['battle_id'];
-    const battle = await updateBattle(battle_id, req.body);
+    const battle = await update(battle_id, req.body);
     res.send(battle);
     res.status(200);
   } catch (error) {
