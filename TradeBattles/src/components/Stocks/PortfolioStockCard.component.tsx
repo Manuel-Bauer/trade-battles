@@ -8,33 +8,21 @@ import {formatter} from '../../shared/utils';
 
 export const PortfolioStockCard: React.FC<{
   stock: PortfolioStock;
-  battleId: string;
   userId: string;
-  currentUserPortfolio: PortfolioStock[];
-  setCurrentUserPortfolio: React.Dispatch<
-    React.SetStateAction<PortfolioStock[]>
-  >;
-}> = ({
-  stock,
-  battleId,
-  userId,
-  currentUserPortfolio,
-  setCurrentUserPortfolio,
-}) => {
+}> = ({stock, userId}) => {
   const navigation = useNavigation<ProfileScreenNavigationProp>();
+
+  console.log('indstock', stock);
 
   return (
     <Pressable
       style={styles.container}
       onPress={() => {
         navigation.navigate('BuySellStock', {
-          stock: stock.quote,
-          shares_owned: stock.quantity,
-          average_cost: stock.averageCost,
-          battleId: battleId,
+          stock: stock.symbol,
+          owning: stock.owning,
+          averageBuyIn: stock.averageBuyIn,
           userId: userId,
-          currentUserPortfolio,
-          setCurrentUserPortfolio,
         });
       }}>
       <View style={styles.logo_container}>
@@ -52,16 +40,16 @@ export const PortfolioStockCard: React.FC<{
       </View>
 
       <Text style={styles.text}>{stock.symbol}</Text>
-      <Text
+      {/* <Text
         style={[
           styles.change,
           {color: stock.change > 0 ? theme.primary_green : theme.primary_red},
         ]}>
         {stock.change.toFixed(2)}%
-      </Text>
+      </Text> */}
       <View style={styles.price_owned}>
-        <Text style={styles.price}>{formatter.format(stock.price)}</Text>
-        <Text style={styles.owned}>{stock.quantity} owned</Text>
+        <Text style={styles.price}>{formatter.format(stock.currentPrice)}</Text>
+        <Text style={styles.owned}>{stock.owning} owned</Text>
       </View>
     </Pressable>
   );

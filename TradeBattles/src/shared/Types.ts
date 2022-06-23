@@ -25,12 +25,11 @@ export type Stock = {
 };
 
 export type PortfolioStock = {
-  price: number;
   symbol: string;
   change: number;
-  quantity: number;
-  averageCost: number;
-  quote: Stock;
+  owning: number;
+  averageBuyIn: number;
+  currentPrice: number;
 };
 
 export type LoginStackParamList = {
@@ -44,15 +43,10 @@ export type RootStackParamList = {
     userId: string;
   };
   BuySellStock: {
-    stock: Stock;
-    shares_owned: number;
-    average_cost: number;
-    battleId: string;
+    stock: String;
+    owning: number;
+    averageBuyIn: number;
     userId: string;
-    currentUserPortfolio: PortfolioStock[];
-    setCurrentUserPortfolio: React.Dispatch<
-      React.SetStateAction<PortfolioStock[]>
-    >;
   };
   MyBattles: {
     userId: string;

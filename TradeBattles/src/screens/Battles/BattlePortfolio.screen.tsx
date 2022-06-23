@@ -34,7 +34,12 @@ export const BattlePortfolio: React.FC = () => {
 
   let profit: number;
 
-  console.log(battle);
+  const stocks = battle.users.filter(el => el.id === Number(userId))[0].stocks;
+  const stocksArr = Object.keys(stocks).map(key => ({
+    ...stocks[key],
+    symbol: key,
+  }));
+  console.log(stocksArr)
 
   const setPortfolio = async () => {
     setNonLockedGainLoss(0);
@@ -142,17 +147,9 @@ export const BattlePortfolio: React.FC = () => {
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
               }
               showsVerticalScrollIndicator={false}
-              data={
-                battle.users.filter(el => el.id === Number(userId))[0].stocks
-              }
+              data={stocksArr}
               renderItem={({item}: {item: any}) => (
-                <PortfolioStockCard
-                  battleId={battle.id}
-                  userId={userId}
-                  stock={item}
-                  currentUserPortfolio={currentUserPortfolio}
-                  setCurrentUserPortfolio={setCurrentUserPortfolio}
-                />
+                <PortfolioStockCard stock={item} userId={userId} />
               )}
             />
           </View>
