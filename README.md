@@ -14,7 +14,7 @@
   </p>
 </div>
 
-[![Trade Battles Screen Shot][product-screenshot]]
+![Trade Battles Screen Shot][product-screenshot]
 
 With TradeBattles, you can organize stock-trading competitions with your friends. Track your progress, see how your friends are doing, and compare your strategies.
 
