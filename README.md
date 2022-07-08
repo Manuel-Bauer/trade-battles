@@ -1,5 +1,26 @@
 # trade-battles-legacy
 
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="http://matchup.vercel.app/">
+    <img src="logo.png" alt="Logo" width="60" height="60">
+  </a>
+
+  <h4 align="center">TradeBattles</h4>
+
+  <p align="center">
+    Trade against your friends
+  </p>
+</div>
+
+[![Trade Battles Screen Shot][product-screenshot]]
+
+Looking for a fun and easy way to meet up and play sports with locals in your city? MatchUp makes it simple and quick to connect with other sports enthusiasts in your area so you can hit the court, field, or course in no time!
+By requiring a small commitment deposit of 5€, we make sure that people that signed up to a MatchUp actually appear. If they do,
+the deposit gets refunded - but if not, it will be automatically donated to a local charity organization.
+
+
 ## Backend
 
 Requires PostgreSQL >14.0 for procedures in sql script
@@ -78,3 +99,5 @@ transaction_timestamp: text
       - Identifier (set to Bundle Identifier found in General)
       - URL Schemes (set to value of REVERSED_CLIENT_ID found in GoogleService-info file)
       - Role (Editor)
+
+[product-screenshot]: ./title-image.png
