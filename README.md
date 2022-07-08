@@ -14,7 +14,7 @@
   </p>
 </div>
 
-[Trade Battles Screen Shot][product-screenshot]()
+![Trade Battles Screen Shot][product-screenshot]
 
 Looking for a fun and easy way to meet up and play sports with locals in your city? MatchUp makes it simple and quick to connect with other sports enthusiasts in your area so you can hit the court, field, or course in no time!
 By requiring a small commitment deposit of 5€, we make sure that people that signed up to a MatchUp actually appear. If they do,
